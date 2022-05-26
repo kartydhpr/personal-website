@@ -1,0 +1,201 @@
+html
+{
+	scroll-behavior: smooth;
+}
+
+body
+{
+	 background-color:white;  
+	/* background-image: url(public/images/final.png)  */
+}
+
+mark
+{
+	background-color:rgba(255, 136, 0, 0.404);
+}
+
+.navbar
+{
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 20;
+}
+
+.logo-image{
+    width: 45px;
+	height: auto;
+	padding-bottom: -10%;
+    border-radius: 0%;
+    overflow: hidden;
+	margin-top: 0px;
+	vertical-align: middle;
+}
+
+.scroll-progress
+{
+	/* margin-top: 3%; */
+	width: 0%;
+	background-color: #FF6630;
+	height: 6px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 20;
+}
+
+.lightSwitchButton
+{
+	background: black;
+	color: #fff;
+	border: 3px solid #00FF7F;
+	border-radius: 20px;
+	box-shadow: 0px 0px 10px #00FF7F;
+
+}
+
+.headline
+{
+	margin-top: 15%;
+	text-align: center;
+	/* margin-left: 35%; */
+	color: #777;
+	margin-bottom: -13%;
+
+}
+
+.landingAttribs
+{
+	padding-bottom: 7%;
+	background-image: url("public/images/landing8.png");
+	/* background: linear-gradient(rgba(25, 236, 255, 0.774), rgba(0,0,0,0.2)); */
+	height:	100vh;
+}
+
+
+#anchor
+{
+	position: relative;
+	padding-top: 65px; 
+}
+
+.bodyButton
+{
+	margin-top: 4%;
+	background: black;
+	color: #fff;
+	font-size: x-large;
+	width: 35%;
+	height: auto;
+	border: 3px solid #00FF7F;
+	border-radius: 50px;
+	box-shadow: 0px 0px 30px #00FF7F;
+}
+
+.profile-picture
+{
+	margin-top: 15%;
+	align-self: center;
+	border-radius: 50%;
+	width:50%;
+	height: auto;
+	border: 10px solid #1ce783  /* #037231 03cc57  #00FF7F */;
+	box-shadow: 0px 0px 70px #00ff808f;
+	
+}
+
+.title
+{
+	/* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+	margin-top: 5%;
+	color: #03e976;
+	/* color: rgb(3, 204, 87);  */
+	font-size: 90px;  /* 100 */
+	line-height: 1.5em;
+	/* box-shadow: 0px 20px 10px #ccc;
+	background-color: rgba(245, 154, 36, 0.461); */
+}
+
+.header
+{
+	color: #03e976;
+	font-size: 50px;   /* 50 */
+	line-height: 1.5em;
+}
+.sub-title
+{
+	/* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+	color: black;
+	font-size: 35px;  /* 40 */
+	line-height: 1.8em;
+	/* box-shadow: 0px 20px 10px #ccc;
+	background-color: rgba(245, 154, 36, 0.461); */
+
+}
+
+.about
+{
+	/* margin-top: 10%; */
+	text-align: center;
+	padding-bottom: 5%;
+
+}
+
+.about h4
+{
+	margin-left: 0%;
+	margin-right: 0%;
+}
+
+.footer
+{
+	text-align: center;
+	background-color: #FF6630;
+}
+
+.footer h1
+{
+	color: black;
+	margin-top: 5%;
+	font-size: 50px;
+	padding-bottom: 2%;
+}
+
+.footer a
+{
+	margin-left: 3%;
+	margin-right: 3%;
+	text-decoration: none;
+}
+
+.fa-linkedin
+{
+	color: black;
+}
+
+.fa-github
+{
+	color: black;
+}
+
+.fa-envelope
+{
+	color:  black;
+}
+.aboutAnimation
+{
+	margin-left: 20%;
+	margin-top: -3%;
+
+}
+
+.defaultAnimation
+{
+	margin: 0 auto;
+}
+
+.musicAnimation
+{
+	margin: 0 auto;
+	margin-top: -10%;
+}
