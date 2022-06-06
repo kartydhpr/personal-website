@@ -18,7 +18,7 @@
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 
     <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="public/images/icon.ico">
+    <link rel="icon" type="image/x-icon" href="public/images/Kicon.ico">
 
     <title>kartydhpr</title>
 
@@ -37,12 +37,12 @@
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+          <!-- <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a> -->
           <a class="nav-item nav-link" href="#about">About</a>
           <a class="nav-item nav-link" href="#programming">Programming</a>
-          <a class="nav-item nav-link" href="#art&design">Art and Design</a>
+          <a class="nav-item nav-link" href="#art&design">Art & Design</a>
           <a class="nav-item nav-link" href="#music">Music</a>
         </div>
       </div>
@@ -61,23 +61,28 @@
           <div class="col-md-4"></div>
         </div>
       </div>
-
       <!--Website landing page-->
       <div class = "container-fluid">
-        <div class = "row landingAttribs">
-          <div class = "col-md-3"></div>
+        <div class = "row landingAttribs" id="landingPage">
+          
+          <!-- <div class = "col-md-3"></div> -->
           <!-- <div class = "col-md-4" >
             <img src="public/images/professional_profile.jpeg" class = "profile-picture">
           </div> -->
           <!-- <div class = "col-md-1"></div> -->
-          <div class = "col-md-6 text-center">
-            <img src="public/images/professional_profile.jpeg" class = "profile-picture">
+          <div class = "col-md-12 text-center" style="margin: auto;">
+            <img src="public/images/prof-pic.jpeg" class = "profile-picture">
             <h1 class = "title">Hey! I'm Karty.</h1>
             <h3 class = "sub-title dark-mode-text">I'm a software developer and designer. </h3>
             <h3 class = "sub-title dark-mode-text">It's nice to see you here :) </h3>
             <h3 class = "sub-title dark-mode-text">Feel free to look around! </h3>
           </div>
-           <div class = "col-md-3"></div> 
+          <svg class="arrows">
+            <path class="a1" d="M0 0 L30 32 L60 0"></path>
+            <path class="a2" d="M0 20 L30 52 L60 20"></path>
+            <path class="a3" d="M0 40 L30 72 L60 40"></path>
+          </svg>
+           <!-- <div class = "col-md-3"></div>  -->
         </div>
       </div>
       
@@ -86,10 +91,10 @@
           <div class = "row">
             <div class="col-md-3"></div>
             <div class="col-md-6">
-              <H1 class="header" id="anchor">A little bit about myself</H1>
+              <H1 class="header"  id="anchor">A little bit about myself</H1>
               <lottie-player class = "aboutAnimation" src="https://assets8.lottiefiles.com/packages/lf20_zkz6x7ho.json"  background="transparent"  speed="1"  style="width: 500px; height: 500px;"  loop  autoplay></lottie-player>
-              <H4 class = "dark-mode-text" style="line-height: 2em; ">I'm a junior studying Computer & Information Science and minoring in Art & Design at Purdue University. With the <strong>logical mind</strong> of a software engineer and the <strong>creative vision</strong> of an artist, I am always striving to bring great ideas into fruition. With an eye for the details and the drive to perfect I am always equipped to execute a plan to success.  </h4>
-              <H4 class= "dark-mode-text" style="margin-top: 5%; line-height: 2em;">Born in India and raised in an American bubble in China, I have a <strong>unique cultural perspective</strong> that’s provided me with a unique world view. <strong>Fluent in 3 languages</strong> I am able to effectively communicate in a range of cross-cultural team based and individual settings. Click the button below to view my resume!</H4>
+              <p class = "dark-mode-text" style="line-height: 2em; ">I'm a junior studying Computer & Information Science and minoring in Art & Design at Purdue University. With the <strong>logical mind</strong> of a software engineer and the <strong>creative vision</strong> of an artist, I am always striving to bring great ideas into fruition. With an eye for the details and a drive to perfect, I am always equipped to execute a plan to success.  </p>
+              <p class= "dark-mode-text" style="margin-top: 5%; line-height: 2em;">Born in India and raised in an American bubble in China, I have a <strong>distinctive cultural perspective</strong> that’s provided me with a unique world view. <strong>Fluent in 3 languages</strong> I am able to effectively communicate in a range of cross-cultural team based and individual settings. Click the button below to view my resume!</p>
               <a href="public/files/Karteikay_Dhuper_Resume copy.pdf" target="_blank" download>
                 <input class="bodyButton" type="button" value="Download my resume"></input>
               </a>
@@ -104,8 +109,8 @@
             <div class="col-md-6">
               <H1 class="header" id="anchor">Programming and Projects</H1>
               <lottie-player class = "defaultAnimation" src="https://assets3.lottiefiles.com/packages/lf20_uu083vh9.json"  background="transparent"  speed="1"  style="width: 400px; height: 400px;"  loop  autoplay></lottie-player>
-              <H4 class = "dark-mode-text" style="line-height: 2em; ">Some of my technical interests include game development and design, iOS app development, web design, augmented/virtual reality, machine learning and computer vision. I’m definitely drawn to the field of interactive entertainment since I feel it has endless possibilities with regards to visual story telling made possible through the intersection between art and technology. </h4>
-              <H4 class= "dark-mode-text" style="margin-top: 5%; line-height: 2em;">Outside of class, I like to tinker with new cutting-edge tools and technologies like Unreal Engine 5, Xcode, IntellijIDEA, and VS code. I’ve dabbled in developing a few games and apps by teaching myself how to use Unreal 5 and Xcode. I’ve also programmed some automation scripts powered by tools like Selenium and Watchdogs in Python3 to help make my workflow more efficient. </H4>
+              <p class = "dark-mode-text" style="line-height: 2em; ">Some of my technical interests include game development and design, iOS app development, web design, augmented/virtual reality, machine learning and computer vision. I am drawn to the field of interactive entertainment since I feel it has endless possibilities with regards to visual story telling, made possible through the intersection between art and technology. </p>
+              <p class= "dark-mode-text" style="margin-top: 5%; line-height: 2em;">Outside of class, I like to tinker with cutting-edge tools and technologies like Unreal Engine 5, Xcode, IntellijIDEA, and VS code. I’ve dabbled in developing a few games and apps by teaching myself how to use Unreal 5 and Xcode. I’ve also programmed some automation scripts powered by tools like Selenium and Watchdogs in Python3 to help make my workflow more efficient. </p>
               <a href="programming.html"> 
                 <input class="bodyButton" type="button" value="See my work">
               </a>
@@ -120,8 +125,8 @@
             <div class="col-md-6">
               <H1 class="header" id="anchor">Art and Design</H1>
               <lottie-player class = "defaultAnimation" src="https://assets4.lottiefiles.com/packages/lf20_iw0kfvau.json"  background="transparent"  speed="0.5"  style="width: 500px; height: 500px;" loop autoplay></lottie-player>
-              <H4 class = "dark-mode-text" style="line-height: 2em; ">I believe that good design connects people to the product, whether it be a video game, a mobile app, or a website — the design and aesthetics are what make the connection between the user and the product more meaningful and enjoyable. Practicality may initially get a user’s foot through the door but good visual design is what keeps them coming back for more.</h4>
-              <H4 class= "dark-mode-text" style="margin-top: 3%; line-height: 2em;">This is why I find it helpful to utilize my background in art and design to help visualize my ideas before getting them off the page into something more tangible — like this website. In my free time I like to illustrate anything from mundane household objects to (my personal favorite) space and interstellar phenomena.</H4>
+              <p class = "dark-mode-text" style="line-height: 2em; ">I believe that good design connects people to the product, whether it be a video game, a mobile app, or a website — the design and aesthetics are what make the connection between the user and the product more meaningful and enjoyable. Practicality may initially get a user’s foot through the door but good visual design is what keeps them coming back for more.</p>
+              <p class= "dark-mode-text" style="margin-top: 3%; line-height: 2em;">This is why I find it helpful to utilize my background in art and design to help visualize my ideas before getting them off the page into something more tangible — like this website. In my free time I like to illustrate anything from mundane household objects to (my personal favorite) space and interstellar phenomena.</p>
               <a href="art.html">
                 <input class="bodyButton" type="button" value="See my work">
               </a>
@@ -136,7 +141,7 @@
             <div class="col-md-6">
               <H1 class="header" id="anchor">Music and Hobbies</H1>
               <lottie-player class = "musicAnimation" src="https://assets10.lottiefiles.com/packages/lf20_j4xgoyi2.json"  background="transparent"  speed="1"  style="width: 500px; height: 500px;" loop autoplay></lottie-player>
-              <H4 class = "dark-mode-text" style="line-height: 2em; ">Music has always been a big part of my life and as with anything that brings me joy I like to learn as much about its inner workings as I possibly can. Which is why in my free time I like to compose and record new music using my electric guitar and GarageBand. Some of my favorite genres of inspiration include alt-indie rock, folk, shoegaze, surf rock, and dream pop. My other hobbies include gaming, photography, and cycling. </h4>
+              <p class = "dark-mode-text" style="line-height: 2em; ">Music has always been a big part of my life and as with anything that brings me joy I like to learn as much about its inner workings as I possibly can. Which is why in my free time I like to compose and record new music using my electric guitar and GarageBand. Some of my favorite genres include alt-indie rock, folk, and surf rock. My other hobbies include gaming, photography, and cycling. </p>
               <a href="music.html">
                 <input class="bodyButton" type="button" value="See my work">
               </a>

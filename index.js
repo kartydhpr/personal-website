@@ -8,6 +8,8 @@ var texts = document.getElementsByClassName("dark-mode-text"); // stored as an a
 var headers = document.getElementsByClassName("header");
 var greeting = document.getElementsByClassName("title");
 var nav = document.getElementById("dark-mode-nav");
+var lp = document.getElementById("landingPage")
+
 
 console.log("How's it going hackers.");
 console.log("Today's date is: "+today);
@@ -58,14 +60,25 @@ function toggleDarkMode()
 
 	if(pressed % 2 == 0) //dark mode is only toggled on when the value of the "pressed" variable is even
 	{
-		bg.style.backgroundColor = "black"; // background color changed to black 
-
+		try
+		{
+			lp.classList.remove("landingAttribsLight")
+			lp.classList.add("landingAttribsDark");
+		}
+		catch
+		{
+			console.log("Website landing page not on this page")
+		}
+		finally
+		{
+			bg.style.backgroundColor = "black"; // background color changed to black 
+		}
 		//Changing text to dark mode with white text
 		for (let text of texts) // for-loop iterates through texts array and changes each text element's style to white
 		{
 			text.style.color = "white";
 		}
-
+		
 		for (let header of headers)
 		{
 			header.style.color = "#1ce783" // changes header text to a lighter more bright green for contrast
@@ -81,14 +94,25 @@ function toggleDarkMode()
 		nav.classList.remove("bg-light");
 		nav.classList.add("navbar-dark")
 		
-		nav.style.backgroundColor = "#1C2833";
+		nav.style.backgroundColor = "rgba(0, 255, 255, 0)";
 		
 		document.getElementById("darkModeBtn").value = "  Toggle light mode  "
 	}
 	else // condiiton if "pressed" variable is odd and light mode is switched on.
 	{
-		bg.style.backgroundColor = "white";
-		bg.style.background = null
+		try
+		{
+			lp.classList.add("landingAttribsLight");
+		}
+		catch
+		{
+			console.log("Website landing page not on this page.")
+		}
+		finally
+		{
+			bg.style.backgroundColor = "white";
+		}
+		//bg.style.background = null
 
 		//Changing text to light mode with black text 
 		for (let text of texts)
@@ -110,6 +134,8 @@ function toggleDarkMode()
 		nav.classList.remove("navbar-dark");
 		nav.classList.add("navbar-light");
 		nav.classList.add("bg-light");
+
+		nav.style.backgroundColor = "rgba(0, 255, 255, 0)";
 
 		document.getElementById("darkModeBtn").value = "  Toggle dark mode  "
 
