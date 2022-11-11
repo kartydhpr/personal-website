@@ -273,3 +273,18 @@ img:hover {
   margin: 0 auto;
   margin-top: -10%;
 }
+
+.card {
+  /* Add shadows to create the "card" effect */
+  background-color: rgba(105, 105, 105, 0.205);
+  height: 700px;
+  width: 900px;
+  border-radius: 50px;
+  margin-left: 5%;
+  margin-bottom: 3%;
+}
+
+.card-header{
+  text-align: center; 
+  font-size: 30px; /* 50 */
+}
