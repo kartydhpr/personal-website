@@ -102,22 +102,22 @@ mark {
 
 .arrows path.a1 {
   animation-delay: -1s;
-  -webkit-animation-delay: -1s; /* Safari 和 Chrome */
+  -webkit-animation-delay: -1s; /* Safari and Chrome */
 }
 
 .arrows path.a2 {
   animation-delay: -0.5s;
-  -webkit-animation-delay: -0.5s; /* Safari 和 Chrome */
+  -webkit-animation-delay: -0.5s; /* Safari and Chrome */
 }
 
 .arrows path.a3 {
   animation-delay: 0s;
-  -webkit-animation-delay: 0s; /* Safari 和 Chrome */
+  -webkit-animation-delay: 0s; /* Safari and Chrome */
 }
 
 #anchor {
   position: relative;
-  padding-top: 65px;
+  padding-top: 45px;
 }
 
 .bodyButton {
