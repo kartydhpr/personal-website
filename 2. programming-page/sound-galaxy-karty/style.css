@@ -1,11 +1,11 @@
 body {
   padding: 0;
   margin: 0;
-  background-color = "Black"
+  background-color: "Black";
 }
 
 .text-background{
-  background(color("Black"))
+  background-color: "Black";
 }
 
 html {
