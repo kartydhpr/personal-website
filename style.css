@@ -200,7 +200,7 @@ input:hover {
   margin-bottom: 2%;
   align-self: center;
   border-radius: 50%;
-  width: 450px;
+  width: 25rem;
   height: auto;
   border: 10px solid #1ce783 /* #037231 03cc57  #00FF7F */;
   box-shadow: 0px 0px 70px #1ce783;
@@ -229,7 +229,7 @@ img:hover {
   display: inline-block;
   overflow: hidden; /* Ensures the content is not revealed until the animation */
   color: #03e976;
-  font-size: 5.3rem; /* 100 */
+  font-size: 5rem; /* 100 */
   border-right: 0.1em solid #ff6630; /* The typwriter cursor */
   white-space: nowrap; /* Keeps the content on a single line */
   margin: auto; /* Gives that scrolling effect as the typing happens */
@@ -317,7 +317,7 @@ img:hover {
   color: black;
 }
 .aboutAnimation {
-  margin-left: 20%;
+  /* margin-left: 20%; */
   margin-top: -3%;
 }
 
