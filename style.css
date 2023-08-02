@@ -1,6 +1,13 @@
 html {
   scroll-behavior: smooth;
   font-size: 19px;
+  min-height: 100%;
+}
+
+@media (min-width: 786px){
+  html{
+    
+  }
 }
 
 mark {
