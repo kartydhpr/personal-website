@@ -6,7 +6,7 @@ html {
   min-height: 100%;
 }
 
-@media screen and (max-width: 1300px){
+@media screen and (max-width: 1366px){
   /* smaller PCs larger tablets*/
   html{
     font-size: 14px;
