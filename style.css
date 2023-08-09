@@ -7,7 +7,7 @@ html {
 }
 
 @media screen and (max-width: 1600px){
-  /* smaller PCs larger tablets*/
+  /* smaller PCs*/
   html{
     font-size: 14px;
   } 
@@ -28,10 +28,6 @@ html {
   } 
 }
 
-input[type="button"]
-{
-    font-size: 20px;
-}
 .navbar {
   position: fixed;
   top: 0;
@@ -39,9 +35,6 @@ input[type="button"]
   z-index: 20;
 }
 
-/* .nav-reallign{
-  margin-left: -70px;
-} */
 .nav-island{
   background-color: black !important;
   border-top: 3px solid #ff6630;
@@ -212,7 +205,6 @@ input[type="button"]
 .bodyButton {
   background: black;
   color: #fff;
-  font-size: x-large;
   text-align: center;
   min-width: 300px;
   height: auto;
@@ -227,6 +219,11 @@ input:hover {
   color: #ff6630;
   box-shadow: 0 20px 16px 0 rgba(0, 0, 0, 0.24);
   transition: 0.5s;
+}
+
+input[type="button"]
+{
+    font-size: 1.1rem;
 }
 
 .profile-picture {
@@ -314,11 +311,6 @@ img:hover {
   font-weight: 500;
   line-height: 2em;
 }
-
-/* .details h4 {
-  margin-left: 0%;
-  margin-right: 0%;
-} */
 
 .footer {
   text-align: center;
