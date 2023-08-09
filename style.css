@@ -6,13 +6,13 @@ html {
   min-height: 100%;
 }
 
-@media screen and (max-width: 1366px){
+@media screen and (max-width: 1600px){
   /* smaller PCs larger tablets*/
   html{
     font-size: 14px;
   } 
 }
-@media screen and (max-width: 1023px) {
+@media screen and (max-width: 1025px) {
   /* Tablet */
   html{
     font-size: 12px;
