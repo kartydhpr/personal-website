@@ -103,6 +103,7 @@ html {
 .lightSwitchButton {
   background: black;
   color: #fff;
+  font-size: 1rem;
   border: 3px solid #00ff7f;
   border-radius: 20px;
   box-shadow: 0px 0px 10px #00ff7f;
@@ -205,6 +206,7 @@ html {
 .bodyButton {
   background: black;
   color: #fff;
+  font-size: 1.2rem;
   text-align: center;
   min-width: 300px;
   height: auto;
@@ -219,11 +221,6 @@ input:hover {
   color: #ff6630;
   box-shadow: 0 20px 16px 0 rgba(0, 0, 0, 0.24);
   transition: 0.5s;
-}
-
-input[type="button"]
-{
-    font-size: 1.1rem;
 }
 
 .profile-picture {
