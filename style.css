@@ -39,9 +39,9 @@ input[type="button"]
   z-index: 20;
 }
 
-.nav-reallign{
+/* .nav-reallign{
   margin-left: -70px;
-}
+} */
 .nav-island{
   background-color: black !important;
   border-top: 3px solid #ff6630;
