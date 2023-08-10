@@ -70,6 +70,7 @@ html {
 .nav-island-parent{
   display: flex;
   flex-wrap: wrap;
+  border-radius: 40px;
 }
 .nav-island-parent a{
   display: inline-block;
@@ -213,15 +214,27 @@ html {
   color: #fff;
   font-size: 1.2rem;
   text-align: center;
-  min-width: 300px;
+  max-width: 310px;
   height: auto;
   border: 3px solid #00ff7f;
   border-radius: 50px;
   box-shadow: 0px 0px 35px #00ff7f;
   margin-top: 3%;
+  margin: auto;
 }
-
-input:hover {
+  .bodyButton i{
+    padding: 10px;
+  }
+  .bodyButton a{
+    text-decoration: none;
+    color: white;
+    padding: 15px 55px;
+  }
+  .bodyButton:hover a{
+    color: #ff6630;
+  }
+  
+.hover-btn:hover {
   border: 3px solid #ff6630;
   color: #ff6630;
   box-shadow: 0 20px 16px 0 rgba(0, 0, 0, 0.24);
@@ -244,17 +257,6 @@ img:hover {
   border-radius: 24px;
   box-shadow: 0px 0px 800px #00ff80;
   transition: 0.5s;
-}
-
-.title {
-  /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
-  margin-top: 2%;
-  color: #03e976;
-  /* color: rgb(3, 204, 87);  */
-  font-size: 100px; /* 100 */
-  line-height: 1.5em;
-  /* box-shadow: 0px 20px 10px #ccc;
-	background-color: rgba(245, 154, 36, 0.461); */
 }
 
 .typewriter {
@@ -322,7 +324,7 @@ img:hover {
 .footer h1 {
   color: black;
   margin-top: 5%;
-  font-size: 50px;
+  font-size: 2.65rem;
   padding-bottom: 2%;
 }
 

@@ -42,13 +42,14 @@
           <a class="nav-item nav-link nav-island-right" href="#music">Music</a>
         </div>
       </div>
-      <input class="lightSwitchButton"  type="button", value="  Toggle dark mode  ", id="darkModeBtn"></input>
+      <input class="lightSwitchButton hover-btn"  type="button", value="  Toggle dark mode  ", id="darkModeBtn"></input>
       <div class="scroll-progress" id="scroll-progress"></div>
     </nav>
-      
+    
+    <main>
     <!--Website landing page-->
       <section>  
-          <div class="" id="landingPage">
+          <div id="landingPage">
             <div class = "hero centered">
               <img src="public/images/prof-pic.jpeg" class = "profile-picture">
               <div>
@@ -68,20 +69,21 @@
           </div>
       </section>  
        
-    <main>
       <!--About Section-->
       <section>
         <div class = "container-fluid details" id= "about">
           <div class = "row">
             <div class="col-md-3"></div>
-            <div class="col-sm-12 col-md-6">
+            <div class="col-md-6">
               <H1 class="header"  id="anchor">A little bit about myself</H1>
               <lottie-player class = "aboutAnimation" src="https://assets8.lottiefiles.com/packages/lf20_zkz6x7ho.json"  background="transparent"  speed="1"  style="width: 100%; height: 20rem;"  loop  autoplay></lottie-player>
-              <p class="dark-mode-text">I'm a junior studying Computer & Information Science and minoring in Art & Design at Purdue University. With the <strong>logical mind</strong> of a software engineer and the <strong>creative vision</strong> of an artist, I am always striving to bring great ideas into fruition. I am passionate about delivering beautiful pixel-perfect digital experiences with an emphasis on security and accessibility and have aspirations of working up to a Creative Director or Creative Technologist role. </p>
+              <p class="dark-mode-text">I'm a final year student studying Computer & Information Science and minoring in Art & Design at Purdue University. With the <strong>logical mind</strong> of a software engineer and the <strong>creative vision</strong> of an artist, I am always striving to bring great ideas into fruition. I am passionate about delivering beautiful pixel-perfect digital experiences with an emphasis on accessibility and security and have aspirations of working in a Creative-Technical capacity. </p>
               <p class="dark-mode-text" style="margin-top: 5%;">Born in India and raised in an American bubble in China, I have a <strong>distinctive cultural perspective</strong> that’s provided me with a unique world view. <strong>Fluent in 3 languages</strong>, I am able to effectively communicate in a range of cross-cultural team based and individual settings. Click the button below to view my resume!</p>
-              <a href="public/files/Karteikay_Dhuper_Resume copy.pdf" target="_blank" download>
-                <input class="bodyButton" type="button" value="Download my resume"></input>
-              </a>
+              <div class="bodyButton hover-btn">
+                <a href="public/files/Karteikay_Dhuper_Resume copy.pdf" target="_blank" style="padding: 20px;">
+                  <i class="fa-solid fa-download"></i> Download my resume
+                </a>
+              </div>
             </div>
             <div class="col-md-3"></div>
           </div>
@@ -97,10 +99,12 @@
               <lottie-player class = "defaultAnimation" src="https://assets3.lottiefiles.com/packages/lf20_uu083vh9.json"  background="transparent"  speed="1"  style="width: 20rem ; height: 20rem;"  loop  autoplay></lottie-player>
               <p class="dark-mode-text">Some of my technical interests include Human Computer Interaction, Full Stack Web App Development, Augmented/Virtual Reality, Machine Learning, and Game Development. My passion for <strong>innovative technology</strong> and <strong>impactful art</strong> intersect to fuel my interest in interactive entertaintment.</p>
               <p class="dark-mode-text" style="margin-top: 5%;">Outside of class, I like to tinker with cutting-edge tools and technologies like Unreal Engine 5, Blender, Xcode, IntellijIDEA, and VS code. I'm an experienced back-end programmer in <strong>Java, Python, C#, and SQL</strong>. As well as a proven front-end developer using <strong>HTML5, CSS3, and Javascript</strong> - with exposure to the M.E.R.N stack. </p>
-              <a href="2. programming-page/programming.html"> 
-                <input class="bodyButton" type="button" value="See my work">
-              </a>
+              <div class="bodyButton hover-btn">
+                <a href="2. programming-page/programming.html"> 
+                  <i class="fa-solid fa-code"></i> See my work
+                </a>
               </div>
+            </div>
             <div class="col-md-3"></div>
           </div>
         </div>
@@ -115,10 +119,12 @@
               <lottie-player class = "defaultAnimation" src="https://assets4.lottiefiles.com/packages/lf20_iw0kfvau.json"  background="transparent"  speed="0.5"  style="width: 100%; height: 25rem;" loop autoplay></lottie-player>
               <p class="dark-mode-text">I believe that good design connects people to the product, whether it be a video game, a mobile app, or a website — the design and aesthetics are what make the connection between the user and the product more meaningful and enjoyable.</p>
               <p class="dark-mode-text" style="margin-top: 3%;">This is why I find it helpful to utilize my background in art and design to help visualize my ideas before getting them off the page into something more tangible — like this website. In my free time I like to illustrate anything from mundane household objects to (my personal favorite) space and interstellar phenomena.</p>
-              <a href="3. art-page/art.html">
-                <input class="bodyButton" type="button" value="See my work">
-              </a>
+              <div class="bodyButton hover-btn">
+                <a href="3. art-page/art.html">
+                  <i class="fa-solid fa-palette"></i> View my work
+                </a>
               </div>
+            </div>
             <div class="col-md-3"></div>
           </div>
         </div>
@@ -132,10 +138,12 @@
               <H1 class="header" id="anchor">Music and Hobbies</H1>
               <lottie-player class = "musicAnimation" src="https://assets10.lottiefiles.com/packages/lf20_j4xgoyi2.json"  background="transparent"  speed="1"  style="width: 100%; height: 27rem;" loop autoplay></lottie-player>
               <p class="dark-mode-text">Music has always been a big part of my life and as with anything that brings me joy I like to learn as much about its inner workings as I possibly can. Which is why in my free time I like to compose and record new music using my electric guitar and GarageBand. Some of my favorite genres include alt-indie rock, folk, surf rock, and shoegaze. My other hobbies include gaming, photography, and cycling. </p>
-              <a href="4. music-page/music.html">
-                <input class="bodyButton" type="button" value="See my work">
-              </a>
+              <div class="bodyButton hover-btn">
+                <a href="4. music-page/music.html">
+                  <i class="fa-solid fa-guitar"></i> Hear my work
+                </a>
               </div>
+            </div>
             <div class="col-md-3"></div>
           </div>
         </div>
@@ -150,7 +158,7 @@
             <H1> Get in touch:</H1>
             <a class="fa-brands fa-linkedin fa-3x"  href="https://www.linkedin.com/in/kartydhuper/" target="_blank"></a>
             <a class="fa-brands fa-github fa-3x"  href="https://github.com/kartydhpr" target="_blank"></a>
-            <a class="fa-solid fa-envelope fa-3x" " style="padding-bottom: 3%;" href="" target="_blank"></a>
+            <a class="fa-solid fa-envelope fa-3x"  style="padding-bottom: 3%;" href="" target="_blank"></a>
             <H6 style="padding-bottom: 2%;">Website designed and coded by Karteikay (Karty) Dhuper.</H6>
           </div>
           <div class="col-md-3"></div>
