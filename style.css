@@ -206,7 +206,7 @@ html {
 
 #anchor {
   position: relative;
-  padding-top: 45px;
+  padding-top: 55px;
 }
 
 .bodyButton {
@@ -228,7 +228,7 @@ html {
   .bodyButton a{
     text-decoration: none;
     color: white;
-    padding: 15px 55px;
+    padding: 20px 60px;
   }
   .bodyButton:hover a{
     color: #ff6630;
@@ -252,7 +252,7 @@ html {
   box-shadow: 0px 0px 70px #1ce783;
 }
 
-img:hover {
+.navbar img:hover {
   border: 5px solid #1ce781be /* #037231 03cc57  #00FF7F */;
   border-radius: 24px;
   box-shadow: 0px 0px 800px #00ff80;
@@ -305,7 +305,7 @@ img:hover {
 }
 
 .details {
-  /* margin-top: 10%; */
+  /* margin-top: 3rem; */
   text-align: center;
   padding-bottom: 5%;
 }
@@ -359,4 +359,22 @@ img:hover {
   margin-top: -10%;
 }
 
+/* 
+.tag {
+  opacity: 0;
+  transform: translate(0, 10vh);
+  transition: all 1s;
+}
 
+.tag.visible {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+section { height: 100vh; }
+
+
+.yellow { background-color: lightyellow; }
+.red { background-color: lightcoral; }
+.blue { background-color: lightblue; }
+.green { background-color: lightgreen; } */
