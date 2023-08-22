@@ -8,6 +8,7 @@ html {
   scroll-behavior: smooth;
   font-size: 19px;
   min-height: 100%; 
+  
 }
 
 @media screen and (max-width: 1600px){
@@ -30,6 +31,10 @@ html {
   html{
     font-size: 10px;
   } 
+}
+
+.hstack{
+  display: flex;
 }
 
 .navbar {
@@ -214,7 +219,7 @@ html {
   color: #fff;
   font-size: 1.2rem;
   text-align: center;
-  max-width: 310px;
+  max-width: 20rem;
   height: auto;
   border: 3px solid #00ff7f;
   border-radius: 50px;
@@ -316,6 +321,8 @@ html {
   line-height: 2em;
 }
 
+/* Footer */
+
 .footer {
   text-align: center;
   background-color: #ff6630;
@@ -345,6 +352,9 @@ html {
 .fa-envelope {
   color: black;
 }
+
+/* Animations */
+
 .aboutAnimation {
   /* margin-left: 20%; */
   margin-top: -3%;
@@ -359,7 +369,90 @@ html {
   margin-top: -10%;
 }
 
-/* 
+hr{
+  height: 1px; width: 30%; margin-top: 50px; margin-bottom: 50px; background-color: #3C4042;
+}
+
+/* Carousel View CSS */
+
+.cards {
+  display: grid;
+  grid-auto-columns: 100%;
+  grid-column-gap: 10px;
+  grid-auto-flow: column;
+  padding: 25px 0px;
+  list-style: none;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border-radius: 25px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 15%);
+  scroll-snap-align: start;
+  transition: all 0.2s;
+}
+
+.card .card-title {
+  font-size: 1.5rem;
+}
+
+.card .card-link-wrapper {
+  margin-top: auto;
+  width: fit-content;
+}
+
+.card .card-link {
+  text-decoration: none;
+  color: white;
+  background-color: #ff6630;
+  padding: 6px 30px;
+  border-radius: 18px;
+}
+
+.cards::-webkit-scrollbar {
+  height: 12px;
+}
+
+.cards::-webkit-scrollbar-thumb,
+.cards::-webkit-scrollbar-track {
+  border-radius: 92px;
+}
+
+.cards::-webkit-scrollbar-thumb {
+  background: var(--darkorange);
+}
+
+.cards::-webkit-scrollbar-track {
+  background: var(--thumb);
+}
+
+@media (min-width: 500px) {
+  .cards {
+    grid-auto-columns: calc(50% - 10px);
+    grid-column-gap: 20px;
+  }
+}
+
+@media (min-width: 700px) {
+  .cards {
+    grid-auto-columns: calc(calc(100% / 3) - 20px);
+    grid-column-gap: 30px;
+  }
+}
+
+@media (min-width: 1100px) {
+  .cards {
+    grid-auto-columns: calc(33% - 30px);
+    grid-column-gap: 40px;
+  }
+}
+
+
+/* fade in hompage elements
 .tag {
   opacity: 0;
   transform: translate(0, 10vh);

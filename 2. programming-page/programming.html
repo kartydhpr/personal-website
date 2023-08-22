@@ -44,7 +44,7 @@
           <a class="nav-item nav-link" href="https://www.kartydhpr.com/index.html#music">Music</a>
         </div>
       </div>
-      <input class="lightSwitchButton" type="button", value="  Toggle dark mode  ", id="darkModeBtn"></input>
+      <input class="lightSwitchButton hover-btn" type="button", value="  Toggle dark mode  ", id="darkModeBtn"></input>
       <!-- <button id="darkModeBtn">Dark Mode: On/Off </button> -->
       <div class="scroll-progress" id="scroll-progress"></div> 
     </nav>
@@ -52,36 +52,96 @@
     <main>
       <!--Programming Section-->
       <section>
-      <div class = "container-fluid details" id= "programming">
+      <div class = "container-fluid details" style="padding-bottom: 0%;" id= "programming">
         <div class = "row">
           <div class="col-md-3"></div>
           <div class="col-md-6">
             <H1 class="header" id="anchor" style="margin-top: 20px;">Programming and Projects</H1>
             <lottie-player class = "defaultAnimation" src="https://assets3.lottiefiles.com/packages/lf20_uu083vh9.json"  background="transparent"  speed="1"  style="width: 20rem ; height: 20rem;"  loop  autoplay></lottie-player>
-            <p class="dark-mode-text">This page is still a work in progress as I am trying to consolidate all my projects and their appropriate documentation. For now, enjoy <a href="../2. programming-page/sound-galaxy-karty/index.html">this</a> placeholder project I made using p5.js to make falling bits dance using your microphone's input. Be sure to check back soon once this page is complete!</p>
-            <p class="dark-mode-text" style="margin-top: 5%;">In the meantime, feel free to browse my GitHub profile <a href="https://github.com/kartydhpr" target="_blank">here</a> to see how I've been keeping myself busy!</p>
+            <p class="dark-mode-text">This page contains all of the side-projects I've worked on with links to their source code. It'll continue to be updated with additional projects and documentation. Click any highlighted project in the library below to learn more it.</p>
           </div>
           <div class="col-md-3"></div>
         </div>
       </div>
       </section>
+      <hr>
+      <section>
+        <div class="container">
+            <h2 class="dark-mode-text">Project Library</h2>
+          <ul class="cards dark-mode-text">
+            <li class="card">
+              <div>
+                <div class="hstack">
+                  <h3 class="card-title font-weight-bold">LetsMeetApp</h3>
+                  <a class="fa-brands fa-github fa-2x" style="color: #ff6630; text-decoration: none; margin-left: auto;" href="https://github.com/kartydhpr/LetsMeetApp" target="_blank"></a>
+                </div>
+                <div class="card-content">
+                  <p>A full-stack meeting planner app built with Java that consolidates all the core functionality required when meeting with a team. Features include: Common meeting time scheduling, Chat functionality, GoogleMaps and Zoom integration for meeting location.</p>
+                </div>
+              </div>
+              <div class="card-link-wrapper">
+                <a href="" target="_blank" class="card-link">See it in action</a>
+              </div>
+            </li>
+            <li class="card">
+              <div>
+                <div style="display: flex;">
+                  <h3 class="card-title font-weight-bold">FileSift</h3>
+                  <a class="fa-brands fa-github fa-2x" style="color: #ff6630; text-decoration: none; margin-left: auto;" href="https://github.com/kartydhpr/FileSift" target="_blank"></a>
+                </div>                <div class="card-content">
+                  <p>A Python script I wrote that utilizes Watchdog Observer to move and organize files in my Downloads folder by file type.</p>
+                </div>
+              </div>
+              <div class="card-link-wrapper">
+                <a href="" target="_blank" class="card-link">See it in action</a>
+              </div>
+            </li>
+            <li class="card">
+              <div>
+                <div style="display: flex;">
+                  <h3 class="card-title font-weight-bold">Sound Galaxy</h3>
+                  <a class="fa-brands fa-github fa-2x" style="color: #ff6630; text-decoration: none; margin-left: auto;" href="https://github.com/kartydhpr/personal-website/tree/main/2.%20programming-page/sound-galaxy-karty" target="_blank"></a>
+                </div>                
+                <div class="card-content">
+                  <p>This was an experimental project I made while tinkering with p5.js that uses your device's microphone to make stars dance in the night sky.</p>
+                </div>
+              </div>
+              <div class="card-link-wrapper">
+                <a href="../2. programming-page/sound-galaxy-karty/index.html" class="card-link">Launch</a>
+              </div>
+            </li>
+            <li class="card">
+              <div>
+                <h3 class="card-title">Service 3</h3>
+                <div class="card-content">
+                  <p>Phasellus ultrices lorem vel bibendum ultricies. In hendrerit nulla a ante dapibus pulvinar eu eget quam.</p>
+                </div>
+              </div>
+              <div class="card-link-wrapper">
+                <a href="" class="card-link">Learn More</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <hr>
     </main>
 
     <!--Links Footer Section-->
     <footer>
-  <div class = "container-fluid footer">
-    <div class = "row">
-      <div class="col-md-3"></div>
-      <div class="col-md-6">
-        <H1> Get in touch:</H1>
-        <a class="fa-brands fa-linkedin fa-3x"  href="https://www.linkedin.com/in/kartydhuper/" target="_blank"></a>
-        <a class="fa-brands fa-github fa-3x"  href="https://github.com/kartydhpr" target="_blank"></a>
-        <a class="fa-solid fa-envelope fa-3x" " style="padding-bottom: 3%;" href="" target="_blank"></a>
-        <H6 style="padding-bottom: 2%;">Website designed and coded by Karteikay (Karty) Dhuper.</H6>
+      <div class = "container-fluid footer">
+        <div class = "row">
+          <div class="col-md-3"></div>
+          <div class="col-md-6">
+            <H1> Get in touch:</H1>
+            <a class="fa-brands fa-linkedin fa-3x"  href="https://www.linkedin.com/in/kartydhuper/" target="_blank"></a>
+            <a class="fa-brands fa-github fa-3x"  href="https://github.com/kartydhpr" target="_blank"></a>
+            <a class="fa-solid fa-envelope fa-3x" style="padding-bottom: 3%;" href="" target="_blank"></a>
+            <H6 style="padding-bottom: 2%;">Website designed and coded by Karteikay (Karty) Dhuper.</H6>
+          </div>
+          <div class="col-md-3"></div>
+        </div>
       </div>
-      <div class="col-md-3"></div>
-    </div>
-  </div>
     </footer>
 
     <!--Custom JavaScript-->

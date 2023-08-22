@@ -9,6 +9,7 @@ var headers = document.getElementsByClassName("header");
 var greeting = document.getElementsByClassName("title");
 var nav = document.getElementById("dark-mode-nav");
 var lp = document.getElementById("landingPage");
+var cardElements = document.getElementsByClassName("card");
 
 console.log("How's it going hackers.");
 console.log("Today's date is: " + today);
@@ -90,6 +91,11 @@ function toggleDarkMode() {
     nav.style.backgroundColor = "rgba(0, 255, 255, 0)";
 
     document.getElementById("darkModeBtn").value = "  Toggle light mode  ";
+    
+    // Changing background color of card elements
+    for (let card of cardElements) {
+      card.style.background = "#3C4042";
+    }
   } // condiiton if "pressed" variable is odd and light mode is switched on.
   else {
     try {
@@ -122,11 +128,13 @@ function toggleDarkMode() {
     nav.style.backgroundColor = "rgba(0, 255, 255, 0)";
 
     document.getElementById("darkModeBtn").value = "  Toggle dark mode  ";
+    for (let card of cardElements) {
+      card.style.background = "#ffff";
+    }
   }
 }
 
 // Code for scroll progress bar
-
 const scrollProgressBar = document.getElementById("scroll-progress");
 
 function scrollProgress() {
