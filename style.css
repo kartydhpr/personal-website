@@ -409,8 +409,13 @@ hr{
   text-decoration: none;
   color: white;
   background-color: #ff6630;
-  padding: 6px 30px;
+  padding: 6px 20px;
   border-radius: 18px;
+  box-shadow: 1px 2.5px 2.5px 2.5px rgba(0, 0, 0, 0.24);
+}
+.card-link:hover{
+  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.24);
+  transition: 0.3s
 }
 
 .cards::-webkit-scrollbar {
