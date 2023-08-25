@@ -66,8 +66,8 @@
       </section>
       <hr>
       <section>
-        <div class="container">
-            <h2 class="dark-mode-text">Project Carousel</h2>
+        <div class="container" style="  padding: 0px 0px 50px;">
+            <h2 class="dark-mode-text">Project Library</h2>
           <ul class="cards dark-mode-text">
             <li class="card">
               <div>
@@ -80,7 +80,47 @@
                 </div>
               </div>
               <div class="card-link-wrapper">
-                <a href="" target="_blank" class="card-link">See it in action</a>
+                <a href="#" data-toggle="modal" data-target="#LetsMeetAppDemo" class="card-link">See it in action</a>
+              </div>
+              <!-- The Modal -->
+              <div class="modal fade" id="LetsMeetAppDemo">
+                <div class="modal-dialog modal-dialog-centered modal-xl">
+                  <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                      <h4 class="modal-title" style="color: #1ce783; font-weight: bolder;">LetsMeetApp Demo</h4>
+                      <button type="button" class="close" data-dismiss="modal"></button>
+                    </div>
+                    <!-- Modal body with video -->
+                    <div class="modal-video">
+                      <iframe src="https://www.youtube.com/embed/t2iaeYoZAxI?autoplay=1" frameborder="" allowfullscreen></iframe>
+                    </div>
+                    <div class="modal-body" style="text-align: left !important; color: white; padding-bottom: 10px;">
+                      <div class="row">
+                        <div class="col-6" style="border-right: solid 2px #ff6630; padding: 10px 20px;">
+                          <H6 style="color: #ff6630;">Features:</H6>
+                          <ul>
+                            <li>Common meeting time scheduling</li>
+                            <li>Chat functionality</li>
+                            <li>GoogleMaps and Zoom integration for meeting location</li>
+                          </ul>
+                        </div>
+                        <div class="col-6" style="padding: 10px 20px;">
+                          <H6 style="color: #ff6630;">Tools and Concepts:</H6>
+                          <ul>
+                            <li>Object-oriented programming in Java</li>
+                            <li>GUI development with JFrame</li>
+                            <li>Google Maps and Zoom API integration</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background: #1ce783;">Close</button>
+                    </div>
+                  </div>
+                </div>
               </div>
             </li>
             <li class="card">
@@ -88,7 +128,8 @@
                 <div class="hstack">
                   <h3 class="card-title font-weight-bold">FileSift</h3>
                   <a class="fa-brands fa-github fa-2x" style="color: #ff6630; text-decoration: none; margin-left: auto;" href="https://github.com/kartydhpr/FileSift" target="_blank"></a>
-                </div>                <div class="card-content">
+                </div>                
+                <div class="card-content">
                   <p>A python script I wrote that utilizes Watchdog Observer to move and organize files in my Downloads folder based on the file's type.</p>
                 </div>
               </div>
@@ -115,7 +156,8 @@
                 <div class="hstack">
                   <h3 class="card-title font-weight-bold">Magic 8 Ball App</h3>
                   <a class="fa-brands fa-github fa-2x" style="color: #ff6630; text-decoration: none; margin-left: auto;" href="https://github.com/kartydhpr/Magic-8-Ball_iOS-App" target="_blank"></a>
-                </div>                <div class="card-content">
+                </div>                
+                <div class="card-content">
                   <p>An iOS app I made when learning Swift and SwiftUI that mimicks the functionality of a Magic 8 Ball.</p>
                 </div>
               </div>
@@ -137,10 +179,23 @@
                 <a href="" class="card-link">See it in action</a>
               </div>
             </li>
+            <li class="this-site-card" style="background: transparent !important;">
+              <div>
+                <div class="hstack">
+                  <h3 class="card-title font-weight-bold">This Website</h3>
+                  <a class="fa-brands fa-github fa-2x" style="color: #ff6630; text-decoration: none; margin-left: auto;" href="https://github.com/kartydhpr/personal-website" target="_blank"></a>
+                </div>                
+                <div class="card-content">
+                  <p>A personal website I initially made to learn web development that later evolved into a hub for all my projects and interests.</p>
+                </div>
+              </div>
+              <div class="card-link-wrapper">
+                <a href="../index.html" class="card-link">Take me to the Home page</a>
+              </div>
+            </li>
           </ul>
         </div>
       </section>
-      <hr>
     </main>
 
     <!--Links Footer Section-->
