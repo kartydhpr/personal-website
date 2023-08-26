@@ -455,7 +455,7 @@ hr{
 @media (min-width: 500px) {
   .cards {
     grid-auto-columns: calc(50% - 10px);
-    grid-column-gap: 10px;
+    grid-column-gap: 20px;
   }
 }
 
