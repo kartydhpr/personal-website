@@ -64,7 +64,7 @@ function toggleDarkMode() {
     //dark mode is only toggled on when the value of the "pressed" variable is even
     try {
       lp.classList.remove("landingAttribsLight");
-      lp.classList.add("landingAttribsDark");
+      lp.classList.add("bg");
     } catch {
       console.log("Website landing page not on this page");
     } finally {
@@ -99,7 +99,7 @@ function toggleDarkMode() {
   } // condiiton if "pressed" variable is odd and light mode is switched on.
   else {
     try {
-      lp.classList.add("landingAttribsLight");
+      lp.classList.remove("bg");
     } catch {
       console.log("Website landing page not on this page.");
     } finally {
