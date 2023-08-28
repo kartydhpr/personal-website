@@ -63,8 +63,7 @@ function toggleDarkMode() {
   if (pressed % 2 == 0) {
     //dark mode is only toggled on when the value of the "pressed" variable is even
     try {
-      lp.classList.remove("landingAttribsLight");
-      lp.classList.add("bg");
+      lp.classList.add("bg-dark");
     } catch {
       console.log("Website landing page not on this page");
     } finally {
@@ -99,7 +98,7 @@ function toggleDarkMode() {
   } // condiiton if "pressed" variable is odd and light mode is switched on.
   else {
     try {
-      lp.classList.remove("bg");
+      lp.classList.remove("bg-dark");
     } catch {
       console.log("Website landing page not on this page.");
     } finally {
@@ -150,18 +149,29 @@ function scrollProgress() {
 }
 document.addEventListener("scroll", scrollProgress);
 
+// for fading in landing page hero
+// Add the 'show' class to the image after the page loads
+window.addEventListener('load', function() {
+  const elements = document.querySelectorAll('.fade-in');
+  elements.forEach(element => {
+    element.classList.add('show');
+  });
+});
 
-// $(document).on("scroll", function() {
-//   var pageTop = $(document).scrollTop();
-//   var pageBottom = pageTop + $(window).height();
-//   var tags = $(".tag");
-
-//   for (var i = 0; i < tags.length; i++) {
-//     var tag = tags[i];
-//     if ($(tag).position().top < pageBottom) {
-//       $(tag).addClass("visible");
-//     } else {
-//       $(tag).removeClass("visible");
-//     }
-//   }
-// });
+// for fading in each detail section on home page:
+// Function to handle intersection changes
+function handleIntersection(entries, observer) {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('show');
+      observer.unobserve(entry.target); // Stop observing once the effect is triggered
+    }
+  });
+}
+// Create an observer instance with a callback
+const observer = new IntersectionObserver(handleIntersection, { threshold: 0.2 });
+// Get all elements with the .details class and start observing them
+const sections = document.querySelectorAll('.details');
+sections.forEach(section => {
+  observer.observe(section);
+});
