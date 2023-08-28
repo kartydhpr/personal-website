@@ -348,6 +348,7 @@ html {
 .details {
   /* margin-top: 3rem; */
   text-align: center;
+  height: 100vh;
   padding-bottom: 5%;
   opacity: 0;
   /* transform: translateY(20px); */
