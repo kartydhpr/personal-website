@@ -175,3 +175,22 @@ const sections = document.querySelectorAll('.details');
 sections.forEach(section => {
   observer.observe(section);
 });
+
+
+// const filterButtons = document.querySelectorAll('.filter-button');
+//   const images = document.querySelectorAll('.column img');
+
+//   filterButtons.forEach(button => {
+//     button.addEventListener('click', () => {
+//       const selectedStyle = button.getAttribute('data-style');
+      
+//       images.forEach(image => {
+//         const styles = image.getAttribute('src').split('/').pop().split('.')[0].split('_');
+//         if (styles.includes(selectedStyle)) {
+//           image.classList.remove('hidden');
+//         } else {
+//           image.classList.add('hidden');
+//         }
+//       });
+//     });
+//   });
