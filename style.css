@@ -348,9 +348,9 @@ html {
   /* margin-top: 3rem; */
   text-align: center;
   padding-bottom: 5%;
-  /* opacity: 0; */
+  opacity: 0;
   /* transform: translateY(20px); */
-  /* transition: opacity 2s ease, transform 2s ease; */
+  transition: opacity 2s ease, transform 2s ease;
 }
 
 .details p {
@@ -359,10 +359,10 @@ html {
   line-height: 2em;
 }
 
-/* .details.show {
+.details.show {
   opacity: 1;
   transform: translateY(0);
-} */
+}
 
 /* Footer */
 

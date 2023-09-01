@@ -149,30 +149,30 @@ function scrollProgress() {
 }
 document.addEventListener("scroll", scrollProgress);
 
-// // for fading in landing page hero
-// // Add the 'show' class to the image after the page loads
-// window.addEventListener('load', function() {
-//   const elements = document.querySelectorAll('.fade-in');
-//   elements.forEach(element => {
-//     element.classList.add('show');
-//   });
-// });
+// for fading in landing page hero
+// Add the 'show' class to the image after the page loads
+window.addEventListener('load', function() {
+  const elements = document.querySelectorAll('.fade-in');
+  elements.forEach(element => {
+    element.classList.add('show');
+  });
+});
 
-// // for fading in each detail section on home page:
-// // Function to handle intersection changes
-// function handleIntersection(entries, observer) {
-//   entries.forEach(entry => {
-//     if (entry.isIntersecting) {
-//       entry.target.classList.add('show');
-//       observer.unobserve(entry.target); // Stop observing once the effect is triggered
-//     }
-//   });
-// }
-// // Create an observer instance with a callback
-// const observer = new IntersectionObserver(handleIntersection, { threshold: 0.2 });
-// // Get all elements with the .details class and start observing them
-// const sections = document.querySelectorAll('.details');
-// sections.forEach(section => {
-//   observer.observe(section);
-// });
+// for fading in each detail section on home page:
+// Function to handle intersection changes
+function handleIntersection(entries, observer) {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('show');
+      observer.unobserve(entry.target); // Stop observing once the effect is triggered
+    }
+  });
+}
+// Create an observer instance with a callback
+const observer = new IntersectionObserver(handleIntersection, { threshold: 0.2 });
+// Get all elements with the .details class and start observing them
+const sections = document.querySelectorAll('.details');
+sections.forEach(section => {
+  observer.observe(section);
+});
 
