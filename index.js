@@ -176,14 +176,6 @@ sections.forEach(section => {
   observer.observe(section);
 });
 
-// Add the 'show' class to elements with the 'slide-in' class after the page loads
-window.addEventListener('load', function() {
-  const elements = document.querySelectorAll('.slide-up');
-  elements.forEach(element => {
-    element.classList.add('show');
-  });
-});
-
 
 // const filterButtons = document.querySelectorAll('.filter-button');
 //   const images = document.querySelectorAll('.column img');
