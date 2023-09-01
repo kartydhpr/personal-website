@@ -554,13 +554,23 @@ hr{
     transform: scale(1) translateX(0);
   }
 
-
-
   .gallery {
     display: flex;
     flex-wrap: wrap;
-    padding: 0 10px 100px;
   }
+
+  .slide-up {
+    opacity: 0;
+    transform: translateY(50px); /* Start off the screen to the left */
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+  }
+
+  .slide-up.show {
+    opacity: 1;
+    transform: translateX(0); /* Slide in to the final position */
+  }
+
+
   
   /* Create four equal columns that sits next to each other */
   .column {
