@@ -554,8 +554,6 @@ hr{
     transform: scale(1) translateX(0);
   }
 
-
-
   .gallery {
     display: flex;
     flex-wrap: wrap;

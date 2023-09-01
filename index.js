@@ -143,7 +143,7 @@ function scrollProgress() {
   const percentageScrolled =
     (distanceFromTop / (webpageHeight - windowheight)) * 100;
 
-  console.log(Math.round(percentageScrolled));
+  //console.log(Math.round(percentageScrolled));
 
   scrollProgressBar.style.width = percentageScrolled + "%";
 }
@@ -153,6 +153,13 @@ document.addEventListener("scroll", scrollProgress);
 // Add the 'show' class to the image after the page loads
 window.addEventListener('load', function() {
   const elements = document.querySelectorAll('.fade-in');
+  elements.forEach(element => {
+    element.classList.add('show');
+  });
+});
+// Add the 'show' class to elements with the 'slide-in' class after the page loads
+window.addEventListener('load', function() {
+  const elements = document.querySelectorAll('.slide-up');
   elements.forEach(element => {
     element.classList.add('show');
   });
@@ -176,29 +183,3 @@ sections.forEach(section => {
   observer.observe(section);
 });
 
-// Add the 'show' class to elements with the 'slide-in' class after the page loads
-window.addEventListener('load', function() {
-  const elements = document.querySelectorAll('.slide-up');
-  elements.forEach(element => {
-    element.classList.add('show');
-  });
-});
-
-
-// const filterButtons = document.querySelectorAll('.filter-button');
-//   const images = document.querySelectorAll('.column img');
-
-//   filterButtons.forEach(button => {
-//     button.addEventListener('click', () => {
-//       const selectedStyle = button.getAttribute('data-style');
-      
-//       images.forEach(image => {
-//         const styles = image.getAttribute('src').split('/').pop().split('.')[0].split('_');
-//         if (styles.includes(selectedStyle)) {
-//           image.classList.remove('hidden');
-//         } else {
-//           image.classList.add('hidden');
-//         }
-//       });
-//     });
-//   });
