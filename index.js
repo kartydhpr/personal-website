@@ -22,9 +22,11 @@ var btn = document
 var pressed = null; // variable tracks how many times the dark mode button was pressed
 console.log(pressed);
 
-pressed += 1;
+// uncomment both lines when time based switching is inactive and you want dark mode as default
+pressed += 1; 
 toggleDarkMode();
-// if-statement handles site-wide dark mode implementation only if its after 5:59pm or before 7 am
+
+// // if-statement handles site-wide dark mode implementation only if its after 5:59pm or before 7 am
 // if (today.getHours() > 17 || today.getHours() < 7 )
 // {
 // 	 console.log("Shhh it's night time. Everyone is sleeping...")
@@ -32,8 +34,7 @@ toggleDarkMode();
 
 // 	 try
 // 	 {
-// 		var headline = document.getElementById("toggle-notification");
-// 		headline.innerText = "Light mode will automatically toggle at 7 am.";
+// 		document.getElementById("toggle-notification").textContent = "It's night time, dark mode is active.";
 // 	 }
 // 	 catch(e)
 // 	 {
@@ -143,7 +144,7 @@ function scrollProgress() {
   const percentageScrolled =
     (distanceFromTop / (webpageHeight - windowheight)) * 100;
 
-  //console.log(Math.round(percentageScrolled));
+  console.log(Math.round(percentageScrolled));
 
   scrollProgressBar.style.width = percentageScrolled + "%";
 }
@@ -153,13 +154,6 @@ document.addEventListener("scroll", scrollProgress);
 // Add the 'show' class to the image after the page loads
 window.addEventListener('load', function() {
   const elements = document.querySelectorAll('.fade-in');
-  elements.forEach(element => {
-    element.classList.add('show');
-  });
-});
-// Add the 'show' class to elements with the 'slide-in' class after the page loads
-window.addEventListener('load', function() {
-  const elements = document.querySelectorAll('.slide-up');
   elements.forEach(element => {
     element.classList.add('show');
   });
@@ -181,5 +175,13 @@ const observer = new IntersectionObserver(handleIntersection, { threshold: 0.2 }
 const sections = document.querySelectorAll('.details');
 sections.forEach(section => {
   observer.observe(section);
+});
+
+// Add the 'show' class to elements with the 'slide-in' class after the page loads
+window.addEventListener('load', function() {
+  const elements = document.querySelectorAll('.slide-up');
+  elements.forEach(element => {
+    element.classList.add('show');
+  });
 });
 
