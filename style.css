@@ -571,6 +571,17 @@ hr{
     transform: translateX(0); /* Slide in to the final position */
   }
   
+  .slide-in {
+    opacity: 0;
+    transform: translateX(100px); /* Start off the screen to the left */
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+  }
+
+  .slide-in.show {
+    opacity: 1;
+    transform: translateX(0); /* Slide in to the final position */
+  }
+
   /* Create four equal columns that sits next to each other */
   .column {
     flex: 25%;

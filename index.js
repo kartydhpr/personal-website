@@ -185,3 +185,10 @@ window.addEventListener('load', function() {
   });
 });
 
+window.addEventListener('load', function() {
+  const elements = document.querySelectorAll('.slide-in');
+  elements.forEach(element => {
+    element.classList.add('show');
+  });
+});
+
