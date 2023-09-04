@@ -613,6 +613,40 @@ hr{
     }
   }
 
+  .image-container {
+    position: relative;
+    display: inline-block;
+}
+
+.image-container .tooltip {
+  background-color: rgba(2, 78, 56, 0.90);
+  border: 0.5rem solid #9a310bc9;
+  color: white;
+  text-align: center;
+  border-radius: 4px;
+  padding: 5px 10px;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  display: flex; /* Add display: flex */
+  flex-direction: column; /* Stack elements vertically */
+  align-items: center; /* Center horizontally */
+  justify-content: center; /* Center vertically */
+  transition: opacity 0.3s ease-in-out;
+}
+.tooltip H5{
+  font-weight: bold;
+}
+
+.image-container:hover .tooltip {
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out; /* Add ease-in-out transition */
+}
+
   /* .hidden {
     display: none;
   } */
