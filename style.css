@@ -457,6 +457,10 @@ html {
   margin: auto;
 }
 
+.programmingAnimation {
+  margin: 0 auto;
+  margin-top: -5%;
+}
 .musicAnimation {
   margin: 0 auto;
   margin-top: -10%;
