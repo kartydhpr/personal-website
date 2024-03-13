@@ -133,6 +133,21 @@
             <li class="card">
               <div>
                 <div class="hstack">
+                  <h3 class="card-title font-weight-bold">VR Solar System</h3>
+                  <a class="fa-brands fa-github fa-2x" style="color: #ff6630; text-decoration: none; margin-left: auto;" href="https://github.com/kartydhpr/Magic-8-Ball_iOS-App" target="_blank"></a>
+                </div>                
+                <div class="card-content">
+                  <p>An interactive virtual reality experince built on Unity 3D using C# to provide an educational journey through our solar system.</p>
+                </div>
+              </div>
+              <img src=""/>
+              <div class="card-link-wrapper">
+                <a href="" data-toggle="modal" data-target="#VRSolarSystemDemo" class="card-link">See it in action</a>
+              </div>
+            </li>
+            <li class="card">
+              <div>
+                <div class="hstack">
                   <h3 class="card-title font-weight-bold">Canopy Recipe App</h3>
                   <a class="fa-brands fa-github fa-2x" style="color: #ff6630; text-decoration: none; margin-left: auto;" href="https://github.com/kartydhpr/Canopy_Recipes_iOS-App" target="_blank"></a>
                 </div>                
@@ -167,11 +182,11 @@
                   <a class="fa-brands fa-github fa-2x" style="color: #ff6630; text-decoration: none; margin-left: auto;" href="https://github.com/kartydhpr/personal-website" target="_blank"></a>
                 </div>                
                 <div class="card-content">
-                  <p>A game I'm developing on Unreal Engine 5 that invites players to embody a time-warping android, exploring a world of espionage across Earth’s history and beyond.</p>
+                  <p>A game I'm developing on Unreal Engine 5 that allows players to embody a time-warping android, exploring a world of espionage across Earth’s history and beyond.</p>
                 </div>
               </div>
               <div class="card-link-wrapper">
-                <a href="" data-toggle="modal" data-target="#" class="card-link">Coming Soon</a>
+                <a href="" data-toggle="modal" data-target="#EpochNoirDemo" class="card-link">Watch the Demo</a>
               </div>
             </li>
             <li class="this-site-card" style="background: transparent !important; border: solid #1ce783;">
@@ -195,7 +210,7 @@
       <section>
         <div class="container slide-in" style="padding: 0px 0px 50px;">
           <h2 class="dark-mode-text" style="padding-bottom: 1rem;">Publications</h2>
-          <a href="https://ieeexplore.ieee.org/document/10392942" style="color: #ff6630;">
+          <a href="https://ieeexplore.ieee.org/document/10392942" target="_blank" style="color: #ff6630;">
             <div class="row">
               <div class="col-md-9">
                 <h5><b>Power Efficient Long Range Drone Networking System for UAV Detection</b></h5>
@@ -326,6 +341,46 @@
               </div>
             </div>
           </div>
+          <!-- VRSolarSystemDemo -->
+          <div class="modal fade" id="VRSolarSystemDemo">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+              <div class="modal-content">
+              <!-- Modal Header -->
+                <div class="modal-header">
+                  <h4 class="modal-title" style="color: #1ce783; font-weight: bolder;">VR Solar System Demo</h4>
+                  <button type="button" class="close" data-dismiss="modal"></button>
+                 </div>
+              <!-- Modal body with video -->
+                <div class="modal-video">
+                   <iframe src="https://www.youtube.com/embed/rfsneBCPm8Q" frameborder="" allowfullscreen></iframe>
+                </div>
+                <div class="modal-body" style="text-align: left !important; color: white; padding-bottom: 10px;">
+                  <div class="row" style=" padding: 20px;">
+                    <div class="col-6" style="border-right: solid 2px #ff6630;">
+                      <H6 style="color: #ff6630;">Features:</H6>
+                      <ul>
+                        <li>Realistic planetary rotations relative to Earth</li>
+                        <li>Points of Interests with contextual info panels</li>
+                        <li>Accurate planetary models using texture maps from NASA</li>
+                      </ul>
+                    </div>
+                    <div class="col-6">
+                      <H6 style="color: #ff6630;">Tools and Concepts:</H6>
+                      <ul>
+                        <li>Unity 3D and C#</li>
+                        <li>3D Modelling, Material creation using Texture Mapping, Raycasting, and Box Collision logic</li>             
+                        <li>Oculus Quest Dev Kit</li>             
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+            <!-- Modal footer -->
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background: #1ce783;">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
           <!-- Canopy Modal -->
           <div class="modal fade" id="CanopyDemo">
             <div class="modal-dialog modal-dialog-centered modal-xl">
@@ -399,6 +454,78 @@
               </div>
             </div>
           </div>
+                    <!-- Solo-Wof Modal -->
+          <div class="modal fade" id="SoloWofDemo">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+              <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                  <h4 class="modal-title" style="color: #1ce783; font-weight: bolder;">Solo Wheel of Fortune Demo</h4>
+                  <button type="button" class="close" data-dismiss="modal"></button>
+                </div>
+                <!-- Modal body with video -->
+                <div class="modal-video">
+                  <iframe src="https://www.youtube.com/embed/lPhqoBp3Ls8" frameborder="" allowfullscreen></iframe>
+                </div>
+                <div class="modal-body" style="text-align: left !important; color: white; padding-bottom: 10px;">
+                  <div class="row" style=" padding: 20px;">
+                    <div class="col-6" style="border-right: solid 2px #ff6630;">
+                      <H6 style="color: #ff6630;">Features:</H6>
+                      <p>Emulates a solo "Wheel of Fortune" game that can be played on the command line of a computer. </p>
+                    </div>
+                    <div class="col-6">
+                      <H6 style="color: #ff6630;">Tools and Concepts:</H6>
+                      <ul>
+                        <li>Python3</li>
+                        <li>Time module</li>
+                        <li>OS Module</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background: #1ce783;">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Epoch Noir Modal -->
+          <div class="modal fade" id="EpochNoirDemo">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+              <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                  <h4 class="modal-title" style="color: #1ce783; font-weight: bolder;">Epoch Noir Demo</h4>
+                  <button type="button" class="close" data-dismiss="modal"></button>
+                </div>
+                <!-- Modal body with video -->
+                <div class="modal-video">
+                  <iframe src="https://www.youtube.com/embed/55ruVGIPidU" frameborder="" allowfullscreen></iframe>
+                </div>
+                <div class="modal-body" style="text-align: left !important; color: white; padding-bottom: 10px;">
+                  <div class="row" style=" padding: 20px;">
+                    <div class="col-6" style="border-right: solid 2px #ff6630;">
+                      <H6 style="color: #ff6630;">Features:</H6>
+                      <p>Emulates a solo "Wheel of Fortune" game that can be played on the command line of a computer. </p>
+                    </div>
+                    <div class="col-6">
+                      <H6 style="color: #ff6630;">Tools and Concepts:</H6>
+                      <ul>
+                        <li>Unreal Engine 5 and Blueprints</li>
+                        <li>Environmental Art and Level Design</li>
+                        <li>Gameplay programming </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background: #1ce783;">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>          
       </center>
     </main>
 
@@ -418,7 +545,8 @@
             <a class="fa-brands fa-linkedin fa-3x"  href="https://www.linkedin.com/in/kartydhuper/" target="_blank"></a>
             <a class="fa-brands fa-github fa-3x"  href="https://github.com/kartydhpr" target="_blank"></a>
             <a class="fa-solid fa-envelope fa-3x" style="padding-bottom: 3%;" href="" target="_blank"></a>
-            <H6 style="padding-bottom: 2%;">Website designed and coded by Karteikay (Karty) Dhuper.</H6>
+            <H6>Website designed and coded by Karteikay (Karty) Dhuper.</H6>
+            <H6 style="padding-bottom: 2%;">© 2024 Karteikay Dhuper</H6>
           </div>
           <div class="col-md-3"></div>
         </div>
