@@ -33,6 +33,12 @@ html {
   } 
 }
 
+.pub1{
+  
+}
+.pub1:hover{
+  background-color: #ff67304f;
+}
 
 .loading-spinner {
   border: 4px solid rgba(0, 0, 0, 0.1);
