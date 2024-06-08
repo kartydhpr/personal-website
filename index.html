@@ -30,8 +30,8 @@
       </button>
       <div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
         <div class="nav-island-parent centered">
-          <a class="nav-item nav-link nav-island-left" href="#about">About</a>
-          <a class="nav-item nav-link nav-island" href="#programming">Programming</a>
+          <a class="nav-item nav-link nav-island-left" href="#programming">Programming</a>
+          <a class="nav-item nav-link nav-island" href="#about">About</a>
           <a class="nav-item nav-link nav-island" href="#art&design">Art & Design</a>
           <a class="nav-item nav-link nav-island-right" href="#music">Music</a>
         </div>
@@ -45,7 +45,7 @@
       <section>  
           <div id="landingPage" style="height: 100vh;">
             <div class = "hero centered">
-              <a href="#about">
+              <a href="#programming">
                 <img src="public/images/prof-pic.jpeg" class = "profile-picture fade-in">
               </a>
               <div>
@@ -57,7 +57,7 @@
                 <h3>Feel free to look around! </h3>
               </div>
             </div>
-            <a href="#about">
+            <a href="#programming">
               <svg class="arrows fade-in">
                 <path class="a1" d="M0 0 L30 32 L60 0"></path>
                 <path class="a2" d="M0 20 L30 52 L60 20"></path>
@@ -67,28 +67,8 @@
         </div>
       </section>  
        
-      <!--About Section-->
-      <section>
-        <div class = "container-fluid details" id= "about">
-          <div class = "row">
-            <div class="col-md-3"></div>
-            <div class="col-md-6">
-              <H1 class="header"  id="anchor">A little bit about myself</H1>
-              <lottie-player class = "aboutAnimation" src="https://lottie.host/3683ce0b-7020-485a-adbd-6de198a2c564/1xmDGqV2am.json"  background="transparent"  speed="1"  style="width: 100%; height: 20rem;"  loop  autoplay></lottie-player>
-              <p class="dark-mode-text">I'm a final year student studying Computer & Information Science and minoring in Art & Design at Purdue University. With the <strong>logical mind</strong> of a software engineer and the <strong>creative vision</strong> of an artist, I am always striving to bring great ideas into fruition. I'm looking for experiences that would allow me to hone and grow my existing engineering and design skills. </p>
-              <p class="dark-mode-text" style="margin-top: 5%;">Born in India and raised in an American bubble in China, I have a <strong>distinctive cultural perspective</strong> that’s provided me with a unique world view. <strong>Fluent in 3 languages</strong>, I am able to effectively communicate in a range of cross-cultural team based and individual settings. Click the button below to view my resume!</p>
-              <div class="bodyButton hover-btn">
-                <a href="public/files/Karteikay_Dhuper_Resume copy.pdf" target="_blank" style="padding: 20px;">
-                  <i class="fa-solid fa-download"></i> Download my resume
-                </a>
-              </div>
-            </div>
-            <div class="col-md-3"></div>
-          </div>
-        </div>
-      </section>
       <!--Programming Section-->
-      <section>
+      <!-- <section>
         <div class = "container-fluid details" id= "programming">
           <div class = "row">
             <div class="col-md-3"></div>
@@ -106,20 +86,505 @@
             <div class="col-md-3"></div>
           </div>
         </div>
-      </section>
-      <!--Art Section-->
+      </section> -->
+
+        <!--Programming Section-->
+        <section>
+          <div class = "container-fluid details" style="padding-bottom: 0%;" id= "programming">
+            <div class = "row">
+              <div class="col-md-3"></div>
+              <div class="col-md-6">
+                <H1 class="header" id="anchor">Programming and Projects</H1>
+              <lottie-player class = "programmingAnimation" src="https://lottie.host/41d7f969-9cb9-4fb5-bbc7-03d42ca3a5d5/2Lz2AbW4MP.json"  background="transparent"  speed="1"  style="width: 20rem ; height: 20rem;"  loop  autoplay></lottie-player>
+              <p class="dark-mode-text">Some of my technical interests include Human Computer Interaction, Full Stack Web App Development, UX Design, Augmented/Virtual Reality, Machine Learning, and Game Development. My passion for <strong>innovative technology</strong> and <strong>impactful art</strong> intersect to fuel my interest in interactive entertaintment.</p>
+              </div>
+              <div class="col-md-3"></div>
+            </div>
+          </div>
+        </section>
+        <hr>
+        <section>
+          <div class="container slide-in" style="padding: 0px 0px 50px;">
+              <h2 class="dark-mode-text">Project Library</h2>
+              <p class="dark-mode-text">I'm an experienced back-end programmer in <strong>Java, Python, C#, and SQL</strong>. As well as a proven front-end developer using <strong>HTML5, CSS3, and Javascript</strong> - with exposure to the MERN and .NET stack. </p>
+            <ul class="cards dark-mode-text">
+              <li class="card">
+                <div>
+                  <div class="hstack">
+                    <h3 class="card-title font-weight-bold">LetsMeetApp</h3>
+                    <a class="fa-brands fa-github fa-2x" style="color: #ff6630; text-decoration: none; margin-left: auto;" href="https://github.com/kartydhpr/LetsMeetApp" target="_blank"></a>
+                  </div>
+                  <div class="card-content">
+                    <p>A full-stack meeting planner app built with Java that consolidates all the core functionality required when meeting with a team.</p>
+                  </div>
+                </div>
+                <img src="2. programming-page/languages/letsmeetapp.png"/>
+                <div class="card-link-wrapper">
+                  <a href="#" data-toggle="modal" data-target="#LetsMeetAppDemo" class="card-link">See it in action</a>
+                </div>
+              </li>
+              <li class="card">
+                <div>
+                  <div class="hstack">
+                    <h3 class="card-title font-weight-bold">FileSift</h3>
+                    <a class="fa-brands fa-github fa-2x" style="color: #ff6630; text-decoration: none; margin-left: auto;" href="https://github.com/kartydhpr/FileSift" target="_blank"></a>
+                  </div>                
+                  <div class="card-content">
+                    <p>A python script I wrote that utilizes Watchdog Observer to move and organize files in my Downloads folder based on the file's type.</p>
+                  </div>
+                </div>
+                <img src="2. programming-page/languages/filesift.png"/>
+                <div class="card-link-wrapper">
+                  <a href="" data-toggle="modal" data-target="#FileSiftDemo" class="card-link">See it in action</a>
+                </div>
+              </li>
+              <li class="card">
+                <div>
+                  <div class="hstack">
+                    <h3 class="card-title font-weight-bold">Sound Galaxy</h3>
+                    <a class="fa-brands fa-github fa-2x" style="color: #ff6630; text-decoration: none; margin-left: auto;" href="https://github.com/kartydhpr/personal-website/tree/main/2.%20programming-page/sound-galaxy-karty" target="_blank"></a>
+                  </div>                
+                  <div class="card-content">
+                    <p>An experimental project I made while tinkering with p5.js that uses your device's microphone to make stars dance in the night sky.</p>
+                  </div>
+                </div>
+                <img src="2. programming-page/languages/personalsite.png"/>
+                <div style="padding: 0.5rem;"></div>
+                <div class="card-link-wrapper">
+                  <a href="../2. programming-page/sound-galaxy-karty/index.html" class="card-link">Launch</a>
+                </div>
+              </li>
+              <li class="card">
+                <div>
+                  <div class="hstack">
+                    <h3 class="card-title font-weight-bold">VR Solar System</h3>
+                    <a class="fa-brands fa-github fa-2x" style="color: #ff6630; text-decoration: none; margin-left: auto;" href="https://github.com/kartydhpr/Magic-8-Ball_iOS-App" target="_blank"></a>
+                  </div>                
+                  <div class="card-content">
+                    <p>An interactive virtual reality experince built on Unity 3D using C# to provide an educational journey through our solar system.</p>
+                  </div>
+                </div>
+                <img src=""/>
+                <div class="card-link-wrapper">
+                  <a href="" data-toggle="modal" data-target="#VRSolarSystemDemo" class="card-link">See it in action</a>
+                </div>
+              </li>
+              <li class="this-site-card" style="background: transparent !important;">
+                <div>
+                  <div class="hstack">
+                    <h3 class="card-title font-weight-bold">Epoch Noir Game</h3>
+                    <a class="fa-brands fa-github fa-2x" style="color: #ff6630; text-decoration: none; margin-left: auto;" href="https://github.com/kartydhpr/personal-website" target="_blank"></a>
+                  </div>                
+                  <div class="card-content">
+                    <p>A game I'm developing on Unreal Engine 5 that allows players to embody a time-warping android, exploring a world of espionage across Earth’s history and beyond.</p>
+                  </div>
+                </div>
+                <div class="card-link-wrapper">
+                  <a href="" data-toggle="modal" data-target="#EpochNoirDemo" class="card-link">Watch the Demo</a>
+                </div>
+              </li>
+              <li class="card">
+                <div>
+                  <div class="hstack">
+                    <h3 class="card-title font-weight-bold">Magic 8 Ball App</h3>
+                    <a class="fa-brands fa-github fa-2x" style="color: #ff6630; text-decoration: none; margin-left: auto;" href="https://github.com/kartydhpr/Magic-8-Ball_iOS-App" target="_blank"></a>
+                  </div>                
+                  <div class="card-content">
+                    <p>An iOS app I made when learning Swift and SwiftUI that mimics the functionality of a Magic 8 Ball.</p>
+                  </div>
+                </div>
+                <img src="2. programming-page/languages/magic8ball.png"/>
+                <div class="card-link-wrapper">
+                  <a href="" data-toggle="modal" data-target="#Magic8BallDemo" class="card-link">See it in action</a>
+                </div>
+              </li>
+              <li class="card">
+                <div>
+                  <div class="hstack">
+                    <h3 class="card-title font-weight-bold">Canopy Recipe App</h3>
+                    <a class="fa-brands fa-github fa-2x" style="color: #ff6630; text-decoration: none; margin-left: auto;" href="https://github.com/kartydhpr/Canopy_Recipes_iOS-App" target="_blank"></a>
+                  </div>                
+                  <div class="card-content">
+                    <p>An intermediate iOS app I made that allows the user to create and store a collection of recipes for various meals throughout the day.</p>
+                  </div>
+                </div>
+                <img src="2. programming-page/languages/magic8ball.png"/>
+                <div class="card-link-wrapper">
+                  <a href="" data-toggle="modal" data-target="#CanopyDemo" class="card-link">See it in action</a>
+                </div>
+              </li>
+              <li class="card">
+                <div>
+                  <div class="hstack">
+                    <h3 class="card-title font-weight-bold">Wheel of Fortune</h3>
+                    <a class="fa-brands fa-github fa-2x" style="color: #ff6630; text-decoration: none; margin-left: auto;" href="https://github.com/kartydhpr/Solo_wheel_of_fortune_game" target="_blank"></a>
+                  </div>                
+                  <div class="card-content">
+                    <p>A python program that emulates a solo Wheel of Fortune game to be played on the command line.</p>
+                  </div>
+                </div>
+                <img src="2. programming-page/languages/filesift.png"/>
+                <div class="card-link-wrapper">
+                  <a href="" data-toggle="modal" data-target="#SoloWofDemo" class="card-link">See it in action</a>
+                </div>
+              </li>
+              <li class="this-site-card" style="background: transparent !important; border: solid #1ce783;">
+                <div>
+                  <div class="hstack">
+                    <h3 class="card-title font-weight-bold">This Website</h3>
+                    <a class="fa-brands fa-github fa-2x" style="color: #1ce783; text-decoration: none; margin-left: auto;" href="https://github.com/kartydhpr/personal-website" target="_blank"></a>
+                  </div>                
+                  <div class="card-content">
+                    <p>A personal website I initially made to learn web development that later evolved into a hub for all my projects and interests.</p>
+                  </div>
+                </div>
+                <img src="2. programming-page/languages/personalsite.png"/>
+                <div class="card-link-wrapper">
+                  <a class="card-link" style="color: #1ce783;">You are Here</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </section>
+        <section>
+          <div class="container slide-in" style="padding: 0px 0px 50px;">
+            <h2 class="dark-mode-text" style="padding-bottom: 1rem;">Publications</h2>
+            <a href="https://ieeexplore.ieee.org/document/10392942" target="_blank" style="color: #ff6630;">
+              <div class="row">
+                <div class="col-md-9">
+                  <h5><b>Power Efficient Long Range Drone Networking System for UAV Detection</b></h5>
+                  <H6 class="dark-mode-text" style="padding-bottom: 10px;">DOI: 10.1109/ICTC58733.2023.10392942</H6>
+                  <H6 class="dark-mode-text">Publisher: IEEE</H6>
+                  <H6 class="dark-mode-text">Date: 11-13 October 2023</H6>
+                  <H6 class="dark-mode-text">Location: Jeju Island, Korea</H6>
+                </div>
+                <div class="col-md-3">
+                  <img src="2. programming-page/languages/Screenshot 2024-03-06 at 8.04.19 AM.png" style="height: auto; width: 100%; border-radius: 4%;"/>
+                </div>
+              </div>
+            </a>
+          </div>
+        </section>
+        <!--Modals-->
+        <center>
+        <!-- LetsMeetApp Modal -->
+          <div class="modal fade" id="LetsMeetAppDemo">
+              <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                  <!-- Modal Header -->
+                  <div class="modal-header">
+                    <h4 class="modal-title" style="color: #1ce783; font-weight: bolder;">LetsMeetApp Demo</h4>
+                    <button type="button" class="close" data-dismiss="modal"></button>
+                  </div>
+                  <p class="text-center" style="font-size: 0.85rem; color: whitesmoke; padding-top: 10px;">This project was built with a team of 2 other developers during my "Objected-Oriented App Development" class at Purdue University.</p>
+                  <!-- Modal body with video -->
+                  <div class="modal-video">
+                     <iframe src="https://www.youtube.com/embed/t2iaeYoZAxI" frameborder="" allowfullscreen></iframe>
+                  </div>
+                  <div class="modal-body" style="text-align: left !important; color: white; padding-bottom: 10px;">
+                    <div class="row">
+                        <div class="col-6" style="border-right: solid 2px #ff6630;">
+                            <H6 style="color: #ff6630;">Features:</H6>
+                            <ul>
+                              <li>Common meeting time scheduling</li>
+                              <li>Chat functionality</li>
+                              <li>GoogleMaps and Zoom integration for meeting location</li>
+                            </ul>
+                        </div>
+                        <div class="col-6">
+                            <H6 style="color: #ff6630;">Tools and Concepts:</H6>
+                            <ul>
+                              <li>Object-oriented programming in Java</li>
+                              <li>GUI development with JFrame</li>
+                              <li>Google Maps and Zoom API integration</li>
+                            </ul>
+                        </div>
+                    </div>
+                  </div>
+                  <!-- Modal footer -->
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background: #1ce783;">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- FileSift Modal -->
+            <div class="modal fade" id="FileSiftDemo">
+              <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                  <!-- Modal Header -->
+                  <div class="modal-header">
+                    <h4 class="modal-title" style="color: #1ce783; font-weight: bolder;">FileSift Demo</h4>
+                    <button type="button" class="close" data-dismiss="modal"></button>
+                  </div>
+                  <!-- Modal body with video -->
+                  <div class="modal-video">
+                    <iframe src="https://www.youtube.com/embed/WZKjPIHjTDc" frameborder="" allowfullscreen></iframe>
+                  </div>
+                  <div class="modal-body" style="text-align: left !important; color: white; padding-bottom: 10px;">
+                    <div class="row" style=" padding: 20px;">
+                      <div class="col-6" style="border-right: solid 2px #ff6630;">
+                        <H6 style="color: #ff6630;">Features:</H6>
+                        <p>Automatic sorting and relocation of files from the downloads folder to their respective folders based on file type.</p>
+                      </div>
+                      <div class="col-6">
+                        <H6 style="color: #ff6630;">Tools and Concepts:</H6>
+                        <ul>
+                          <li>Python 3</li>
+                          <li>Watchdog Observer</li>
+                          <li>File System Event Handler</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Modal footer -->
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background: #1ce783;">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Magic8ball Modal -->
+            <div class="modal fade" id="Magic8BallDemo">
+              <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                  <!-- Modal Header -->
+                  <div class="modal-header">
+                    <h4 class="modal-title" style="color: #1ce783; font-weight: bolder;">Magic 8 Ball App Demo</h4>
+                    <button type="button" class="close" data-dismiss="modal"></button>
+                  </div>
+                  <!-- Modal body with video -->
+                  <div class="modal-video">
+                    <iframe src="https://www.youtube.com/embed/Ea7Dqh1CXpU" frameborder="" allowfullscreen></iframe>
+                  </div>
+                  <div class="modal-body" style="text-align: left !important; color: white; padding-bottom: 10px;">
+                    <div class="row" style=" padding: 20px;">
+                      <div class="col-6" style="border-right: solid 2px #ff6630;">
+                        <H6 style="color: #ff6630;">Features:</H6>
+                        <p>Emulates a Magic 8 Ball on an iPhone with speech recognition enabled by natural language processing.</p>
+                      </div>
+                      <div class="col-6">
+                        <H6 style="color: #ff6630;">Tools and Concepts:</H6>
+                        <ul>
+                          <li>Swift + SwiftUI</li>
+                          <li>Xcode</li>             
+                          <li>Model-View-View Model architecture pattern</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Modal footer -->
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background: #1ce783;">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- VRSolarSystemDemo -->
+            <div class="modal fade" id="VRSolarSystemDemo">
+              <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                <!-- Modal Header -->
+                  <div class="modal-header">
+                    <h4 class="modal-title" style="color: #1ce783; font-weight: bolder;">VR Solar System Demo</h4>
+                    <button type="button" class="close" data-dismiss="modal"></button>
+                   </div>
+                <!-- Modal body with video -->
+                  <div class="modal-video">
+                     <iframe src="https://www.youtube.com/embed/rfsneBCPm8Q" frameborder="" allowfullscreen></iframe>
+                  </div>
+                  <div class="modal-body" style="text-align: left !important; color: white; padding-bottom: 10px;">
+                    <div class="row" style=" padding: 20px;">
+                      <div class="col-6" style="border-right: solid 2px #ff6630;">
+                        <H6 style="color: #ff6630;">Features:</H6>
+                        <ul>
+                          <li>Realistic planetary scale and axis rotations relative to Earth</li>
+                          <li>Points of Interests with contextual info panels</li>
+                          <li>Accurate planetary models using texture maps from NASA</li>
+                        </ul>
+                      </div>
+                      <div class="col-6">
+                        <H6 style="color: #ff6630;">Tools and Concepts:</H6>
+                        <ul>
+                          <li>Unity 3D and C#</li>
+                          <li>3D Modelling, Material creation using Texture Mapping, Raycasting, and Box Collision logic</li>             
+                          <li>Oculus Quest Dev Kit</li>             
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+              <!-- Modal footer -->
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background: #1ce783;">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Canopy Modal -->
+            <div class="modal fade" id="CanopyDemo">
+              <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                  <!-- Modal Header -->
+                  <div class="modal-header">
+                    <h4 class="modal-title" style="color: #1ce783; font-weight: bolder;">Canopy Recipe App Demo</h4>
+                    <button type="button" class="close" data-dismiss="modal"></button>
+                  </div>
+                  <p class="text-center" style="font-size: 0.85rem; color: whitesmoke; padding-top: 10px;">This project was built as part of an "iOS Development Career Path" course I took on Codecademy.</p>
+                  <!-- Modal body with video -->
+                  <div class="modal-video">
+                    <iframe src="https://www.youtube.com/embed/gixD5bZ3Lb8" frameborder="" allowfullscreen></iframe>
+                  </div>
+                  <div class="modal-body" style="text-align: left !important; color: white; padding-bottom: 10px;">
+                    <div class="row" style=" padding: 20px;">
+                      <div class="col-6" style="border-right: solid 2px #ff6630;">
+                        <H6 style="color: #ff6630;">Features:</H6>
+                        <p>A recipe app that can create, edit, and store recipes. Add in your own recipes and explore some of the community favorites.</p>
+                      </div>
+                      <div class="col-6">
+                        <H6 style="color: #ff6630;">Tools and Concepts:</H6>
+                        <ul>
+                          <li>Swift, SwiftUI, Xcode</li>
+                          <li>Model-View-View Model architecture pattern</li>
+                          <li>Toolbars, sheets, closures, and generics to build reusable views</li>             
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Modal footer -->
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background: #1ce783;">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Solo-Wof Modal -->
+            <div class="modal fade" id="SoloWofDemo">
+              <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                  <!-- Modal Header -->
+                  <div class="modal-header">
+                    <h4 class="modal-title" style="color: #1ce783; font-weight: bolder;">Solo Wheel of Fortune Demo</h4>
+                    <button type="button" class="close" data-dismiss="modal"></button>
+                  </div>
+                  <!-- Modal body with video -->
+                  <div class="modal-video">
+                    <iframe src="https://www.youtube.com/embed/lPhqoBp3Ls8" frameborder="" allowfullscreen></iframe>
+                  </div>
+                  <div class="modal-body" style="text-align: left !important; color: white; padding-bottom: 10px;">
+                    <div class="row" style=" padding: 20px;">
+                      <div class="col-6" style="border-right: solid 2px #ff6630;">
+                        <H6 style="color: #ff6630;">Features:</H6>
+                        <p>Emulates a solo "Wheel of Fortune" game that can be played on the command line of a computer. </p>
+                      </div>
+                      <div class="col-6">
+                        <H6 style="color: #ff6630;">Tools and Concepts:</H6>
+                        <ul>
+                          <li>Python3</li>
+                          <li>Time module</li>
+                          <li>OS Module</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Modal footer -->
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background: #1ce783;">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+                      <!-- Solo-Wof Modal -->
+            <div class="modal fade" id="SoloWofDemo">
+              <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                  <!-- Modal Header -->
+                  <div class="modal-header">
+                    <h4 class="modal-title" style="color: #1ce783; font-weight: bolder;">Solo Wheel of Fortune Demo</h4>
+                    <button type="button" class="close" data-dismiss="modal"></button>
+                  </div>
+                  <!-- Modal body with video -->
+                  <div class="modal-video">
+                    <iframe src="https://www.youtube.com/embed/lPhqoBp3Ls8" frameborder="" allowfullscreen></iframe>
+                  </div>
+                  <div class="modal-body" style="text-align: left !important; color: white; padding-bottom: 10px;">
+                    <div class="row" style=" padding: 20px;">
+                      <div class="col-6" style="border-right: solid 2px #ff6630;">
+                        <H6 style="color: #ff6630;">Features:</H6>
+                        <p>Emulates a solo "Wheel of Fortune" game that can be played on the command line of a computer. </p>
+                      </div>
+                      <div class="col-6">
+                        <H6 style="color: #ff6630;">Tools and Concepts:</H6>
+                        <ul>
+                          <li>Python3</li>
+                          <li>Time module</li>
+                          <li>OS Module</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Modal footer -->
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background: #1ce783;">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Epoch Noir Modal -->
+            <div class="modal fade" id="EpochNoirDemo">
+              <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content">
+                  <!-- Modal Header -->
+                  <div class="modal-header">
+                    <h4 class="modal-title" style="color: #1ce783; font-weight: bolder;">Epoch Noir Demo</h4>
+                    <button type="button" class="close" data-dismiss="modal"></button>
+                  </div>
+                  <!-- Modal body with video -->
+                  <div class="modal-video">
+                    <iframe src="https://www.youtube.com/embed/55ruVGIPidU" frameborder="" allowfullscreen></iframe>
+                  </div>
+                  <div class="modal-body" style="text-align: left !important; color: white; padding-bottom: 10px;">
+                    <div class="row" style=" padding: 20px;">
+                      <div class="col-6" style="border-right: solid 2px #ff6630;">
+                        <H6 style="color: #ff6630;">Features:</H6>
+                        <ul>
+                          <li>Advanced locomotion system</li>
+                          <li>Dynamic objective checklist</li>
+                          <li>Collectibles logic</li>
+                          <li>Slow down time</li>
+                        </ul>
+                      </div>
+                      <div class="col-6">
+                        <H6 style="color: #ff6630;">Tools and Concepts:</H6>
+                        <ul>
+                          <li>Unreal Engine 5 and Node-based scripting with Blueprints</li>
+                          <li>Environmental Art and Level Design</li>
+                          <li>Gameplay logic and GUI widget programming </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Modal footer -->
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background: #1ce783;">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>          
+        </center>
+
+      <!--About Section-->
       <section>
-        <div class = "container-fluid details" id= "art&design">
+        <div class = "container-fluid details" id= "about">
           <div class = "row">
             <div class="col-md-3"></div>
             <div class="col-md-6">
-              <H1 class="header" id="anchor">Art and Design</H1>
-              <lottie-player class = "defaultAnimation" src="https://assets4.lottiefiles.com/packages/lf20_iw0kfvau.json"  background="transparent"  speed="0.5"  style="width: 100%; height: 25rem;" loop autoplay></lottie-player>
-              <p class="dark-mode-text">I believe that good design connects people to the product, whether it be a video game, a mobile app, or a website — the design and aesthetics are what make the connection between the user and the product more meaningful and enjoyable.</p>
-              <p class="dark-mode-text" style="margin-top: 3%;">This is why I find it helpful to utilize my background in art and design to help visualize my ideas before getting them off the page into something more tangible — like this website. In my free time I like to illustrate anything from mundane household objects to space and interstellar phenomena.</p>
+              <H1 class="header"  id="anchor">Get to know me a little better</H1>
+              <lottie-player class = "aboutAnimation" src="https://lottie.host/3683ce0b-7020-485a-adbd-6de198a2c564/1xmDGqV2am.json"  background="transparent"  speed="1"  style="width: 100%; height: 20rem;"  loop  autoplay></lottie-player>
+              <p class="dark-mode-text">I graduated from Purdue University with a BS in Computer & Information Science and a minor in Art & Design. With the <strong>logical mind</strong> of a Software Engineer and the <strong>creative vision</strong> of an Artist, I am always striving to bring great ideas into fruition. I'm looking for experiences that would allow me to hone and grow my existing engineering and design skills. </p>
+              <p class="dark-mode-text" style="margin-top: 5%;">Born in India and raised in an American bubble in China, I have a <strong>distinctive cultural perspective</strong> that’s provided me with a unique world view. <strong>Fluent in 3 languages</strong>, I am able to effectively communicate in a range of cross-cultural team based and individual settings. Click the button below to view my resume!</p>
               <div class="bodyButton hover-btn">
-                <a href="3. art-page/art.html">
-                  <i class="fa-solid fa-palette"></i> See my work
+                <a href="public/files/Karteikay_Dhuper_Resume copy.pdf" target="_blank" style="padding: 20px;">
+                  <i class="fa-solid fa-download"></i> Download my resume
                 </a>
               </div>
             </div>
@@ -127,25 +592,57 @@
           </div>
         </div>
       </section>
-      <!--Music Section-->
-      <section>
-        <div class = "container-fluid details" id= "music">
-          <div class = "row">
-            <div class="col-md-3"></div>
-            <div class="col-md-6">
-              <H1 class="header" id="anchor">Music and Hobbies</H1>
-              <lottie-player class = "musicAnimation" src="https://assets10.lottiefiles.com/packages/lf20_j4xgoyi2.json"  background="transparent"  speed="1"  style="width: 100%; height: 27rem;" loop autoplay></lottie-player>
-              <p class="dark-mode-text">Music has always been a big part of my life and as with anything that brings me joy I like to learn as much about its inner workings as I possibly can. Which is why in my free time I like to compose and record new music using my electric guitar and GarageBand. Some of my favorite genres include alt-indie rock, folk, surf rock, and shoegaze. My other hobbies include gaming, photography, and cycling. </p>
-              <div class="bodyButton hover-btn">
-                <a href="4. music-page/music.html">
-                  <i class="fa-solid fa-guitar"></i> Hear my work
-                </a>
+
+
+            <!--Art Section-->
+            <section>
+              <div class = "container-fluid details" id= "art&design">
+                <div class = "row">
+                  <div class="col-md-1"></div>
+                  <div class="col-md-5">
+                    <H1 class="header" id="anchor">Art and Design</H1>
+                    <lottie-player class = "artAnimation" src="https://assets4.lottiefiles.com/packages/lf20_iw0kfvau.json"  background="transparent"  speed="0.5"  style="width: 100%; height: 25rem;" loop autoplay></lottie-player>
+                    <p class="dark-mode-text">I believe that good design connects people to the product, whether it be a video game, a mobile app, or a website — the design and aesthetics are what make the connection between the user and the product more meaningful and enjoyable.</p>
+                    <p class="dark-mode-text" style="margin-top: 3%;">This is why I find it helpful to utilize my background in art and design to help visualize my ideas before getting them off the page into something more tangible — like this website. In my free time I like to illustrate anything from mundane household objects to space and interstellar phenomena.</p>
+                    <div class="bodyButton hover-btn">
+                      <a href="3. art-page/art.html">
+                        <i class="fa-solid fa-palette"></i> See my work
+                      </a>
+                    </div>
+                  </div>
+                  <div class="col-md-5">
+                    <img class="center" style="width: 85%; padding-top: 4rem; rotate: 3deg;" src="public/images/art.jpeg"/>
+                  </div>
+                  <div class="col-md-1"></div>
+                </div>
               </div>
-            </div>
-            <div class="col-md-3"></div>
-          </div>
-        </div>
-      </section>
+            </section>
+
+
+            <!--Music Section-->
+            <section>
+              <div class = "container-fluid details" id= "music">
+                <div class = "row">
+                  <div class="col-md-1"></div>
+                  <div class="col-md-5">
+                    <img class="center" style="width: 85%; padding-top: 4rem; rotate: -3deg;" src="public/images/music.jpeg"/>
+                  </div>
+                  <div class="col-md-5">
+                    <H1 class="header" id="anchor">Music and Hobbies</H1>
+                    <lottie-player class = "musicAnimation" src="https://assets10.lottiefiles.com/packages/lf20_j4xgoyi2.json"  background="transparent"  speed="1"  style="width: 100%; height: 27rem;" loop autoplay></lottie-player>
+                    <p class="dark-mode-text">Music has always been a big part of my life and as with anything that brings me joy I like to learn as much about its inner workings as I possibly can. Which is why in my free time I like to compose and record new music using my electric guitar and GarageBand. Some of my favorite genres include alt-indie rock, folk, surf rock, and shoegaze. My other hobbies include gaming, photography, and cycling. </p>
+                    <div class="bodyButton hover-btn">
+                      <a href="4. music-page/music.html">
+                        <i class="fa-solid fa-guitar"></i> Hear my work
+                      </a>
+                    </div>
+                  </div>
+                  <div class="col-md-1"></div>
+                </div>
+              </div>
+            </section>
+
+    
     </main>
     <!--Links Footer Section-->
     <footer>

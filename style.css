@@ -250,7 +250,8 @@ html {
   }
 }
 
-@keyframes AnimateBG {
+@keyframes 
+ateBG {
   0% {
     background-position: 0% 50%;
   }
@@ -469,8 +470,9 @@ html {
   margin-top: -3%;
 }
 
-.defaultAnimation {
+.artAnimation {
   margin: auto;
+  margin-top: -3rem;
 }
 
 .programmingAnimation {
