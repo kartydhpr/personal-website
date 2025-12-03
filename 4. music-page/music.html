@@ -43,9 +43,11 @@
           <a class="nav-item nav-link active" href="https://www.kartydhpr.com/index.html#music">Music<span class="sr-only">(current)</span></a>
         </div>
       </div>
-      <input class="lightSwitchButton" type="button", value="  Toggle dark mode  ", id="darkModeBtn"></input>
-      <!-- <button id="darkModeBtn">Dark Mode: On/Off </button> -->
-    	<div class="scroll-progress" id="scroll-progress"></div>
+      <button class="lightSwitchButton hover-btn" type="button" id="darkModeBtn" aria-label="Switch to light mode">
+        <i class="fa-solid fa-moon" id="darkModeIcon"></i>
+        <span id="darkModeText">Dark Mode</span>
+      </button>
+      <div class="scroll-progress" id="scroll-progress"></div>
     </nav>
 
     <main>
@@ -57,11 +59,103 @@
           <div class="col-md-6">
             <H1 class="header" id="anchor">Music and Hobbies</H1>
             <lottie-player class = "musicAnimation" src="https://assets10.lottiefiles.com/packages/lf20_j4xgoyi2.json"  background="transparent"  speed="1"  style="width: 100%; height: 27rem;" loop autoplay></lottie-player>
-            <p class="dark-mode-text">Here I will put all of my work in progress garageband audio tracks. Stay tuned!</p>
+            <p class="dark-mode-text">Here I will put all of my work in progress garageband audio tracks. This page is still a work in progress, stay tuned!</p>
           </div>
           <div class="col-md-3"></div>
         </div>
       </div>
+      </section>
+
+      <!-- Music Player Section -->
+      <section>
+        <div class="container-fluid music-player-section">
+          <div class="music-player-container" id="musicPlayerContainer">
+            <!-- Left Side - Player Controls -->
+            <div class="player-left">
+              <!-- Album Cover -->
+              <div class="album-cover-container">
+                <img id="albumCover" class="album-cover" src="https://via.placeholder.com/200?text=Album" alt="Album Cover">
+              </div>
+
+              <!-- Song Info -->
+              <div class="song-info">
+                <h2 id="songTitle" class="song-title">No Song Playing</h2>
+                <p id="artistName" class="artist-name">Select a song</p>
+              </div>
+
+              <!-- Controls -->
+              <div class="player-controls">
+                <button id="prevBtn" class="control-btn" aria-label="Previous song">
+                  <i class="fas fa-step-backward"></i>
+                </button>
+                <button id="playPauseBtn" class="control-btn play-btn" aria-label="Play/Pause">
+                  <i class="fas fa-play"></i>
+                </button>
+                <button id="nextBtn" class="control-btn" aria-label="Next song">
+                  <i class="fas fa-step-forward"></i>
+                </button>
+              </div>
+
+              <!-- Progress Bar -->
+              <div class="progress-container">
+                <span id="currentTime" class="time-display dark-mode-text">0:00</span>
+                <div class="progress-bar-wrapper">
+                  <div class="progress-bar" id="progressBar">
+                    <div class="progress-fill" id="progressFill"></div>
+                  </div>
+                </div>
+                <span id="duration" class="time-display dark-mode-text">0:00</span>
+              </div>
+
+              <!-- Up Next -->
+              <div class="up-next">
+                <h3 class="dark-mode-text">Up Next</h3>
+                <div class="up-next-item dark-mode-text" id="upNextItem">
+                  <p>--</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Side - Song Library -->
+            <div class="player-right">
+              <div class="library-header">
+                <h3 class="library-title dark-mode-text">My Songs</h3>
+                <button id="insightsToggleBtn" class="insights-toggle-btn" aria-label="Toggle song insights">
+                  <i class="fas fa-lightbulb"></i>
+                </button>
+              </div>
+              <div class="songs-library" id="songsLibrary">
+                <!-- Songs will be populated here by JavaScript -->
+              </div>
+            </div>
+
+            <!-- Song Insights Section (Hidden by default) -->
+            <div class="player-insights" id="playerInsights" style="display: none;">
+              <h3 class="insights-title dark-mode-text">Song Insights</h3>
+              <div class="insights-content dark-mode-text" id="insightsContent">
+                <div class="insight-item">
+                  <span class="insight-label">Date Written:</span>
+                  <span id="insightDate" class="insight-value">--</span>
+                </div>
+                <div class="insight-item">
+                  <span class="insight-label">Collaborators:</span>
+                  <span id="insightCollaborators" class="insight-value">--</span>
+                </div>
+                <div class="insight-item">
+                  <span class="insight-label">Location:</span>
+                  <span id="insightLocation" class="insight-value">--</span>
+                </div>
+                <div class="insight-item">
+                  <span class="insight-label">Genre:</span>
+                  <span id="insightGenre" class="insight-value">--</span>
+                </div>
+                <div class="insight-description">
+                  <p id="insightDescription">--</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
     </main>
     <!--Links Footer Section-->
@@ -73,7 +167,7 @@
             <H1> Get in touch:</H1>
             <a class="fa-brands fa-linkedin fa-3x"  href="https://www.linkedin.com/in/kartydhuper/" target="_blank"></a>
             <a class="fa-brands fa-github fa-3x"  href="https://github.com/kartydhpr" target="_blank"></a>
-            <a class="fa-solid fa-envelope fa-3x" " style="padding-bottom: 3%;" href="" target="_blank"></a>
+            <a class="fa-solid fa-envelope fa-3x" style="padding-bottom: 3%;" href="" target="_blank"></a>
             <H6 style="padding-bottom: 2%;">Website designed and coded by Karteikay (Karty) Dhuper.</H6>
           </div>
           <div class="col-md-3"></div>
@@ -83,6 +177,7 @@
 
     <!--Custom JavaScript-->
     <script src="../index.js"></script>
+    <script src="musicPlayer.js"></script>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

@@ -36,7 +36,10 @@
           <a class="nav-item nav-link nav-island-right" href="#music">Music</a>
         </div>
       </div>
-      <input class="lightSwitchButton hover-btn"  type="button", value="  Toggle dark mode  ", id="darkModeBtn"></input>
+      <button class="lightSwitchButton hover-btn" type="button" id="darkModeBtn" aria-label="Switch to light mode">
+        <i class="fa-solid fa-moon" id="darkModeIcon"></i>
+        <span id="darkModeText">Dark Mode</span>
+      </button>
       <div class="scroll-progress" id="scroll-progress"></div>
     </nav>
     
@@ -49,7 +52,7 @@
                 <img src="public/images/prof-pic.jpeg" class = "profile-picture fade-in">
               </a>
               <div>
-                <h1 class = "typewriter fade-in">Hey! I'm Karty.</h1>
+                <h1 class = "typewriter fade-in" id="typewriter-text"></h1>
               </div>
               <div class = "sub-title dark-mode-text fade-in"> 
                 <h3>I'm a <strong>software engineer</strong> and <strong>designer</strong>. </h3>
@@ -305,7 +308,7 @@
                   </div>
                   <!-- Modal footer -->
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background: #1ce783;">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background: #1ce783; border-radius: 19px; padding: 4px 17px">Close</button>
                   </div>
                 </div>
               </div>
@@ -341,7 +344,7 @@
                   </div>
                   <!-- Modal footer -->
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background: #1ce783;">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background: #1ce783; border-radius: 19px; padding: 4px 17px">Close</button>
                   </div>
                 </div>
               </div>
@@ -377,7 +380,7 @@
                   </div>
                   <!-- Modal footer -->
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background: #1ce783;">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background: #1ce783; border-radius: 19px; padding: 4px 17px">Close</button>
                   </div>
                 </div>
               </div>
@@ -417,7 +420,7 @@
                   </div>
               <!-- Modal footer -->
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background: #1ce783;">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background: #1ce783; border-radius: 19px; padding: 4px 17px">Close</button>
                   </div>
                 </div>
               </div>
@@ -454,7 +457,7 @@
                   </div>
                   <!-- Modal footer -->
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background: #1ce783;">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background: #1ce783; border-radius: 19px; padding: 4px 17px">Close</button>
                   </div>
                 </div>
               </div>
@@ -490,7 +493,7 @@
                   </div>
                   <!-- Modal footer -->
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background: #1ce783;">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background: #1ce783; border-radius: 19px; padding: 4px 17px">Close</button>
                   </div>
                 </div>
               </div>
@@ -526,7 +529,7 @@
                   </div>
                   <!-- Modal footer -->
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background: #1ce783;">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background: #1ce783; border-radius: 19px; padding: 4px 17px">Close</button>
                   </div>
                 </div>
               </div>
@@ -567,7 +570,7 @@
                   </div>
                   <!-- Modal footer -->
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background: #1ce783;">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background: #1ce783; border-radius: 19px; padding: 4px 17px">Close</button>
                   </div>
                 </div>
               </div>
@@ -613,7 +616,11 @@
                     </div>
                   </div>
                   <div class="col-md-5">
-                    <img class="center" style="width: 85%; padding-top: 4rem; rotate: 3deg;" src="public/images/art.jpeg"/>
+                    <div class="polaroid-wrapper" style="padding-top: 4rem; rotate: 3deg;">
+                      <div class="polaroid-frame">
+                        <img class="center" style="width: 100%;" src="public/images/art.jpeg"/>
+                      </div>
+                    </div>
                   </div>
                   <div class="col-md-1"></div>
                 </div>
@@ -627,7 +634,11 @@
                 <div class = "row">
                   <div class="col-md-1"></div>
                   <div class="col-md-5">
-                    <img class="center" style="width: 85%; padding-top: 4rem; rotate: -3deg;" src="public/images/music.jpeg"/>
+                    <div class="polaroid-wrapper" style="padding-top: 4rem; rotate: -3deg;">
+                      <div class="polaroid-frame">
+                        <img class="center" style="width: 100%;" src="public/images/music.jpeg"/>
+                      </div>
+                    </div>
                   </div>
                   <div class="col-md-5">
                     <H1 class="header" id="anchor">Music and Hobbies</H1>
