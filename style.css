@@ -47,6 +47,8 @@ body, #dark-mode-bg {
   /* Smart phone (portrait) */
   html{
     font-size: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
   } 
 }
 
