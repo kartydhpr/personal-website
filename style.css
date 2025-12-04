@@ -46,9 +46,9 @@ body, #dark-mode-bg {
 @media screen and (max-width: 499px){ /*everything less than 499px width will have this applied to it*/
   /* Smart phone (portrait) */
   html{
-    font-size: 10px;
+    font-size: 12px;
   } 
-  .phone-response{
+  .quarantine{
     padding-left: 23px;
     padding-right: 23px;
   }
