@@ -35,7 +35,7 @@ class MusicPlayer {
         description: ""
       },
       {
-        title: "Untitled Track 2",
+        title: "Coming Soon 1",
         artist: "Karty",
         duration: 200,
         albumCover: "https://via.placeholder.com/200?text=Track+2",
@@ -47,7 +47,7 @@ class MusicPlayer {
         description: ""
       },
       {
-        title: "Untitled Track 3",
+        title: "Coming Soon 2",
         artist: "Karty",
         duration: 220,
         albumCover: "https://via.placeholder.com/200?text=Track+3",
