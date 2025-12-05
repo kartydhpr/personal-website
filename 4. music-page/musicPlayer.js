@@ -19,8 +19,8 @@ class MusicPlayer {
         dateWritten: "TBA",
         collaborators: "Aamir Rahman, Karteikay Dhuper",
         location: "Indianapolis, IN",
-        genre: "Grunge, Alternative Rock, Shoegaze",
-        description: "An upcoming track - stay tuned for more details!"
+        genre: "Grunge, Shoegaze",
+        description: ""
       },
       {
         title: "Erase Me",
@@ -31,23 +31,23 @@ class MusicPlayer {
         dateWritten: "2024",
         collaborators: "Aamir Rahman, Ellie Parr, Karteikay Dhuper, Taylor Anne, Dhruv Narayanan",
         location: "Purdue University, West Lafayette, IN",
-        genre: "",
+        genre: "Grunge, Shoegaze",
         description: ""
       },
       {
-        title: "Coming Soon 1",
+        title: "Experiment 1",
         artist: "Karty",
-        duration: 200,
-        albumCover: "https://via.placeholder.com/200?text=Track+2",
-        src: "#",
-        dateWritten: "2024",
+        duration: 67,
+        albumCover: "../4. music-page/sunset.jpg",
+        src: "../4. music-page/Final Minute - Demo.m4a",
+        dateWritten: "2021",
         collaborators: "Solo",
-        location: "Home Studio",
-        genre: "",
+        location: "Dorm Room, Wiley Hall",
+        genre: "Experimental folk",
         description: ""
       },
       {
-        title: "Coming Soon 2",
+        title: "Coming Soon",
         artist: "Karty",
         duration: 220,
         albumCover: "https://via.placeholder.com/200?text=Track+3",
