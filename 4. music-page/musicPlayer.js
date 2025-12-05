@@ -13,7 +13,7 @@ class MusicPlayer {
       {
         title: "Try Again",
         artist: "Cascadia",
-        duration: 180,
+        duration: 274,
         albumCover: "../3. art-page/Designs/cascadia.jpg",
         src: "../4. music-page/Try Again.mp3",
         dateWritten: "TBA",
@@ -25,7 +25,7 @@ class MusicPlayer {
       {
         title: "Erase Me",
         artist: "Cascadia",
-        duration: 240,
+        duration: 221,
         albumCover: "../3. art-page/Designs/cascadia.jpg",
         src: "../4. music-page/Erase me.mp3",
         dateWritten: "2024",
