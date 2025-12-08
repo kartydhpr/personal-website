@@ -19,13 +19,13 @@ class MusicPlayer {
         dateWritten: "TBA",
         collaborators: "Aamir Rahman, Karteikay Dhuper",
         location: "Indianapolis, IN",
-        genre: "Grunge, Shoegaze",
+        genre: "Grunge Revival, Shoegaze",
         description: ""
       },
       {
         title: "Erase Me",
         artist: "Cascadia",
-        duration: 221,
+        duration: 178,
         albumCover: "../3. art-page/Designs/cascadia.jpg",
         src: "../4. music-page/Erase me.mp3",
         dateWritten: "2024",
@@ -34,6 +34,42 @@ class MusicPlayer {
         genre: "Grunge, Shoegaze",
         description: ""
       },
+      {
+        title: "Ember",
+        artist: "Cascadia",
+        duration: 194,
+        albumCover: "../3. art-page/Designs/cascadia.jpg",
+        src: "../4. music-page/Ember.mp3",
+        dateWritten: "2021",
+        collaborators: "Aamir Rahman, Ellie Parr, Karteikay Dhuper, Taylor Anne, Dhruv Narayanan",
+        location: "Purdue University, West Lafayette, IN",
+        genre: "Shoegaze",
+        description: ""
+      },
+      {
+        title: "Shoegaze Demo",
+        artist: "Cascadia",
+        duration: 229,
+        albumCover: "../3. art-page/Designs/cascadia.jpg",
+        src: "../4. music-page/gazeDemo.mp3",
+        dateWritten: "2021",
+        collaborators: "Aamir Rahman, Ellie Parr, Karteikay Dhuper, Taylor Anne, Dhruv Narayanan",
+        location: "Purdue University, West Lafayette, IN",
+        genre: "Shoegaze",
+        description: ""
+      },
+      // {
+      //   title: "Grungegaze Demo",
+      //   artist: "Cascadia",
+      //   duration: 229,
+      //   albumCover: "../3. art-page/Designs/cascadia.jpg",
+      //   src: "../4. music-page/grungeGaze.mp3",
+      //   dateWritten: "2021",
+      //   collaborators: "Solo",
+      //   location: "Dorm Room, Wiley Hall",
+      //   genre: "Grungegaze",
+      //   description: ""
+      // },
       {
         title: "Experiment 1",
         artist: "Karty",
@@ -44,18 +80,6 @@ class MusicPlayer {
         collaborators: "Solo",
         location: "Dorm Room, Wiley Hall",
         genre: "Experimental folk",
-        description: ""
-      },
-      {
-        title: "Coming Soon",
-        artist: "Karty",
-        duration: 220,
-        albumCover: "https://via.placeholder.com/200?text=Track+3",
-        src: "#",
-        dateWritten: "2024",
-        collaborators: "Solo",
-        location: "Home Studio",
-        genre: "",
         description: ""
       }
     ];

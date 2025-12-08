@@ -1620,3 +1620,78 @@ nav.navbar-light ~ main .song-item-artist { color: #666666; }
   }
 }
 
+/* Polaroid Gallery Section */
+.polaroid-gallery-section {
+  padding: 3rem 0;
+}
+
+.gallery-title {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-weight: 700;
+}
+
+/* Centered + Responsive Horizontal Scroll */
+.polaroid-gallery {
+  display: flex;
+  justify-content: center;              /* Center children when they fit */
+  gap: 2rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 2rem 1rem;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+}
+
+/* Hide scrollbar */
+.polaroid-gallery::-webkit-scrollbar {
+  display: none;
+}
+
+/* Polaroid card */
+.polaroid {
+  flex: 0 0 auto;
+  width: clamp(260px, 40vw, 450px);  /* MUCH larger */
+  background: #fff;
+  padding: 1.2rem 1.2rem 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 12px 20px rgba(0,0,0,0.18);
+  text-align: center;
+  scroll-snap-align: center;
+  transform: rotate(-3deg);
+  transition: transform 0.25s ease;
+}
+
+.polaroid:hover {
+  transform: rotate(0deg) scale(1.03);
+}
+
+.polaroid img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
+.caption {
+  margin-top: 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  font-style: italic;
+  color: #444;
+}
+
+/* Dark Mode Support */
+#dark-mode-bg.dark-mode .polaroid {
+  background: #2a2a2a;
+}
+
+#dark-mode-bg.dark-mode .caption {
+  color: #ddd;
+}
+
+/* Mobile Tweaks */
+@media (max-width: 600px) {
+  .polaroid {
+    width: 70vw;                       /* Bigger polaroids on small screens */
+  }
+}
