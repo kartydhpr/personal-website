@@ -46,7 +46,7 @@
       .duffel-orb--2 {
         width: min(45vw, 360px);
         height: min(45vw, 360px);
-        background: radial-gradient(circle, rgba(28, 231, 131, 0.45) 0%, transparent 70%);
+        background: radial-gradient(circle, rgba(129, 140, 248, 0.42) 0%, transparent 70%);
         top: 10%;
         right: -10%;
       }
@@ -91,7 +91,7 @@
         isolation: isolate;
         background:
           radial-gradient(ellipse 80% 55% at 20% -10%, rgba(255, 102, 48, 0.45) 0%, transparent 55%),
-          radial-gradient(ellipse 60% 45% at 100% 20%, rgba(28, 231, 131, 0.28) 0%, transparent 50%),
+          radial-gradient(ellipse 60% 45% at 100% 20%, rgba(99, 102, 241, 0.26) 0%, transparent 50%),
           radial-gradient(ellipse 50% 40% at 50% 110%, rgba(99, 102, 241, 0.22) 0%, transparent 55%),
           linear-gradient(165deg, #0a0c12 0%, #121826 42%, #0d1018 100%);
       }
@@ -109,11 +109,176 @@
         z-index: 0;
       }
 
+      .duffel-hero::after {
+        content: "";
+        position: absolute;
+        inset: -15%;
+        pointer-events: none;
+        z-index: 0;
+        background:
+          radial-gradient(ellipse 55% 50% at 25% 45%, rgba(255, 102, 48, 0.14) 0%, transparent 55%),
+          radial-gradient(ellipse 50% 45% at 78% 55%, rgba(99, 102, 241, 0.12) 0%, transparent 52%);
+        opacity: 0.75;
+      }
+
       .duffel-hero-inner {
         position: relative;
         z-index: 1;
         max-width: 920px;
         text-align: center;
+        transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      .duffel-hero-ambient,
+      .duffel-floating-icons {
+        transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      @media (prefers-reduced-motion: no-preference) {
+        .duffel-hero::before {
+          animation: duffel-hero-grid-drift 90s linear infinite;
+        }
+
+        .duffel-hero::after {
+          animation: duffel-hero-glow-pulse 14s ease-in-out infinite alternate;
+        }
+
+        .duffel-orb--1 {
+          animation: duffel-orb-a 22s ease-in-out infinite alternate;
+        }
+
+        .duffel-orb--2 {
+          animation: duffel-orb-b 26s ease-in-out infinite alternate;
+        }
+
+        .duffel-orb--3 {
+          animation: duffel-orb-c 19s ease-in-out infinite alternate;
+        }
+
+        .duffel-float-icon:nth-child(1) {
+          animation: duffel-icon-float 9s ease-in-out infinite;
+          animation-delay: 0s;
+        }
+
+        .duffel-float-icon:nth-child(2) {
+          animation: duffel-icon-float 8s ease-in-out infinite;
+          animation-delay: -2s;
+        }
+
+        .duffel-float-icon:nth-child(3) {
+          animation: duffel-icon-float 10s ease-in-out infinite;
+          animation-delay: -4s;
+        }
+
+        .duffel-float-icon:nth-child(4) {
+          animation: duffel-icon-float 9.5s ease-in-out infinite;
+          animation-delay: -1s;
+        }
+
+        .duffel-hero-inner > * {
+          animation: duffel-hero-reveal 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        .duffel-hero-inner > *:nth-child(1) { animation-delay: 0.08s; }
+        .duffel-hero-inner > *:nth-child(2) { animation-delay: 0.18s; }
+        .duffel-hero-inner > *:nth-child(3) { animation-delay: 0.28s; }
+        .duffel-hero-inner > *:nth-child(4) { animation-delay: 0.38s; }
+
+        .duffel-btn-primary::after {
+          content: "";
+          position: absolute;
+          inset: 0;
+          z-index: 0;
+          background: linear-gradient(
+            105deg,
+            transparent 0%,
+            transparent 38%,
+            rgba(255, 255, 255, 0.22) 48%,
+            rgba(255, 255, 255, 0.08) 52%,
+            transparent 62%
+          );
+          transform: translateX(-120%);
+          animation: duffel-btn-shimmer 5.5s ease-in-out infinite;
+        }
+
+        .duffel-pill {
+          animation: duffel-pill-glow 6s ease-in-out infinite alternate;
+          animation-delay: calc(var(--pill-i, 0) * -1.2s);
+        }
+
+        .duffel-pill:nth-child(1) { --pill-i: 0; }
+        .duffel-pill:nth-child(2) { --pill-i: 1; }
+        .duffel-pill:nth-child(3) { --pill-i: 2; }
+      }
+
+      @keyframes duffel-hero-grid-drift {
+        0% { background-position: 0 0, 0 0; }
+        100% { background-position: 48px 48px, 48px 48px; }
+      }
+
+      @keyframes duffel-hero-glow-pulse {
+        0% {
+          opacity: 0.45;
+          transform: scale(1) translate(0, 0);
+        }
+        100% {
+          opacity: 0.95;
+          transform: scale(1.05) translate(2%, -1%);
+        }
+      }
+
+      @keyframes duffel-orb-a {
+        0% { transform: translate(0, 0) scale(1); }
+        100% { transform: translate(5%, 4%) scale(1.08); }
+      }
+
+      @keyframes duffel-orb-b {
+        0% { transform: translate(0, 0) scale(1); }
+        100% { transform: translate(-6%, 3%) scale(1.06); }
+      }
+
+      @keyframes duffel-orb-c {
+        0% { transform: translate(0, 0) scale(1); }
+        100% { transform: translate(3%, -5%) scale(1.07); }
+      }
+
+      @keyframes duffel-icon-float {
+        0%, 100% {
+          transform: translateY(0) rotate(var(--rot, 0deg));
+          opacity: 0.9;
+        }
+        50% {
+          transform: translateY(-14px) rotate(calc(var(--rot, 0deg) + 4deg));
+          opacity: 1;
+        }
+      }
+
+      @keyframes duffel-hero-reveal {
+        from {
+          opacity: 0;
+          transform: translateY(1.1rem);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes duffel-btn-shimmer {
+        0%, 70% { transform: translateX(-120%); }
+        85% { transform: translateX(120%); }
+        100% { transform: translateX(120%); }
+      }
+
+      @keyframes duffel-pill-glow {
+        0% {
+          border-color: rgba(255, 255, 255, 0.16);
+          box-shadow: 0 0 0 0 rgba(255, 102, 48, 0);
+        }
+        100% {
+          border-color: rgba(255, 255, 255, 0.28);
+          box-shadow: 0 0 20px -4px rgba(255, 102, 48, 0.25);
+        }
       }
 
       .duffel-pills {
@@ -222,7 +387,7 @@
         padding: 0.5rem 0.75rem;
       }
 
-      .duffel-btn-subtle:hover { color: #1ce783 !important; transform: none; }
+      .duffel-btn-subtle:hover { color: #a5b4fc !important; transform: none; }
 
       .duffel-section {
         padding: 4.5rem 1.25rem;
@@ -289,8 +454,20 @@
         font-weight: 800;
         letter-spacing: 0.2em;
         text-transform: uppercase;
-        color: #ff6630;
         opacity: 0.95;
+        background: linear-gradient(100deg, #ff934a 0%, #a5b4fc 55%, #818cf8 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+      }
+
+      @supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+        .duffel-product-points__step {
+          color: #9b87e8;
+          background: none;
+          -webkit-text-fill-color: unset;
+        }
       }
 
       .duffel-product-points__icon {
@@ -301,15 +478,28 @@
         align-items: center;
         justify-content: center;
         font-size: 1.15rem;
-        color: #ff6630;
-        background: linear-gradient(145deg, rgba(255, 102, 48, 0.22), rgba(28, 231, 131, 0.16));
-        border: 1px solid rgba(255, 255, 255, 0.14);
-        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.18);
+        color: rgba(255, 255, 255, 0.96);
+        border: 1px solid rgba(255, 180, 140, 0.35);
+        box-shadow:
+          0 6px 24px rgba(0, 0, 0, 0.18),
+          inset 0 0 0 1px rgba(99, 102, 241, 0.22);
+      }
+
+      /* Each chip blends orange + indigo; odd/even flip emphasis */
+      .duffel-product-points__item:nth-child(odd) .duffel-product-points__icon {
+        background: linear-gradient(145deg, rgba(255, 154, 92, 0.55) 0%, rgba(255, 120, 85, 0.28) 38%, rgba(99, 102, 241, 0.42) 100%);
+      }
+
+      .duffel-product-points__item:nth-child(even) .duffel-product-points__icon {
+        background: linear-gradient(145deg, rgba(99, 102, 241, 0.45) 0%, rgba(129, 140, 248, 0.3) 42%, rgba(255, 154, 92, 0.48) 100%);
       }
 
       #dark-mode-bg[style*="white"] .duffel-product-points__icon {
-        border-color: rgba(15, 23, 42, 0.1);
-        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+        border-color: rgba(99, 102, 241, 0.22);
+        box-shadow:
+          0 4px 18px rgba(99, 102, 241, 0.1),
+          0 4px 16px rgba(255, 140, 90, 0.08),
+          0 0 0 1px rgba(99, 102, 241, 0.12) inset;
       }
 
       .duffel-product-points__title {
@@ -341,7 +531,7 @@
       }
 
       .duffel-product-points__copy a:hover {
-        color: #1ce783;
+        color: #818cf8;
       }
 
       @media (max-width: 499px) {
@@ -357,6 +547,81 @@
         }
       }
 
+      .duffel-showcase-section {
+        padding: 3rem 0 4rem;
+        overflow: hidden;
+      }
+
+      .duffel-showcase-track {
+        display: flex;
+        gap: 1.25rem;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-padding: 1.25rem;
+        padding: 0.5rem 1.25rem 1.75rem;
+        margin: 0 -0.25rem;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+      }
+
+      .duffel-showcase-track:focus-visible {
+        outline: 2px solid rgba(255, 102, 48, 0.65);
+        outline-offset: 4px;
+      }
+
+      .duffel-showcase-device {
+        flex: 0 0 auto;
+        width: min(272px, 76vw);
+        scroll-snap-align: center;
+        margin: 0;
+      }
+
+      .duffel-showcase-device img {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: clamp(22px, 5vw, 28px);
+        box-shadow:
+          0 22px 56px rgba(0, 0, 0, 0.42),
+          0 0 0 1px rgba(255, 255, 255, 0.1);
+      }
+
+      #dark-mode-bg[style*="white"] .duffel-showcase-device img {
+        box-shadow:
+          0 16px 40px rgba(0, 0, 0, 0.12),
+          0 0 0 1px rgba(15, 23, 42, 0.08);
+      }
+
+      .duffel-showcase-caption {
+        text-align: center;
+        margin-top: 0.7rem;
+        font-size: 0.86rem;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        line-height: 1.35;
+        opacity: 0.92;
+      }
+
+      @media (min-width: 992px) {
+        .duffel-showcase-track {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          overflow: visible;
+          padding: 0.5rem 0 0;
+          margin: 0;
+          gap: 1.5rem 1.25rem;
+        }
+
+        .duffel-showcase-device {
+          width: auto;
+          scroll-snap-align: unset;
+        }
+      }
+
+      @media (max-width: 575px) {
+        .duffel-showcase-section { padding: 2.25rem 0 3rem; }
+      }
+
       .duffel-cta-panel {
         position: relative;
         margin: 0 1.25rem 4rem;
@@ -366,7 +631,7 @@
         padding: 2rem 1.75rem;
         border-radius: 1.25rem;
         text-align: center;
-        background: linear-gradient(135deg, rgba(255, 102, 48, 0.14) 0%, rgba(28, 231, 131, 0.1) 100%);
+        background: linear-gradient(135deg, rgba(255, 102, 48, 0.14) 0%, rgba(99, 102, 241, 0.12) 100%);
         border: 1px solid rgba(255, 102, 48, 0.28);
         box-shadow:
           0 8px 32px rgba(0, 0, 0, 0.2),
@@ -374,7 +639,7 @@
       }
 
       #dark-mode-bg[style*="white"] .duffel-cta-panel {
-        background: linear-gradient(135deg, rgba(255, 102, 48, 0.12) 0%, rgba(28, 231, 131, 0.09) 100%);
+        background: linear-gradient(135deg, rgba(255, 102, 48, 0.12) 0%, rgba(99, 102, 241, 0.1) 100%);
         border: 1px solid rgba(255, 102, 48, 0.24);
         box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
       }
@@ -484,7 +749,7 @@
         text-underline-offset: 2px;
       }
 
-      .duffel-privacy-body a:hover { color: #1ce783; }
+      .duffel-privacy-body a:hover { color: #818cf8; }
 
       .duffel-back {
         display: inline-flex;
@@ -493,6 +758,12 @@
         margin-top: 2rem;
         font-weight: 600;
         font-size: 0.92rem;
+        color: #a5b4fc !important;
+        text-decoration: none;
+      }
+
+      .duffel-back:hover {
+        color: #c7d2fe !important;
       }
 
       @media (max-width: 575px) {
@@ -559,7 +830,7 @@
             <span class="duffel-btn duffel-btn-primary" title="Coming soon">
               <span class="duffel-btn-primary-inner"><i class="fa-brands fa-apple"></i> App Store soon</span>
             </span>
-            <a class="duffel-btn duffel-btn-ghost" href="https://github.com/kartydhpr/duffel" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHub</a>
+            <a class="duffel-btn duffel-btn-ghost" href="https://github.com/kartydhpr/duffel.git" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHub</a>
             <a class="duffel-btn duffel-btn-subtle" href="#privacy">Privacy policy <i class="fa-solid fa-arrow-down-long" style="font-size:0.75rem;"></i></a>
           </div>
         </div>
@@ -588,7 +859,7 @@
             </div>
             <div>
               <h3 class="duffel-product-points__title dark-mode-text">Road trip math</h3>
-              <p class="duffel-product-points__copy dark-mode-text">Drive duration and fuel cost respect your MPG, airport buffer, and how you like long days behind the wheel. Duffel uses real U.S. retail gasoline averages</strong> from the <a href="https://www.eia.gov" target="_blank" rel="noopener noreferrer"><abbr title="U.S. Energy Information Administration">EIA</abbr></a> so fuel isn’t a guess.</p>
+              <p class="duffel-product-points__copy dark-mode-text">Drive duration and fuel cost respect your MPG, airport buffer, and how you like long days behind the wheel. Duffel uses real U.S. retail gasoline averages from the <a href="https://www.eia.gov" target="_blank" rel="noopener noreferrer"><abbr title="U.S. Energy Information Administration">EIA</abbr></a> so fuel isn’t a guess.</p>
             </div>
           </li>
           <li class="duffel-product-points__item">
@@ -614,10 +885,49 @@
         </ul>
       </section>
 
+      <section class="duffel-showcase-section" aria-labelledby="showcase-heading">
+        <div class="container px-lg-3">
+          <header class="duffel-section-head">
+            <h2 id="showcase-heading" class="duffel-section-title dark-mode-text">See it in action</h2>
+            <p class="duffel-section-intro dark-mode-text">Screens from the real app—trip inputs, comparison cards, the recommendation, and settings.</p>
+          </header>
+          <div class="duffel-showcase-track" tabindex="0" role="region" aria-label="App screenshot gallery. Swipe sideways on small screens.">
+            <figure class="duffel-showcase-device">
+              <img src="duffel-showcase/IMG_9475.PNG" width="1320" height="2868" alt="Duffel home screen with hero headline, weather, map illustration, and trip fields for Indianapolis to Pittsburgh." loading="lazy" decoding="async">
+              <figcaption class="duffel-showcase-caption dark-mode-text">Home · trip at a glance</figcaption>
+            </figure>
+            <figure class="duffel-showcase-device">
+              <img src="duffel-showcase/IMG_9476.PNG" width="1320" height="2868" alt="Road trip math card with MPG, gas price, people in car, airport buffer, and Compare trips button." loading="lazy" decoding="async">
+              <figcaption class="duffel-showcase-caption dark-mode-text">Road trip math &amp; priorities</figcaption>
+            </figure>
+            <figure class="duffel-showcase-device">
+              <img src="duffel-showcase/IMG_9477.PNG" width="1320" height="2868" alt="Your comparison screen with drive and fly cards showing time, cost, and actions for Maps and Google Flights." loading="lazy" decoding="async">
+              <figcaption class="duffel-showcase-caption dark-mode-text">Drive vs. fly cards</figcaption>
+            </figure>
+            <figure class="duffel-showcase-device">
+              <img src="duffel-showcase/IMG_9480.PNG" width="1320" height="2868" alt="Drive comparison card with expanded cost breakdown and Start route in Maps button." loading="lazy" decoding="async">
+              <figcaption class="duffel-showcase-caption dark-mode-text">Drive cost breakdown</figcaption>
+            </figure>
+            <figure class="duffel-showcase-device">
+              <img src="duffel-showcase/IMG_9481.PNG" width="1320" height="2868" alt="Fly card with ballpark time breakdown and Open Google Flights button." loading="lazy" decoding="async">
+              <figcaption class="duffel-showcase-caption dark-mode-text">Flight estimate &amp; Flights</figcaption>
+            </figure>
+            <figure class="duffel-showcase-device">
+              <img src="duffel-showcase/IMG_9478.PNG" width="1320" height="2868" alt="Map of the driving route and Our 2 Cents cards with final Drive recommendation." loading="lazy" decoding="async">
+              <figcaption class="duffel-showcase-caption dark-mode-text">Map, tradeoffs &amp; pick</figcaption>
+            </figure>
+            <figure class="duffel-showcase-device">
+              <img src="duffel-showcase/IMG_9482.PNG" width="1320" height="2868" alt="Settings with color mode, sky gradient, drive preferences, and tip jar." loading="lazy" decoding="async">
+              <figcaption class="duffel-showcase-caption dark-mode-text">Settings &amp; support</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
       <div class="duffel-cta-panel dark-mode-text">
         <h2>Shipped for iPhone &amp; Mac</h2>
         <p>Watch this space for the public App Store link. Until then, the GitHub repo is the best place to follow progress (if the project is public).</p>
-        <div class="duffel-store-badge" role="status"><i class="fa-brands fa-apple"></i> App Store badge: add your URL when live</div>
+        <div class="duffel-store-badge" role="status"><i class="fa-brands fa-apple"></i> App Store badge: URL coming soon</div>
       </div>
 
       <div id="privacy" class="duffel-privacy-wrap">
@@ -658,7 +968,7 @@
           </div>
         </div>
 
-        <a href="../index.html#programming" class="duffel-back dark-mode-text" style="color: #1ce783;"><i class="fa-solid fa-arrow-left"></i> Back to Programming &amp; Projects</a>
+        <a href="../index.html#programming" class="duffel-back dark-mode-text"><i class="fa-solid fa-arrow-left"></i> Back to Programming &amp; Projects</a>
       </div>
     </div>
 
@@ -681,5 +991,35 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script>
+      (function () {
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+        var hero = document.querySelector(".duffel-hero");
+        if (!hero) return;
+        var ambient = hero.querySelector(".duffel-hero-ambient");
+        var deco = hero.querySelector(".duffel-floating-icons");
+        var inner = hero.querySelector(".duffel-hero-inner");
+        if (!ambient || !inner) return;
+        var maxA = 18;
+        var maxD = 26;
+        var maxI = 7;
+        function onMove(e) {
+          var r = hero.getBoundingClientRect();
+          var x = (e.clientX - r.left) / r.width - 0.5;
+          var y = (e.clientY - r.top) / r.height - 0.5;
+          ambient.style.transform = "translate(" + x * maxA + "px," + y * (maxA * 0.65) + "px)";
+          if (deco) deco.style.transform = "translate(" + x * maxD + "px," + y * (maxD * 0.55) + "px)";
+          inner.style.transform = "translate(" + x * -maxI + "px," + y * -maxI * 0.7 + "px)";
+        }
+        function onLeave() {
+          ambient.style.transform = "";
+          if (deco) deco.style.transform = "";
+          inner.style.transform = "";
+        }
+        hero.addEventListener("mousemove", onMove);
+        hero.addEventListener("mouseleave", onLeave);
+      })();
+    </script>
   </body>
 </html>
