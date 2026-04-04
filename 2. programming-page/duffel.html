@@ -1,0 +1,685 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../style.css">
+    <script src="https://kit.fontawesome.com/5d31b230aa.js" crossorigin="anonymous"></script>
+    <link rel="icon" type="image/x-icon" href="../public/images/logo.ico">
+    <title>Duffel · Drive vs. fly | kartydhpr</title>
+    <meta name="description" content="Duffel helps you compare driving and flying: time, rough costs, and a clear summary. Privacy policy included.">
+    <style>
+      /* Page-local: avoids .card so site dark-mode script does not repaint feature tiles */
+      .duffel-page {
+        font-family: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+        padding-top: 4.5rem;
+        overflow-x: hidden;
+      }
+
+      .duffel-hero-ambient {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .duffel-orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(60px);
+        opacity: 0.55;
+      }
+
+      .duffel-orb--1 {
+        width: min(55vw, 420px);
+        height: min(55vw, 420px);
+        background: radial-gradient(circle, rgba(255, 102, 48, 0.65) 0%, transparent 70%);
+        top: -12%;
+        left: -8%;
+      }
+
+      .duffel-orb--2 {
+        width: min(45vw, 360px);
+        height: min(45vw, 360px);
+        background: radial-gradient(circle, rgba(28, 231, 131, 0.45) 0%, transparent 70%);
+        top: 10%;
+        right: -10%;
+      }
+
+      .duffel-orb--3 {
+        width: min(50vw, 400px);
+        height: min(50vw, 400px);
+        background: radial-gradient(circle, rgba(99, 102, 241, 0.4) 0%, transparent 70%);
+        bottom: -15%;
+        left: 25%;
+      }
+
+      .duffel-floating-icons {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        overflow: hidden;
+      }
+
+      .duffel-float-icon {
+        position: absolute;
+        color: rgba(255, 255, 255, 0.14);
+        font-size: clamp(1.8rem, 4.5vw, 3rem);
+        --rot: -8deg;
+        transform: rotate(var(--rot, 0deg));
+      }
+
+      .duffel-float-icon:nth-child(1) { top: 18%; left: 8%; --rot: -12deg; }
+      .duffel-float-icon:nth-child(2) { top: 22%; right: 10%; --rot: 10deg; }
+      .duffel-float-icon:nth-child(3) { bottom: 28%; left: 12%; --rot: 6deg; }
+      .duffel-float-icon:nth-child(4) { bottom: 20%; right: 14%; --rot: -5deg; }
+
+      .duffel-hero {
+        position: relative;
+        min-height: min(92vh, 640px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 4rem 1.25rem 5rem;
+        margin-bottom: 0;
+        isolation: isolate;
+        background:
+          radial-gradient(ellipse 80% 55% at 20% -10%, rgba(255, 102, 48, 0.45) 0%, transparent 55%),
+          radial-gradient(ellipse 60% 45% at 100% 20%, rgba(28, 231, 131, 0.28) 0%, transparent 50%),
+          radial-gradient(ellipse 50% 40% at 50% 110%, rgba(99, 102, 241, 0.22) 0%, transparent 55%),
+          linear-gradient(165deg, #0a0c12 0%, #121826 42%, #0d1018 100%);
+      }
+
+      .duffel-hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        background-size: 48px 48px;
+        mask-image: radial-gradient(ellipse 70% 70% at 50% 40%, black 15%, transparent 70%);
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .duffel-hero-inner {
+        position: relative;
+        z-index: 1;
+        max-width: 920px;
+        text-align: center;
+      }
+
+      .duffel-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        justify-content: center;
+        margin-bottom: 1.35rem;
+      }
+
+      .duffel-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        padding: 0.35rem 0.85rem;
+        border-radius: 999px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.88);
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+      }
+
+      .duffel-pill i { opacity: 0.85; font-size: 0.72rem; }
+
+      .duffel-hero h1 {
+        font-family: inherit;
+        font-weight: 800;
+        font-size: clamp(2.5rem, 7vw, 4rem);
+        line-height: 1.05;
+        letter-spacing: -0.04em;
+        color: #fff !important;
+        margin-bottom: 1rem;
+        text-shadow: 0 2px 40px rgba(0, 0, 0, 0.35);
+      }
+
+      .duffel-hero-lead {
+        font-size: clamp(1rem, 2.4vw, 1.25rem);
+        line-height: 1.55;
+        color: rgba(255, 255, 255, 0.82);
+        max-width: 36rem;
+        margin: 0 auto 2rem;
+        font-weight: 400;
+      }
+
+      .duffel-hero-lead strong { color: #fff; font-weight: 600; }
+
+      .duffel-hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .duffel-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.35rem;
+        border-radius: 999px;
+        font-weight: 600;
+        font-size: 0.95rem;
+        text-decoration: none !important;
+        border: none;
+        cursor: pointer;
+      }
+
+      .duffel-btn-primary {
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(135deg, #ff6630 0%, #ff8a5c 100%);
+        color: #fff !important;
+        box-shadow: 0 8px 28px rgba(255, 102, 48, 0.35);
+      }
+
+      .duffel-btn-primary-inner {
+        position: relative;
+        z-index: 1;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .duffel-btn-primary:hover {
+        box-shadow: 0 12px 36px rgba(255, 102, 48, 0.45);
+        color: #fff !important;
+      }
+
+      .duffel-btn-ghost {
+        background: rgba(255, 255, 255, 0.08);
+        color: #fff !important;
+        border: 1px solid rgba(255, 255, 255, 0.22);
+      }
+
+      .duffel-btn-ghost:hover {
+        background: rgba(255, 255, 255, 0.14);
+        color: #fff !important;
+      }
+
+      .duffel-btn-subtle {
+        color: rgba(255, 255, 255, 0.55) !important;
+        font-size: 0.88rem;
+        padding: 0.5rem 0.75rem;
+      }
+
+      .duffel-btn-subtle:hover { color: #1ce783 !important; transform: none; }
+
+      .duffel-section {
+        padding: 4.5rem 1.25rem;
+      }
+
+      .duffel-section-title {
+        font-weight: 800;
+        font-size: clamp(1.6rem, 4vw, 2rem);
+        letter-spacing: -0.03em;
+        margin-bottom: 0.5rem;
+      }
+
+      .duffel-section-intro {
+        margin: 0 0 2rem;
+        opacity: 0.88;
+        line-height: 1.6;
+        text-wrap: balance;
+      }
+
+      /* One shared column so the title and intro share the same center line (intro had max-width but no mx-auto, so it sat left while the headline centered in the full container). */
+      .duffel-section-head {
+        text-align: center;
+        max-width: 38rem;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 0.25rem;
+      }
+
+      .duffel-product-points {
+        list-style: none;
+        margin: 0 auto;
+        padding: 2rem 0 0;
+        max-width: 38rem;
+      }
+
+      .duffel-product-points__item {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 1rem 1.35rem;
+        padding: 1.65rem 0;
+        align-items: start;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      #dark-mode-bg[style*="white"] .duffel-product-points__item {
+        border-top-color: rgba(15, 23, 42, 0.08);
+      }
+
+      .duffel-product-points__item:first-of-type {
+        border-top: none;
+        padding-top: 0;
+      }
+
+      .duffel-product-points__rail {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.4rem;
+        min-width: 3.25rem;
+      }
+
+      .duffel-product-points__step {
+        font-size: 0.62rem;
+        font-weight: 800;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: #ff6630;
+        opacity: 0.95;
+      }
+
+      .duffel-product-points__icon {
+        width: 3rem;
+        height: 3rem;
+        border-radius: 0.85rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.15rem;
+        color: #ff6630;
+        background: linear-gradient(145deg, rgba(255, 102, 48, 0.22), rgba(28, 231, 131, 0.16));
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.18);
+      }
+
+      #dark-mode-bg[style*="white"] .duffel-product-points__icon {
+        border-color: rgba(15, 23, 42, 0.1);
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+      }
+
+      .duffel-product-points__title {
+        font-weight: 700;
+        font-size: clamp(1.05rem, 2.5vw, 1.2rem);
+        margin: 0 0 0.45rem;
+        letter-spacing: -0.025em;
+        line-height: 1.25;
+      }
+
+      .duffel-product-points__copy {
+        margin: 0;
+        font-size: 0.94rem;
+        line-height: 1.62;
+        opacity: 0.9;
+      }
+
+      .duffel-product-points__copy strong {
+        font-weight: 600;
+        color: inherit;
+        opacity: 1;
+      }
+
+      .duffel-product-points__copy a {
+        color: #ff6630;
+        font-weight: 600;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+      }
+
+      .duffel-product-points__copy a:hover {
+        color: #1ce783;
+      }
+
+      @media (max-width: 499px) {
+        .duffel-product-points__item {
+          grid-template-columns: 1fr;
+          gap: 0.85rem;
+          padding: 1.5rem 0;
+        }
+        .duffel-product-points__rail {
+          flex-direction: row;
+          justify-content: flex-start;
+          min-width: 0;
+        }
+      }
+
+      .duffel-cta-panel {
+        position: relative;
+        margin: 0 1.25rem 4rem;
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 2rem 1.75rem;
+        border-radius: 1.25rem;
+        text-align: center;
+        background: linear-gradient(135deg, rgba(255, 102, 48, 0.14) 0%, rgba(28, 231, 131, 0.1) 100%);
+        border: 1px solid rgba(255, 102, 48, 0.28);
+        box-shadow:
+          0 8px 32px rgba(0, 0, 0, 0.2),
+          0 0 48px rgba(255, 102, 48, 0.06);
+      }
+
+      #dark-mode-bg[style*="white"] .duffel-cta-panel {
+        background: linear-gradient(135deg, rgba(255, 102, 48, 0.12) 0%, rgba(28, 231, 131, 0.09) 100%);
+        border: 1px solid rgba(255, 102, 48, 0.24);
+        box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+      }
+
+      .duffel-cta-panel h2 {
+        font-weight: 800;
+        font-size: 1.35rem;
+        margin-bottom: 0.5rem;
+        letter-spacing: -0.02em;
+      }
+
+      .duffel-cta-panel p {
+        margin-bottom: 1.25rem;
+        opacity: 0.9;
+        max-width: 32rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .duffel-store-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.6rem 1.1rem;
+        border-radius: 0.65rem;
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px dashed rgba(255, 102, 48, 0.45);
+        font-size: 0.88rem;
+        font-weight: 500;
+      }
+
+      #dark-mode-bg[style*="white"] .duffel-store-badge {
+        background: rgba(0, 0, 0, 0.05);
+        border: 1px dashed rgba(255, 102, 48, 0.5);
+      }
+
+      .duffel-privacy-wrap {
+        padding: 0 1.25rem 5rem;
+        max-width: 760px;
+        margin: 0 auto;
+      }
+
+      .duffel-privacy-card {
+        border-radius: 1.25rem;
+        overflow: hidden;
+        border: 1px solid rgba(128, 128, 128, 0.22);
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      #dark-mode-bg[style*="white"] .duffel-privacy-card {
+        background: rgba(0, 0, 0, 0.04);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+      }
+
+      .duffel-privacy-head {
+        padding: 2rem 1.75rem 1.25rem;
+        border-bottom: 1px solid rgba(128, 128, 128, 0.2);
+      }
+
+      #dark-mode-bg[style*="white"] .duffel-privacy-head {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      }
+
+      .duffel-privacy-head h2 {
+        font-weight: 800;
+        font-size: 1.65rem;
+        letter-spacing: -0.03em;
+        margin-bottom: 0.35rem;
+      }
+
+      .duffel-privacy-meta {
+        font-size: 0.85rem;
+        opacity: 0.65;
+      }
+
+      .duffel-privacy-body {
+        padding: 1.75rem 1.75rem 2.25rem;
+        font-size: 0.95rem;
+        line-height: 1.65;
+      }
+
+      .duffel-privacy-body h3 {
+        font-weight: 700;
+        font-size: 1.05rem;
+        margin-top: 1.75rem;
+        margin-bottom: 0.65rem;
+        letter-spacing: -0.02em;
+        color: #ff6630;
+      }
+
+      .duffel-privacy-body h3:first-of-type { margin-top: 0; }
+
+      .duffel-privacy-body ul {
+        padding-left: 1.15rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .duffel-privacy-body li { margin-bottom: 0.35rem; }
+
+      .duffel-privacy-body a {
+        color: #ff6630;
+        font-weight: 500;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+      }
+
+      .duffel-privacy-body a:hover { color: #1ce783; }
+
+      .duffel-back {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        margin-top: 2rem;
+        font-weight: 600;
+        font-size: 0.92rem;
+      }
+
+      @media (max-width: 575px) {
+        .duffel-hero { min-height: auto; padding-top: 5rem; }
+        .duffel-section { padding: 3rem 1rem; }
+      }
+
+      body#dark-mode-bg:has(.duffel-page) {
+        transition: background-color 0.16s ease-out;
+      }
+      body#dark-mode-bg:has(.duffel-page) .duffel-page .dark-mode-text {
+        transition: none !important;
+      }
+    </style>
+  </head>
+  <body id="dark-mode-bg">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" id="dark-mode-nav">
+      <a class="navbar-brand" href="../index.html">
+        <div class="logo-image">
+          <img src="../public/images/logo.png" class="img-fluid" alt="">
+        </div>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-item nav-link" href="../index.html">Home</a>
+          <a class="nav-item nav-link" href="https://www.kartydhpr.com/index.html#about">About</a>
+          <a class="nav-item nav-link active" href="../index.html#programming">Programming<span class="sr-only">(current)</span></a>
+          <a class="nav-item nav-link" href="https://www.kartydhpr.com/index.html#art&design">Art & Design</a>
+          <a class="nav-item nav-link" href="https://www.kartydhpr.com/index.html#music">Music</a>
+        </div>
+      </div>
+      <button class="lightSwitchButton hover-btn" type="button" id="darkModeBtn" aria-label="Switch to light mode">
+        <i class="fa-solid fa-moon" id="darkModeIcon"></i>
+        <span id="darkModeText">Dark Mode</span>
+      </button>
+      <div class="scroll-progress" id="scroll-progress"></div>
+    </nav>
+
+    <div class="duffel-page">
+      <header class="duffel-hero">
+        <div class="duffel-hero-ambient" aria-hidden="true">
+          <div class="duffel-orb duffel-orb--1"></div>
+          <div class="duffel-orb duffel-orb--2"></div>
+          <div class="duffel-orb duffel-orb--3"></div>
+        </div>
+        <div class="duffel-floating-icons" aria-hidden="true">
+          <i class="fa-solid fa-car-side duffel-float-icon"></i>
+          <i class="fa-solid fa-plane duffel-float-icon"></i>
+          <i class="fa-solid fa-suitcase-rolling duffel-float-icon"></i>
+          <i class="fa-solid fa-route duffel-float-icon"></i>
+        </div>
+        <div class="duffel-hero-inner">
+          <div class="duffel-pills" aria-label="Tech stack">
+            <span class="duffel-pill"><i class="fa-brands fa-swift"></i> Swift</span>
+            <span class="duffel-pill"><i class="fa-solid fa-mobile-screen"></i> SwiftUI</span>
+            <span class="duffel-pill"><i class="fa-solid fa-map-location-dot"></i> MapKit</span>
+          </div>
+          <h1>Plan the trip.<br>Pick the mode.</h1>
+          <p class="duffel-hero-lead"><strong>Duffel</strong> lines up <strong>drive time and fuel cost</strong> against a <strong>rough flight estimate</strong>, then makes a reccomendation based on <strong>cost</strong>, <strong>time</strong>, or a <strong>balanced</strong> call when they disagree.</p>
+          <div class="duffel-hero-actions">
+            <span class="duffel-btn duffel-btn-primary" title="Coming soon">
+              <span class="duffel-btn-primary-inner"><i class="fa-brands fa-apple"></i> App Store soon</span>
+            </span>
+            <a class="duffel-btn duffel-btn-ghost" href="https://github.com/kartydhpr/duffel" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHub</a>
+            <a class="duffel-btn duffel-btn-subtle" href="#privacy">Privacy policy <i class="fa-solid fa-arrow-down-long" style="font-size:0.75rem;"></i></a>
+          </div>
+        </div>
+      </header>
+
+      <section class="duffel-section container" aria-labelledby="features-heading">
+        <header class="duffel-section-head">
+          <h2 id="features-heading" class="duffel-section-title dark-mode-text">Everything in one flow</h2>
+          <p class="duffel-section-intro dark-mode-text">No spreadsheets. Just the inputs you already think about<br class="duffel-intro-break d-none d-sm-inline" /> when you’re deciding whether to drive or fly.</p>
+        </header>
+        <ul class="duffel-product-points" role="list">
+          <li class="duffel-product-points__item">
+            <div class="duffel-product-points__rail" aria-hidden="true">
+              <span class="duffel-product-points__step">01</span>
+              <span class="duffel-product-points__icon"><i class="fa-solid fa-location-dot"></i></span>
+            </div>
+            <div>
+              <h3 class="duffel-product-points__title dark-mode-text">Where and when</h3>
+              <p class="duffel-product-points__copy dark-mode-text">Set origin, destination, and travel date. Duffel uses that context for both road and air-side estimates: one itinerary, two ways to get there.</p>
+            </div>
+          </li>
+          <li class="duffel-product-points__item">
+            <div class="duffel-product-points__rail" aria-hidden="true">
+              <span class="duffel-product-points__step">02</span>
+              <span class="duffel-product-points__icon"><i class="fa-solid fa-road"></i></span>
+            </div>
+            <div>
+              <h3 class="duffel-product-points__title dark-mode-text">Road trip math</h3>
+              <p class="duffel-product-points__copy dark-mode-text">Drive duration and fuel cost respect your MPG, airport buffer, and how you like long days behind the wheel. Duffel uses real U.S. retail gasoline averages</strong> from the <a href="https://www.eia.gov" target="_blank" rel="noopener noreferrer"><abbr title="U.S. Energy Information Administration">EIA</abbr></a> so fuel isn’t a guess.</p>
+            </div>
+          </li>
+          <li class="duffel-product-points__item">
+            <div class="duffel-product-points__rail" aria-hidden="true">
+              <span class="duffel-product-points__step">03</span>
+              <span class="duffel-product-points__icon"><i class="fa-solid fa-plane-departure"></i></span>
+            </div>
+            <div>
+              <h3 class="duffel-product-points__title dark-mode-text">Flying estimate</h3>
+              <p class="duffel-product-points__copy dark-mode-text">Flight-side numbers come from our <strong>offline estimation algorithm</strong>, built for fair comparison, not live shopping. When you’re ready to book, Duffel <strong>deeplinks to Google Flights</strong> with your trip pre-filled so you don’t re-type routes and dates.</p>
+            </div>
+          </li>
+          <li class="duffel-product-points__item">
+            <div class="duffel-product-points__rail" aria-hidden="true">
+              <span class="duffel-product-points__step">04</span>
+              <span class="duffel-product-points__icon"><i class="fa-solid fa-sliders"></i></span>
+            </div>
+            <div>
+              <h3 class="duffel-product-points__title dark-mode-text">Your priority</h3>
+              <p class="duffel-product-points__copy dark-mode-text">Bias the summary toward saving money, saving time, or stay neutral, so the recommendation reads like how you actually choose trips.</p>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <div class="duffel-cta-panel dark-mode-text">
+        <h2>Shipped for iPhone &amp; Mac</h2>
+        <p>Watch this space for the public App Store link. Until then, the GitHub repo is the best place to follow progress (if the project is public).</p>
+        <div class="duffel-store-badge" role="status"><i class="fa-brands fa-apple"></i> App Store badge: add your URL when live</div>
+      </div>
+
+      <div id="privacy" class="duffel-privacy-wrap">
+        <div class="duffel-privacy-card">
+          <div class="duffel-privacy-head dark-mode-text">
+            <h2>Privacy policy</h2>
+            <p class="duffel-privacy-meta mb-0"><em>Last updated: April 2, 2026</em></p>
+          </div>
+          <div class="duffel-privacy-body dark-mode-text">
+            <p>This policy describes how the <strong>Duffel</strong> app (&ldquo;the app&rdquo;), developed by Karteikay Dhuper, handles information. The app is designed to run primarily <strong>on your device</strong>; it does not require you to create an account in the app.</p>
+
+            <h3>Information the app may use</h3>
+            <ul>
+              <li><strong>Locations you enter.</strong> Trip origin and destination are used with Apple’s <strong>MapKit</strong> and related services to geocode places, compute driving directions and distances, and build comparison context.</li>
+              <li><strong>Approximate device location (optional).</strong> If you allow it, the app may use your <strong>current location once</strong> to suggest a starting label for &ldquo;From&rdquo; and/or to fetch <strong>nearby weather</strong> for display on the home screen. You can deny location access and still type locations manually.</li>
+              <li><strong>Preferences you set.</strong> Values such as MPG, gas price, airport buffer, drive preferences, and trip priority may be stored <strong>locally on your device</strong> (e.g. UserDefaults) so the app remembers your choices between launches.</li>
+            </ul>
+
+            <h3>Network and third parties</h3>
+            <ul>
+              <li><strong>Apple.</strong> MapKit and system location services are subject to <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener noreferrer">Apple’s privacy policy</a>.</li>
+              <li><strong>Weather data.</strong> The app may request <strong>current conditions</strong> from a public weather API (e.g. Open-Meteo) using coordinates derived from your location or your trip: only what’s needed for that request.</li>
+              <li><strong>Optional EIA data.</strong> If configured, the app may request a <strong>U.S. average gas price</strong> from the U.S. Energy Information Administration (<a href="https://www.eia.gov" target="_blank" rel="noopener noreferrer">EIA</a>). An API key, if present, is stored in your project configuration, not on a Dhuper-operated server.</li>
+            </ul>
+            <p>The app does <strong>not</strong> sell your personal information. Duffel is not intended to host a social network or advertising profile on behalf of the developer based on app usage.</p>
+
+            <h3>Analytics and ads</h3>
+            <p>If analytics or advertising are added in a future version, this policy will be updated and, where required, additional consent or App Store disclosures will apply.</p>
+
+            <h3>Children</h3>
+            <p>The app is not directed at children under 13. If you believe we have inadvertently collected a child’s data, please contact us and we will take appropriate steps.</p>
+
+            <h3>Changes</h3>
+            <p>This policy may be updated when the app changes. The &ldquo;Last updated&rdquo; date at the top will reflect the latest revision.</p>
+
+            <h3>Contact</h3>
+            <p>Questions about this policy or Duffel: use the contact options on <a href="../index.html">kartydhpr.com</a> (e.g. LinkedIn or email when listed).</p>
+          </div>
+        </div>
+
+        <a href="../index.html#programming" class="duffel-back dark-mode-text" style="color: #1ce783;"><i class="fa-solid fa-arrow-left"></i> Back to Programming &amp; Projects</a>
+      </div>
+    </div>
+
+    <footer>
+      <div class="container-fluid footer">
+        <div class="row">
+          <div class="col-md-3"></div>
+          <div class="col-md-6">
+            <h1>Get in touch:</h1>
+            <a class="fa-brands fa-linkedin fa-3x" href="https://www.linkedin.com/in/kartydhuper/" target="_blank" rel="noopener noreferrer"></a>
+            <a class="fa-brands fa-github fa-3x" href="https://github.com/kartydhpr" target="_blank" rel="noopener noreferrer"></a>
+            <h6 style="padding-top: 1rem;">© 2026 Karteikay Dhuper · Duffel</h6>
+          </div>
+          <div class="col-md-3"></div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="../index.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>

@@ -27,6 +27,14 @@ let Particle = function(position) {
 }
 
 function setup() {
+  const boot = document.getElementById('sound-galaxy-boot')
+  if (boot) {
+    boot.classList.add('is-done')
+    setTimeout(function () {
+      boot.remove()
+    }, 400)
+  }
+
   createCanvas(windowWidth, windowHeight)
   noStroke()
 

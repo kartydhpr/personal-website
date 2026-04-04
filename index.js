@@ -18,7 +18,7 @@ const COLOR_CONFIG = {
     background: "white",
     text: "black",
     header: "#03e976",        // Green for headers
-    cardBackground: "#ffff"   // White for cards
+    cardBackground: "#ffffff"   // White for cards
   },
   // Shared Colors
   navBackground: "rgba(0, 255, 255, 0)", // Transparent cyan
@@ -129,6 +129,7 @@ function toggleDarkMode() {
     
     // Changing background color of card elements
     for (let card of cardElements) {
+      if (card.classList.contains("duffel-tile")) continue;
       card.style.background = colors.cardBackground;
     }
 
@@ -182,6 +183,7 @@ function toggleDarkMode() {
     }
     document.getElementById("darkModeBtn").setAttribute("aria-label", "Switch to dark mode");
     for (let card of cardElements) {
+      if (card.classList.contains("duffel-tile")) continue;
       card.style.background = colors.cardBackground;
     }
 
@@ -197,58 +199,190 @@ function toggleDarkMode() {
 const scrollProgressBar = document.getElementById("scroll-progress");
 
 function scrollProgress() {
+  if (!scrollProgressBar) return;
   const webpageHeight = document.body.scrollHeight;
   const distanceFromTop = document.documentElement.scrollTop;
   const windowheight = document.documentElement.clientHeight;
   const percentageScrolled =
     (distanceFromTop / (webpageHeight - windowheight)) * 100;
-
-  console.log(Math.round(percentageScrolled));
-
   scrollProgressBar.style.width = percentageScrolled + "%";
 }
 document.addEventListener("scroll", scrollProgress);
 
-// for fading in landing page hero
-// Add the 'show' class to the image after the page loads
-window.addEventListener('load', function() {
-  const elements = document.querySelectorAll('.fade-in');
-  elements.forEach(element => {
-    element.classList.add('show');
+function revealFadeAndSlideIn() {
+  document.querySelectorAll(".fade-in, .slide-in, .slide-up").forEach((el) => {
+    el.classList.add("show");
   });
-});
+}
 
-// for fading in each detail section on home page:
-// Function to handle intersection changes
-function handleIntersection(entries, observer) {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('show');
-      observer.unobserve(entry.target); // Stop observing once the effect is triggered
+function revealAllStaticSections() {
+  document.querySelectorAll(".details").forEach((el) => el.classList.add("show"));
+}
+
+function prefersReducedMotion() {
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+function wrapLazyMediaPlaceholders() {
+  function wrapImg(img, contextClass) {
+    if (!img || img.closest(".lazy-image-wrap")) return;
+    if (img.id === "albumCover") return;
+    if (img.closest(".navbar")) return;
+    if (img.closest("#landingPage") || img.classList.contains("profile-picture"))
+      return;
+    const parent = img.parentNode;
+    if (!parent) return;
+    const wrap = document.createElement("div");
+    wrap.className = `lazy-image-wrap lazy-image-wrap--gallery ${contextClass}`;
+    const sk = document.createElement("div");
+    sk.className = "skeleton skeleton--card-thumb";
+    sk.setAttribute("aria-hidden", "true");
+    parent.insertBefore(wrap, img);
+    wrap.appendChild(sk);
+    wrap.appendChild(img);
+    if (!img.hasAttribute("loading")) img.setAttribute("loading", "lazy");
+    if (!img.hasAttribute("decoding")) img.setAttribute("decoding", "async");
+  }
+
+  document
+    .querySelectorAll(".image-container > img")
+    .forEach((img) => wrapImg(img, "lazy-context-art"));
+  document
+    .querySelectorAll(".polaroid-frame > img")
+    .forEach((img) => wrapImg(img, "lazy-context-polaroid"));
+  document
+    .querySelectorAll("ul.cards > li > img")
+    .forEach((img) => wrapImg(img, "lazy-context-card"));
+  document
+    .querySelectorAll("main .row > .col-md-3 > img")
+    .forEach((img) => wrapImg(img, "lazy-context-publication"));
+  document.querySelectorAll("main img").forEach((img) => {
+    if (img.closest(".lazy-image-wrap")) return;
+    if (img.id === "albumCover") return;
+    if (img.closest(".navbar")) return;
+    wrapImg(img, "lazy-context-inline");
+  });
+}
+
+function initLottieSkeletonHosts() {
+  const failOpenMs = 8000;
+
+  document.querySelectorAll("lottie-player").forEach((player) => {
+    if (player.closest(".lottie-skeleton-host")) return;
+    const parent = player.parentNode;
+    if (!parent) return;
+    const host = document.createElement("div");
+    host.className = "lottie-skeleton-host lottie-context-motion";
+    const sk = document.createElement("div");
+    sk.className = "skeleton skeleton--lottie";
+    sk.setAttribute("aria-hidden", "true");
+    parent.insertBefore(host, player);
+    host.appendChild(sk);
+    host.appendChild(player);
+    let finished = false;
+    const done = () => {
+      if (finished) return;
+      finished = true;
+      host.classList.add("lottie-ready");
+    };
+
+    /* load / error: data ready — play: first frame actually running (reliable with autoplay) */
+    ["load", "ready", "error", "play", "data_ready"].forEach((evt) => {
+      player.addEventListener(evt, done, { once: true });
+    });
+
+    const tryInstanceReady = () => {
+      try {
+        if (typeof player.getLottie === "function" && player.getLottie()) {
+          done();
+          return true;
+        }
+      } catch (_) {
+        /* web component not upgraded yet */
+      }
+      return false;
+    };
+    if (!tryInstanceReady()) {
+      queueMicrotask(tryInstanceReady);
+    }
+    let pollLeft = 45;
+    const poll = () => {
+      if (finished) return;
+      if (tryInstanceReady()) return;
+      if (--pollLeft <= 0) return;
+      requestAnimationFrame(poll);
+    };
+    requestAnimationFrame(poll);
+
+    setTimeout(done, failOpenMs);
+  });
+}
+
+function initLazyImagePlaceholders() {
+  document.querySelectorAll(".lazy-image-wrap img").forEach((img) => {
+    const wrap = img.closest(".lazy-image-wrap");
+    if (!wrap) return;
+    const src = (img.getAttribute("src") || "").trim();
+    if (!src) {
+      wrap.classList.add("loaded");
+      return;
+    }
+    function markLoaded() {
+      wrap.classList.add("loaded");
+    }
+    if (img.complete && img.naturalHeight > 0) markLoaded();
+    else {
+      img.addEventListener("load", markLoaded, { once: true });
+      img.addEventListener("error", markLoaded, { once: true });
     }
   });
 }
-// Create an observer instance with a callback
-const observer = new IntersectionObserver(handleIntersection, { threshold: 0.2 });
-// Get all elements with the .details class and start observing them
-const sections = document.querySelectorAll('.details');
-sections.forEach(section => {
-  observer.observe(section);
+
+document.addEventListener("DOMContentLoaded", () => {
+  wrapLazyMediaPlaceholders();
+  initLottieSkeletonHosts();
+  initLazyImagePlaceholders();
+  if (prefersReducedMotion()) {
+    revealFadeAndSlideIn();
+    revealAllStaticSections();
+    document.querySelectorAll(".lottie-skeleton-host").forEach((h) =>
+      h.classList.add("lottie-ready")
+    );
+    return;
+  }
+  revealFadeAndSlideIn();
 });
 
-// Add the 'show' class to elements with the 'slide-in' class after the page loads
-window.addEventListener('load', function() {
-  const elements = document.querySelectorAll('.slide-up');
-  elements.forEach(element => {
-    element.classList.add('show');
+const detailsFallbackMs = 4500;
+let detailsFallbackTimer = setTimeout(() => {
+  revealAllStaticSections();
+}, detailsFallbackMs);
+
+window.addEventListener(
+  "load",
+  () => {
+    clearTimeout(detailsFallbackTimer);
+    revealFadeAndSlideIn();
+  },
+  { once: true }
+);
+
+function handleIntersection(entries, observer) {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("show");
+      observer.unobserve(entry.target);
+    }
   });
+}
+
+const sectionObserver = new IntersectionObserver(handleIntersection, {
+  threshold: 0.08,
+  rootMargin: "0px 0px 80px 0px",
 });
 
-window.addEventListener('load', function() {
-  const elements = document.querySelectorAll('.slide-in');
-  elements.forEach(element => {
-    element.classList.add('show');
-  });
+document.querySelectorAll(".details").forEach((section) => {
+  sectionObserver.observe(section);
 });
 
 // Multi-language typing animation
@@ -282,6 +416,7 @@ if (typewriterElement) {
     if (!isDeleting && currentCharIndex < currentText.length) {
       // Typing forward
       typewriterElement.textContent = currentText.substring(0, currentCharIndex + 1);
+      typewriterElement.closest(".hero-typewriter-wrap")?.classList.add("has-typewriter-text");
       currentCharIndex++;
       // Use variable speed for more natural feel
       const delay = getRandomDelay(baseTypingSpeed);
@@ -309,34 +444,59 @@ if (typewriterElement) {
   typeText();
 }
 
-// Make polaroid gallery draggable (desktop)
 const gallery = document.getElementById("polaroidGallery");
+if (gallery) {
+  let isDown = false;
+  let startX;
+  let scrollLeft;
 
-let isDown = false;
-let startX;
-let scrollLeft;
+  gallery.addEventListener("mousedown", (e) => {
+    isDown = true;
+    gallery.classList.add("active");
+    startX = e.pageX - gallery.offsetLeft;
+    scrollLeft = gallery.scrollLeft;
+  });
 
-gallery.addEventListener("mousedown", e => {
-  isDown = true;
-  gallery.classList.add("active");
-  startX = e.pageX - gallery.offsetLeft;
-  scrollLeft = gallery.scrollLeft;
-});
+  gallery.addEventListener("mouseleave", () => {
+    isDown = false;
+    gallery.classList.remove("active");
+  });
 
-gallery.addEventListener("mouseleave", () => {
-  isDown = false;
-  gallery.classList.remove("active");
-});
+  gallery.addEventListener("mouseup", () => {
+    isDown = false;
+    gallery.classList.remove("active");
+  });
 
-gallery.addEventListener("mouseup", () => {
-  isDown = false;
-  gallery.classList.remove("active");
-});
+  gallery.addEventListener("mousemove", (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - gallery.offsetLeft;
+    const walk = (x - startX) * 1.5;
+    gallery.scrollLeft = scrollLeft - walk;
+  });
 
-gallery.addEventListener("mousemove", e => {
-  if (!isDown) return;
-  e.preventDefault();
-  const x = e.pageX - gallery.offsetLeft;
-  const walk = (x - startX) * 1.5; // scroll speed
-  gallery.scrollLeft = scrollLeft - walk;
-});
+  function hideScrollHintOnce() {
+    gallery.classList.add("polaroid-gallery--interacted");
+    gallery.removeEventListener("scroll", onGalleryScroll);
+  }
+
+  function onGalleryScroll() {
+    if (gallery.scrollLeft > 6) hideScrollHintOnce();
+  }
+
+  function syncScrollHintToOverflow() {
+    if (gallery.scrollWidth <= gallery.clientWidth + 2) {
+      hideScrollHintOnce();
+    }
+  }
+
+  gallery.addEventListener("scroll", onGalleryScroll, { passive: true });
+  window.addEventListener("resize", syncScrollHintToOverflow);
+  window.addEventListener("load", syncScrollHintToOverflow, { once: true });
+
+  function scrollGalleryToStart() {
+    gallery.scrollLeft = 0;
+  }
+  scrollGalleryToStart();
+  window.addEventListener("load", scrollGalleryToStart, { once: true });
+}

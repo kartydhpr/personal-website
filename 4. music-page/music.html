@@ -58,7 +58,7 @@
           <div class="col-md-3"></div>
           <div class="col-md-6">
             <H1 class="header" id="anchor">Music and Hobbies</H1>
-            <lottie-player class = "musicAnimation" src="https://assets10.lottiefiles.com/packages/lf20_j4xgoyi2.json"  background="transparent"  speed="1"  style="width: 100%; height: 27rem;" loop autoplay></lottie-player>
+            <lottie-player class="musicAnimation" src="https://assets10.lottiefiles.com/packages/lf20_j4xgoyi2.json" background="transparent" speed="1" style="width: 100%; height: 27rem;" loop autoplay></lottie-player>
             <p class="dark-mode-text">This page is still a work in progress, stay tuned!</p>
           </div>
           <div class="col-md-3"></div>
@@ -66,9 +66,9 @@
       </div>
       </section>
 
-      <!-- Polaroid Photo Swipe Gallery -->
-<section class="polaroid-wrapper">
-  <div class="container-fluid">
+      <!-- Polaroid Photo Swipe Gallery (width matches .music-player-container) -->
+<section class="polaroid-wrapper polaroid-wrapper--music-rail">
+  <div class="polaroid-gallery-stack">
     <h2 class="gallery-title dark-mode-text">Live Shows</h2>
 
     <div class="polaroid-gallery" id="polaroidGallery">
@@ -87,8 +87,45 @@
         <span class="caption">Cascadia @ The Nest - March 30th 2024</span>
       </div>
 
+      <div class="polaroid-frame">
+        <img src="../public/images/band-pic.jpg" alt="band portrait">
+        <span class="caption">band portrait</span>
+      </div>
+
+      <div class="polaroid-frame">
+        <img src="../public/images/nest-9.21.24.jpg" alt="Cascadia @ The Nest - September 21st, 2024">
+        <span class="caption">Cascadia @ The Nest - September 21st, 2024</span>
+      </div>
+
+      <div class="polaroid-frame polaroid-frame--compact-photo">
+        <img src="../public/images/IMG_9466.jpg" alt="Taylor">
+        <span class="caption">Taylor</span>
+      </div>
+
+      <div class="polaroid-frame polaroid-frame--compact-photo">
+        <img src="../public/images/IMG_9468.jpg" alt="Dhruv">
+        <span class="caption">Dhruv</span>
+      </div>
+
+      <div class="polaroid-frame polaroid-frame--compact-photo">
+        <img src="../public/images/IMG_9471.jpg" alt="Ellie">
+        <span class="caption">Ellie</span>
+      </div>
+
+      <div class="polaroid-frame polaroid-frame--compact-photo">
+        <img src="../public/images/IMG_9470.jpg" alt="Karty">
+        <span class="caption">Karty</span>
+      </div>
+
       <!-- Add as many as you want -->
     </div>
+    <p class="polaroid-gallery-scroll-hint" aria-hidden="true">
+      <span class="polaroid-gallery-scroll-hint__track">
+        <span class="polaroid-gallery-scroll-hint__arrow" aria-hidden="true">›</span>
+        <span class="polaroid-gallery-scroll-hint__arrow polaroid-gallery-scroll-hint__arrow--delayed" aria-hidden="true">›</span>
+      </span>
+      <span class="polaroid-gallery-scroll-hint__text">Swipe or scroll for more photos</span>
+    </p>
   </div>
 </section>
 

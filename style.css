@@ -76,6 +76,370 @@ body, #dark-mode-bg {
   }
 }
 
+@keyframes skeleton-shimmer {
+  0% {
+    transform: translate3d(-160%, 0, 0);
+  }
+  100% {
+    transform: translate3d(360%, 0, 0);
+  }
+}
+
+/*
+ * Skeleton theme: defaults on :root; light mode when #dark-mode-bg uses white
+ * (inline style from toggleDarkMode in index.js).
+ */
+:root {
+  --sk-base: #131315;
+  --sk-frame: #101012;
+  --sk-border: rgba(255, 255, 255, 0.07);
+  --sk-shimmer-a: rgba(255, 255, 255, 0);
+  --sk-shimmer-b: rgba(255, 255, 255, 0.028);
+  --sk-shimmer-c: rgba(255, 255, 255, 0.052);
+  --sk-shimmer-d: rgba(255, 255, 255, 0.088);
+}
+
+#dark-mode-bg[style*="white"],
+#dark-mode-bg[style*="rgb(255, 255, 255)"] {
+  --sk-base: #e4e4e8;
+  --sk-frame: #dcdce2;
+  --sk-border: rgba(15, 23, 42, 0.09);
+  --sk-shimmer-a: rgba(255, 255, 255, 0);
+  --sk-shimmer-b: rgba(255, 255, 255, 0.35);
+  --sk-shimmer-c: rgba(255, 255, 255, 0.72);
+  --sk-shimmer-d: rgba(255, 255, 255, 0.95);
+}
+
+/* Loading placeholders: themed base + angled shimmer band */
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--sk-base);
+}
+
+.skeleton:not(.skeleton--card-thumb):not(.skeleton--lottie)::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 38%;
+  max-width: 420px;
+  background: linear-gradient(
+    103deg,
+    var(--sk-shimmer-a) 0%,
+    var(--sk-shimmer-a) 28%,
+    var(--sk-shimmer-b) 42%,
+    var(--sk-shimmer-c) 48%,
+    var(--sk-shimmer-d) 50%,
+    var(--sk-shimmer-c) 52%,
+    var(--sk-shimmer-b) 58%,
+    var(--sk-shimmer-a) 72%,
+    var(--sk-shimmer-a) 100%
+  );
+  opacity: 0.92;
+  transform: translate3d(-100%, 0, 0);
+  will-change: transform;
+  animation: skeleton-shimmer 1.9s cubic-bezier(0.62, 0.04, 0.34, 1) infinite;
+}
+
+.hero-typewriter-wrap {
+  position: relative;
+  min-height: clamp(2.75rem, 8vw, 4.25rem);
+}
+
+.typewriter-skeleton {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0;
+  width: min(20rem, 88vw);
+  height: clamp(2.25rem, 5.5vw, 3.5rem);
+  border-radius: 12px;
+  pointer-events: none;
+  overflow: hidden;
+  background-color: var(--sk-base);
+  transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.typewriter-skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 38%;
+  max-width: 320px;
+  background: linear-gradient(
+    103deg,
+    var(--sk-shimmer-a) 0%,
+    var(--sk-shimmer-a) 28%,
+    var(--sk-shimmer-b) 42%,
+    var(--sk-shimmer-c) 48%,
+    var(--sk-shimmer-d) 50%,
+    var(--sk-shimmer-c) 52%,
+    var(--sk-shimmer-b) 58%,
+    var(--sk-shimmer-a) 72%,
+    var(--sk-shimmer-a) 100%
+  );
+  opacity: 0.92;
+  transform: translate3d(-100%, 0, 0);
+  will-change: transform;
+  animation: skeleton-shimmer 1.9s cubic-bezier(0.62, 0.04, 0.34, 1) infinite;
+  animation-delay: 0.12s;
+}
+
+.hero-typewriter-wrap .typewriter {
+  position: relative;
+  z-index: 1;
+  min-height: clamp(2.25rem, 5.5vw, 3.5rem);
+}
+
+.hero-typewriter-wrap.has-typewriter-text .typewriter-skeleton {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.lazy-image-wrap {
+  position: relative;
+  width: 100%;
+  min-height: 11rem;
+  border-radius: 12px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.lazy-image-wrap .skeleton--card-thumb {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  overflow: hidden;
+  background-color: var(--sk-base);
+}
+
+.lazy-image-wrap:not(.loaded) .skeleton--card-thumb::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 38%;
+  max-width: 420px;
+  background: linear-gradient(
+    103deg,
+    var(--sk-shimmer-a) 0%,
+    var(--sk-shimmer-a) 28%,
+    var(--sk-shimmer-b) 42%,
+    var(--sk-shimmer-c) 48%,
+    var(--sk-shimmer-d) 50%,
+    var(--sk-shimmer-c) 52%,
+    var(--sk-shimmer-b) 58%,
+    var(--sk-shimmer-a) 72%,
+    var(--sk-shimmer-a) 100%
+  );
+  opacity: 0.92;
+  transform: translate3d(-100%, 0, 0);
+  will-change: transform;
+  animation: skeleton-shimmer 1.9s cubic-bezier(0.62, 0.04, 0.34, 1) infinite;
+}
+
+.lazy-image-wrap img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  opacity: 0;
+  transition: opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.lazy-image-wrap.loaded img {
+  opacity: 1;
+}
+
+.lazy-image-wrap.loaded .skeleton--card-thumb {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.lazy-image-wrap--gallery {
+  min-height: 7.5rem;
+  width: 100%;
+}
+
+.lazy-image-wrap--gallery.loaded {
+  min-height: 0;
+}
+
+.column .lazy-image-wrap--gallery {
+  max-width: 100%;
+}
+
+/* Polaroid photo area — keeps each image’s natural aspect ratio (no crop) */
+.polaroid-frame .lazy-image-wrap--gallery {
+  position: relative;
+  width: 100%;
+  min-height: 0;
+  border-radius: 3px;
+  overflow: hidden;
+  background: #0a0a0a;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+.polaroid-frame .lazy-image-wrap--gallery:not(.loaded) {
+  min-height: 10rem;
+}
+
+.polaroid-frame .lazy-image-wrap--gallery.loaded {
+  min-height: 0;
+}
+
+.polaroid-frame .lazy-image-wrap img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border-radius: 0;
+}
+
+.gallery .image-container {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin-top: 8px;
+}
+
+.gallery .lazy-image-wrap--gallery {
+  max-width: 100%;
+  border-radius: 12px;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* Frame only while placeholder visible — no outline after the image loads */
+.gallery .lazy-image-wrap--gallery:not(.loaded) {
+  min-height: clamp(11rem, 34vw, 24rem);
+  aspect-ratio: 3 / 4;
+  border: 1px solid var(--sk-border);
+  background-color: var(--sk-frame);
+}
+
+.gallery .lazy-image-wrap--gallery.loaded {
+  min-height: 0;
+  aspect-ratio: auto;
+}
+
+.lottie-skeleton-host {
+  position: relative;
+  display: block;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  min-height: 14rem;
+  border-radius: 12px;
+  border: none;
+  background: transparent;
+  overflow: hidden;
+}
+
+.lottie-skeleton-host:not(.lottie-ready) {
+  border: 1px solid var(--sk-border);
+  background-color: var(--sk-frame);
+}
+
+.lottie-skeleton-host.lottie-ready {
+  min-height: 0;
+  border: none;
+  background: transparent;
+}
+
+.lottie-context-motion:not(.lottie-ready) .skeleton--lottie {
+  position: absolute;
+  inset: 0;
+  border-radius: 11px;
+  min-height: 12rem;
+  overflow: hidden;
+  background-color: var(--sk-base);
+}
+
+.lottie-context-motion:not(.lottie-ready) .skeleton--lottie::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 38%;
+  max-width: 420px;
+  background: linear-gradient(
+    103deg,
+    var(--sk-shimmer-a) 0%,
+    var(--sk-shimmer-a) 28%,
+    var(--sk-shimmer-b) 42%,
+    var(--sk-shimmer-c) 48%,
+    var(--sk-shimmer-d) 50%,
+    var(--sk-shimmer-c) 52%,
+    var(--sk-shimmer-b) 58%,
+    var(--sk-shimmer-a) 72%,
+    var(--sk-shimmer-a) 100%
+  );
+  opacity: 0.92;
+  transform: translate3d(-100%, 0, 0);
+  will-change: transform;
+  animation: skeleton-shimmer 1.9s cubic-bezier(0.62, 0.04, 0.34, 1) infinite;
+  animation-delay: 0.2s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton:not(.skeleton--card-thumb):not(.skeleton--lottie)::after,
+  .typewriter-skeleton::after,
+  .lazy-image-wrap:not(.loaded) .skeleton--card-thumb::after,
+  .lottie-context-motion:not(.lottie-ready) .skeleton--lottie::after {
+    animation: none !important;
+  }
+}
+
+.lottie-skeleton-host lottie-player {
+  position: relative;
+  z-index: 1;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0;
+  transition: opacity 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.lottie-skeleton-host.lottie-ready lottie-player {
+  opacity: 1;
+}
+
+.lottie-skeleton-host.lottie-ready .skeleton--lottie {
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.sound-galaxy-boot {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--sk-frame);
+  pointer-events: none;
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.sound-galaxy-boot.is-done {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.sound-galaxy-boot__panel {
+  width: min(88vw, 400px);
+  height: min(52vh, 248px);
+  border-radius: 12px;
+}
+
 .hstack{
   display: flex;
 }
@@ -85,6 +449,99 @@ body, #dark-mode-bg {
   top: 0;
   width: 100%;
   z-index: 20;
+}
+
+/* Navbar: avoid .centered on links (absolute positioning broke Bootstrap collapse on narrow screens) */
+#dark-mode-nav.navbar {
+  row-gap: 0;
+}
+
+@media (max-width: 991.98px) {
+  #dark-mode-nav .navbar-brand-cluster {
+    order: 1;
+    max-width: calc(100% - 7.5rem);
+  }
+
+  #dark-mode-nav .navbar-theme-btn {
+    order: 2;
+    padding: 6px 11px;
+    font-size: 0.9rem;
+    gap: 0;
+  }
+
+  #dark-mode-nav .navbar-theme-btn #darkModeText {
+    display: none;
+  }
+
+  #dark-mode-nav .navbar-toggler {
+    order: 3;
+  }
+
+  #dark-mode-nav .nav-collapse-panel {
+    order: 4;
+    flex-basis: 100%;
+    align-items: stretch !important;
+  }
+
+  /* Single card + hairline dividers (desktop “pill segments” borders stack badly vertically) */
+  #dark-mode-nav .nav-collapse-panel .nav-island-parent {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    margin-top: 0.5rem;
+    padding: 0;
+    border: 2px solid #ff6630;
+    border-radius: 14px;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, 0.65);
+    flex-wrap: nowrap;
+  }
+
+  #dark-mode-nav .nav-collapse-panel .nav-island-parent .nav-link {
+    text-align: center;
+    padding: 0.85rem 1rem !important;
+    margin: 0;
+    border: none !important;
+    border-radius: 0 !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+  }
+
+  #dark-mode-nav .nav-collapse-panel .nav-island-parent .nav-link:not(:last-child) {
+    border-bottom: 1px solid rgba(255, 102, 48, 0.5) !important;
+  }
+}
+
+@media (min-width: 992px) {
+  /* True viewport-centered nav pill; flex “middle” was off-center vs logo/theme widths */
+  #dark-mode-nav {
+    justify-content: space-between;
+  }
+
+  #dark-mode-nav .navbar-brand-cluster {
+    order: 1;
+    position: relative;
+    z-index: 2;
+  }
+
+  #dark-mode-nav .nav-collapse-panel {
+    order: 2;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: auto !important;
+    max-width: min(52rem, calc(100vw - 20rem));
+    flex: none !important;
+    margin: 0;
+    z-index: 1;
+  }
+
+  #dark-mode-nav .navbar-theme-btn {
+    order: 3;
+    position: relative;
+    z-index: 2;
+  }
 }
 
 .nav-island{
@@ -199,6 +656,8 @@ body, #dark-mode-bg {
   justify-content: center;
   text-align: center;
   align-items: center;
+  position: relative;
+  z-index: 1;
 }
 
 .centered {
@@ -209,66 +668,223 @@ body, #dark-mode-bg {
   transform: translate(-50%, -50%);
 }
 
-.arrows {
-  width: 60px;
-  height: 72px;
+/*
+ * Landing hero: center icon arc → last subtitle in the space below the fixed navbar
+ * (avoid 50%/50% absolute center on full viewport — that ignores nav and hugs the top).
+ */
+#landingPage.home-hero {
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: visible;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: max(3.85rem, calc(env(safe-area-inset-top, 0px) + 3.2rem)) 1rem 3.75rem;
+  box-sizing: border-box;
+}
+
+/* Stack orbit, typewriter, and subtitle on one vertical axis (inline-block was sitting typewriter beside the portrait on wide screens). */
+#landingPage .hero.centered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: min(900px, 100%);
+  position: relative;
+  top: auto;
+  left: auto;
+  margin-right: 0;
+  transform: translateY(clamp(-1.35rem, -1.8vh, -0.4rem));
+  margin-top: 0;
+}
+
+/*
+ * Outer orbit wrapper: landing-only top pad for hero vertical balance.
+ * Inner (.hero-avatar-orbit-inner) is the positioning context for the ring so
+ * 50%/50% stays concentric with the portrait (padding on outer was skewing the arc).
+ */
+#landingPage .hero-avatar-orbit {
+  padding-top: min(3.5rem, 9vmin);
+}
+
+.hero-avatar-orbit {
+  display: inline-block;
+  line-height: 0;
+}
+
+.hero-avatar-orbit-inner {
+  position: relative;
+  display: inline-block;
+  line-height: 0;
+}
+
+.hero-avatar-orbit-inner > a {
+  position: relative;
+  z-index: 2;
+  display: inline-block;
+}
+
+.home-orbit-ring {
+  --orbit-r: min(13.5rem, 34vmin);
+  --orbit-n: 11;
   position: absolute;
   left: 50%;
-  margin-left: -30px;
-  bottom: 20px;
+  top: 50%;
+  width: 150%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 1;
+  overflow: visible;
 }
 
-.arrows path {
-  stroke: #1ce783;
-  fill: transparent;
-  stroke-width: 3px;
-  animation: arrow 2s infinite;
-  -webkit-animation: arrow 1 infinite;
+/* Static arc of icons across the top of the portrait */
+.home-orbit-icon {
+  --orbit-n: 11;
+  --orbit-r: inherit;
+  --orbit-angle: calc(-70deg + var(--k) * 14deg);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  font-size: clamp(0.88rem, 2.2vmin, 1.35rem);
+  opacity: 0.95;
+  color: rgba(255, 102, 48, 0.5);
+  /* Evenly spaced along a ~140deg arc centred above the avatar (from top-left to top-right: -70deg–+70deg). */
+  transform: translate(-50%, -50%)
+    rotate(var(--orbit-angle))
+    translateY(calc(-1 * var(--orbit-r)));
 }
 
-@keyframes arrow {
-  0% {
-    opacity: 0;
+/* Only bounce when the hero image/orbit is hovered or focused. */
+.hero-avatar-orbit:hover .home-orbit-icon,
+.hero-avatar-orbit:focus-within .home-orbit-icon {
+  animation: home-orbit-bounce 2s ease-in-out infinite;
+  animation-delay: calc(var(--k) * 0.12s);
+}
+
+.home-orbit-icon:nth-child(even) {
+  color: rgba(28, 231, 131, 0.44);
+}
+
+#landingPage.home-hero:not(.bg-dark) .home-orbit-icon:nth-child(odd) {
+  color: rgba(255, 102, 48, 0.55);
+}
+
+#landingPage.home-hero:not(.bg-dark) .home-orbit-icon:nth-child(even) {
+  color: rgba(28, 231, 131, 0.48);
+}
+
+@keyframes home-orbit-spin {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
   }
-  40% {
-    opacity: 1;
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
   }
-  80% {
-    opacity: 0;
-  }
+}
+
+/* Gentle radial “bounce” on the fixed arc; each icon is delayed by index so the motion travels as a wave. */
+@keyframes home-orbit-bounce {
+  0%,
+  60%,
   100% {
-    opacity: 0;
+    transform: translate(-50%, -50%)
+      rotate(var(--orbit-angle))
+      translateY(calc(-1 * var(--orbit-r)));
+  }
+  30% {
+    transform: translate(-50%, -50%)
+      rotate(var(--orbit-angle))
+      translateY(calc(-1.05 * var(--orbit-r)));
   }
 }
 
-@-webkit-keyframes arrow /*Safari and Chrome*/ {
-  0% {
-    opacity: 0;
-  }
-  40% {
-    opacity: 1;
-  }
-  80% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 0;
+@media (prefers-reduced-motion: reduce) {
+  .home-orbit-ring,
+  .home-orbit-icon {
+    will-change: auto;
   }
 }
 
-.arrows path.a1 {
-  animation-delay: -1s;
-  -webkit-animation-delay: -1s; /* Safari and Chrome */
+#landingPage .hero.centered > .sub-title {
+  position: relative;
+  z-index: 2;
+  align-self: stretch;
+  max-width: 100%;
 }
 
-.arrows path.a2 {
-  animation-delay: -0.5s;
-  -webkit-animation-delay: -0.5s; /* Safari and Chrome */
+/* Simple wrap so the typewriter can sit under the avatar with no special background. */
+#landingPage .hero-typewriter-wrap {
+  position: relative;
+  z-index: 2;
+  display: inline-block;
+  margin: 0.15rem auto;
 }
 
-.arrows path.a3 {
-  animation-delay: 0s;
-  -webkit-animation-delay: 0s; /* Safari and Chrome */
+/* Ultra-minimal scroll cue: arrow with connected tail */
+.scroll-pill {
+  position: absolute;
+  left: 50%;
+  bottom: 22px;
+  transform: translateX(-50%);
+  display: inline-block;
+  width: 18px;
+  height: 30px;
+  text-decoration: none;
+  z-index: 2;
+  transition: opacity 0.18s ease-out;
+}
+
+.scroll-pill-icon {
+  /* visually hidden; we draw the cue via ::before/::after */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.scroll-pill::before,
+.scroll-pill::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Tail */
+.scroll-pill::before {
+  top: 4px;
+  width: 2px;
+  height: 16px;
+  border-radius: 999px;
+  background-color: rgba(28, 231, 131, 0.8);
+}
+
+/* Arrow head, touching the tail */
+.scroll-pill::after {
+  bottom: 4px;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid #1ce783;
+}
+
+.scroll-pill:hover,
+.scroll-pill:focus-visible {
+  outline: none;
+  opacity: 0.9;
+}
+
+.scroll-pill:active {
+  opacity: 0.75;
 }
 
 .bg-dark {
@@ -296,8 +912,7 @@ body, #dark-mode-bg {
   }
 }
 
-@keyframes 
-ateBG {
+@keyframes AnimateBG {
   0% {
     background-position: 0% 50%;
   }
@@ -451,6 +1066,37 @@ ateBG {
   line-height: 1.5em;
   transition: color 0.5s ease-in-out;
 }
+
+.section-heading-with-icon {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.45em;
+}
+
+h1.header.section-heading-with-icon {
+  justify-content: center;
+}
+
+h2.section-heading-with-icon {
+  justify-content: flex-start;
+}
+
+.section-heading-icon {
+  color: #ff6630;
+  line-height: 1;
+  opacity: 0.95;
+  flex-shrink: 0;
+}
+
+h1.header .section-heading-icon {
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
+}
+
+h2 .section-heading-icon {
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+}
+
 .sub-title {
   /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
   color: black;
@@ -458,6 +1104,28 @@ ateBG {
   /* box-shadow: 0px 20px 10px #ccc;
 	background-color: rgba(245, 154, 36, 0.461); */
   transition: color 0.5s ease-in-out;
+}
+
+/* Landing hero — mid scale between full-size globals and the tighter pass */
+#landingPage .profile-picture {
+  width: min(22.75rem, 87vw);
+  border-width: 0.55rem;
+  box-shadow: 0 0 64px #1ce783;
+}
+
+#landingPage .typewriter {
+  font-size: clamp(1.75rem, 4.05vw, 4.25rem);
+  line-height: 1.32;
+}
+
+#landingPage .sub-title h3 {
+  font-size: clamp(1.1rem, 2.5vw, 1.38rem);
+  line-height: 1.55;
+}
+
+/* Landing hero scroll pill tweaks */
+#landingPage .scroll-pill {
+  bottom: 20px;
 }
 
 .details {
@@ -720,6 +1388,13 @@ hr{
     border: 0.5rem solid rgba(90, 90, 90, 0.285);
     border-radius: 10px;
   }
+
+  /* Lazy-loaded gallery: avoid double frame (wrapper + legacy .column img border) */
+  .gallery .column .lazy-image-wrap img {
+    margin-top: 0;
+    border: none;
+    border-radius: 12px;
+  }
   
   /* Responsive layout - makes a two column-layout instead of four columns */
   @media screen and (max-width: 800px) {
@@ -783,43 +1458,56 @@ hr{
 }
 
 .polaroid-frame {
-  background: white;
+  background: #f6f6f4;
   padding: 12px 12px 50px 12px; /* Extra padding at bottom for polaroid effect */
-  border-radius: 2px;
-  box-shadow: 
-    0 4px 8px rgba(0, 0, 0, 0.06),
-    0 10px 24px rgba(0, 0, 0, 0.08),
-    0 20px 48px rgba(0, 0, 0, 0.05);
+  border-radius: 3px;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.65) inset,
+    0 4px 12px rgba(0, 0, 0, 0.07),
+    0 16px 40px rgba(0, 0, 0, 0.09);
   display: block;
   position: relative;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.35s cubic-bezier(0.34, 1.2, 0.64, 1), box-shadow 0.35s ease;
   width: 100%;
 }
 
 .polaroid-frame::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 38px; /* Bottom section of polaroid */
-  background: white;
-  border-radius: 0 0 2px 2px;
+  height: 38px;
+  background: linear-gradient(to bottom, #f0f0ee 0%, #f8f8f6 100%);
+  border-radius: 0 0 3px 3px;
+  z-index: 0;
+  pointer-events: none;
 }
 
-.polaroid-frame img {
+.polaroid-frame .caption {
+  position: relative;
+  z-index: 1;
+  display: block;
+  margin-top: 0.65rem;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+}
+
+/* Direct img (before / without lazy wrapper) */
+.polaroid-frame > img {
   display: block;
   width: 100%;
+  max-width: 100%;
   height: auto;
-  border-radius: 1px;
+  border-radius: 3px;
 }
 
 .polaroid-frame:hover {
-  transform: translateY(-5px);
-  box-shadow: 
-    0 6px 12px rgba(0, 0, 0, 0.08),
-    0 15px 36px rgba(0, 0, 0, 0.1),
-    0 25px 60px rgba(0, 0, 0, 0.08);
+  transform: translateY(-6px);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.65) inset,
+    0 8px 20px rgba(0, 0, 0, 0.1),
+    0 24px 50px rgba(0, 0, 0, 0.12);
 }
 
 /* =====================================
@@ -1631,16 +2319,191 @@ nav.navbar-light ~ main .song-item-artist { color: #666666; }
   font-weight: 700;
 }
 
-/* Centered + Responsive Horizontal Scroll */
+/* Horizontal scroll — start at first polaroid (avoid centered flex overflow) */
 .polaroid-gallery {
   display: flex;
-  justify-content: center;              /* Center children when they fit */
+  justify-content: flex-start;
+  align-items: center;
   gap: 2rem;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  padding: 2rem 1rem;
+  scroll-padding-inline: 0;
+  padding: 1.25rem 0 1rem;
   -webkit-overflow-scrolling: touch;
   width: 100%;
+}
+
+/* Same horizontal rhythm as .music-player-section + .music-player-container (1400px rail) */
+.polaroid-wrapper.polaroid-wrapper--music-rail {
+  width: 100%;
+  max-width: none;
+  margin: 0 auto;
+  padding: 60px 20px 48px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.polaroid-wrapper.polaroid-wrapper--music-rail .polaroid-gallery-stack {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.polaroid-wrapper.polaroid-wrapper--music-rail .gallery-title {
+  margin-bottom: 0.35rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+
+.polaroid-wrapper:has(.polaroid-gallery) .polaroid-frame .caption {
+  color: #252220;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+@keyframes polaroid-scroll-hint {
+  0%,
+  100% {
+    transform: translateX(0);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translateX(10px);
+    opacity: 1;
+  }
+}
+
+.polaroid-gallery-scroll-hint {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem 0.65rem;
+  margin: 0.35rem 0 0;
+  padding: 0;
+  font-size: 0.8125rem;
+  line-height: 1.3;
+  color: rgba(24, 24, 27, 0.45);
+  user-select: none;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.polaroid-gallery-scroll-hint__track {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  letter-spacing: -0.15em;
+  animation: polaroid-scroll-hint 2.1s ease-in-out infinite;
+}
+
+.polaroid-gallery-scroll-hint__arrow {
+  display: inline-block;
+  font-size: 1.35rem;
+  font-weight: 300;
+  line-height: 1;
+  opacity: 0.85;
+}
+
+.polaroid-gallery-scroll-hint__arrow--delayed {
+  opacity: 0.55;
+  margin-left: -0.08em;
+}
+
+#dark-mode-bg:is([style*="black"], [style*="rgb(0, 0, 0)"])
+  .polaroid-gallery-scroll-hint {
+  color: rgba(244, 244, 245, 0.45);
+}
+
+.polaroid-gallery--interacted + .polaroid-gallery-scroll-hint {
+  opacity: 0;
+  visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .polaroid-gallery-scroll-hint__track {
+    animation: none;
+    opacity: 0.85;
+    transform: translateX(4px);
+  }
+}
+
+.polaroid-gallery > .polaroid-frame {
+  flex: 0 0 auto;
+  width: fit-content;
+  max-width: min(92vw, 520px);
+  scroll-snap-align: start;
+  transform-origin: 50% 90%;
+  transition:
+    transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1),
+    box-shadow 0.35s ease,
+    z-index 0s linear;
+}
+
+.polaroid-gallery > .polaroid-frame:nth-child(3n + 1) {
+  transform: rotate(-1.4deg) translateY(4px);
+}
+
+.polaroid-gallery > .polaroid-frame:nth-child(3n + 2) {
+  transform: rotate(1.4deg) translateY(-6px);
+}
+
+.polaroid-gallery > .polaroid-frame:nth-child(3n) {
+  transform: rotate(-0.9deg) translateY(3px);
+}
+
+.polaroid-gallery > .polaroid-frame:hover {
+  transform: rotate(0deg) translateY(-10px) scale(1.02);
+  z-index: 4;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.65) inset,
+    0 10px 24px rgba(0, 0, 0, 0.12),
+    0 28px 48px rgba(0, 0, 0, 0.14);
+}
+
+#dark-mode-bg:is([style*="black"], [style*="rgb(0, 0, 0)"])
+  .polaroid-gallery
+  > .polaroid-frame:hover {
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.65) inset,
+    0 12px 28px rgba(0, 0, 0, 0.4),
+    0 32px 56px rgba(0, 0, 0, 0.35);
+}
+
+/* Shrink-to-photo layout: intrinsic aspect ratio, max print width */
+.polaroid-gallery > .polaroid-frame .lazy-image-wrap--gallery {
+  width: auto;
+  max-width: min(92vw, 520px);
+}
+
+.polaroid-gallery > .polaroid-frame .lazy-image-wrap--gallery:not(.loaded) {
+  min-width: min(72vw, 280px);
+  min-height: 12rem;
+}
+
+.polaroid-gallery > .polaroid-frame .lazy-image-wrap img {
+  width: auto;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Taller originals → scale down so overall polaroid height matches the rest */
+.polaroid-gallery
+  > .polaroid-frame.polaroid-frame--compact-photo
+  .lazy-image-wrap
+  img {
+  max-height: clamp(220px, 34vw, 300px);
+  width: auto;
+  max-width: 100%;
+  height: auto;
+}
+
+.polaroid-gallery > .polaroid-frame.polaroid-frame--compact-photo > img {
+  max-height: clamp(220px, 34vw, 300px);
+  width: auto;
+  max-width: 100%;
+  height: auto;
 }
 
 /* Hide scrollbar */

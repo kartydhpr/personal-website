@@ -18,40 +18,73 @@
   </head>
   <body id="dark-mode-bg">
     <!-- Navigation Bar Code-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" id="dark-mode-nav"> 
-      <a class="navbar-brand">
-        <div class="logo-image">
-              <img src="public/images/logo.png" class="img-fluid">
-        </div>
-      </a>
-      <a class="navbar-brand" href="#">Karteikay Dhuper</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light align-items-center flex-wrap" id="dark-mode-nav">
+      <div class="navbar-brand-cluster d-flex align-items-center mr-auto min-w-0">
+        <a class="navbar-brand mb-0 py-0" href="#">
+          <div class="logo-image">
+            <img src="public/images/logo.png" class="img-fluid" alt="">
+          </div>
+        </a>
+        <a class="navbar-brand mb-0 py-0 text-truncate" href="#">Karteikay Dhuper</a>
+      </div>
+      <button
+        class="lightSwitchButton hover-btn navbar-theme-btn flex-shrink-0"
+        type="button"
+        id="darkModeBtn"
+        aria-label="Switch light or dark mode"
+      >
+        <i class="fa-solid fa-moon" id="darkModeIcon"></i>
+        <span id="darkModeText">Dark Mode</span>
+      </button>
+      <button
+        class="navbar-toggler flex-shrink-0 d-lg-none"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse justify-content-center" id="navbarNavAltMarkup">
-        <div class="nav-island-parent centered">
+      <div class="collapse navbar-collapse justify-content-lg-center nav-collapse-panel" id="navbarNavAltMarkup">
+        <div class="nav-island-parent">
           <a class="nav-item nav-link nav-island-left" href="#programming">Programming</a>
           <a class="nav-item nav-link nav-island" href="#about">About</a>
           <a class="nav-item nav-link nav-island" href="#art&design">Art & Design</a>
           <a class="nav-item nav-link nav-island-right" href="#music">Music</a>
         </div>
       </div>
-      <button class="lightSwitchButton hover-btn" type="button" id="darkModeBtn" aria-label="Switch to light mode">
-        <i class="fa-solid fa-moon" id="darkModeIcon"></i>
-        <span id="darkModeText">Dark Mode</span>
-      </button>
       <div class="scroll-progress" id="scroll-progress"></div>
     </nav>
     
     <main>
     <!--Website landing page-->
       <section>  
-          <div id="landingPage" style="height: 100vh;">
+          <div id="landingPage" class="home-hero">
             <div class = "hero centered">
-              <a href="#programming">
-                <img src="public/images/camprof.jpeg" class = "profile-picture fade-in">
-              </a>
-              <div>
+              <div class="hero-avatar-orbit">
+                <div class="hero-avatar-orbit-inner">
+                  <div class="home-orbit-ring" aria-hidden="true">
+                    <i class="fa-solid fa-code home-orbit-icon" style="--k: 0"></i>
+                    <i class="fa-solid fa-palette home-orbit-icon" style="--k: 1"></i>
+                    <i class="fa-solid fa-laptop-code home-orbit-icon" style="--k: 2"></i>
+                    <i class="fa-solid fa-headphones home-orbit-icon" style="--k: 3"></i>
+                    <i class="fa-solid fa-gamepad home-orbit-icon" style="--k: 4"></i>
+                    <i class="fa-solid fa-bicycle home-orbit-icon" style="--k: 5"></i>
+                    <i class="fa-solid fa-person-hiking home-orbit-icon" style="--k: 6"></i>
+                    <i class="fa-solid fa-camera home-orbit-icon" style="--k: 7"></i>
+                    <i class="fa-solid fa-mountain home-orbit-icon" style="--k: 8"></i>
+                    <i class="fa-solid fa-plane home-orbit-icon" style="--k: 9"></i>
+                    <i class="fa-solid fa-language home-orbit-icon" style="--k: 10"></i>
+                  </div>
+                  <a href="#programming">
+                    <img src="public/images/camprof.jpeg" class = "profile-picture fade-in">
+                  </a>
+                </div>
+              </div>
+              <div class="hero-typewriter-wrap">
+                <span class="typewriter-skeleton" aria-hidden="true"></span>
                 <h1 class = "typewriter fade-in" id="typewriter-text"></h1>
               </div>
               <div class = "sub-title dark-mode-text fade-in"> 
@@ -60,12 +93,9 @@
                 <h3>Feel free to look around! </h3>
               </div>
             </div>
-            <a href="#programming">
-              <svg class="arrows fade-in">
-                <path class="a1" d="M0 0 L30 32 L60 0"></path>
-                <path class="a2" d="M0 20 L30 52 L60 20"></path>
-                <path class="a3" d="M0 40 L30 72 L60 40"></path>
-              </svg>
+            <a href="#programming" class="scroll-pill fade-in">
+              <span class="scroll-pill-icon" aria-hidden="true">⌄</span>
+              <span class="sr-only">Scroll to programming section</span>
             </a>  
         </div>
       </section>  
@@ -76,7 +106,7 @@
           <div class = "row">
             <div class="col-md-3"></div>
             <div class="col-md-6">
-              <H1 class="header" id="anchor">Programming and Projects</H1>
+              <H1 class="header section-heading-with-icon" id="anchor"><i class="fa-solid fa-code section-heading-icon" aria-hidden="true"></i><span>Programming and Projects</span></H1>
               <lottie-player class = "programmingAnimation" src="https://lottie.host/41d7f969-9cb9-4fb5-bbc7-03d42ca3a5d5/2Lz2AbW4MP.json"  background="transparent"  speed="1"  style="width: 20rem ; height: 20rem;"  loop  autoplay></lottie-player>
               <p class="dark-mode-text">Some of my technical interests include Human Computer Interaction, Full Stack Web App Development, Augmented/Virtual Reality, Machine Learning, and Game Development. My passion for <strong>innovative technology</strong> and <strong>impactful art</strong> intersect to fuel my interest in interactive entertaintment.</p>
               <p class="dark-mode-text" style="margin-top: 5%;">Outside of class, I like to tinker with cutting-edge tools and technologies like Unreal Engine 5, Blender, Xcode, IntellijIDEA, and VS code. I'm an experienced back-end programmer in <strong>Java, Python, C#, and SQL</strong>. As well as a proven front-end developer using <strong>HTML5, CSS3, and Javascript</strong> - with exposure to the MERN and .NET stack. </p>
@@ -97,7 +127,7 @@
             <div class = "row">
               <div class="col-md-3"></div>
               <div class="col-md-6">
-                <H1 class="header" id="anchor">Programming and Projects</H1>
+                <H1 class="header section-heading-with-icon" id="anchor"><i class="fa-solid fa-code section-heading-icon" aria-hidden="true"></i><span>Programming and Projects</span></H1>
               <lottie-player class = "programmingAnimation" src="https://lottie.host/41d7f969-9cb9-4fb5-bbc7-03d42ca3a5d5/2Lz2AbW4MP.json"  background="transparent"  speed="1"  style="width: 20rem ; height: 20rem;"  loop  autoplay></lottie-player>
               <p class="dark-mode-text">Some of my technical interests include Human Computer Interaction, Full Stack Web App Development, UX Design, Augmented/Virtual Reality, Machine Learning, and Game Development. My passion for <strong>innovative technology</strong> and <strong>impactful art</strong> intersect to fuel my interest in interactive entertaintment.</p>
               </div>
@@ -108,9 +138,24 @@
         <hr>
         <section>
           <div class="container slide-in" style="padding: 0px 0px 50px;">
-              <h2 class="dark-mode-text">Project Library</h2>
+              <h2 class="dark-mode-text section-heading-with-icon"><i class="fa-solid fa-laptop-code section-heading-icon" aria-hidden="true"></i><span>Project Library</span></h2>
               <p class="dark-mode-text">I'm an experienced back-end programmer in <strong>Java, Python, C#, and SQL</strong>. As well as a proven front-end developer using <strong>HTML5, CSS3, and Javascript</strong> - with exposure to the MERN and .NET stack. </p>
             <ul class="cards dark-mode-text">
+              <li class="card">
+                <div>
+                  <div class="hstack">
+                    <h3 class="card-title font-weight-bold">Duffel</h3>
+                    <a class="fa-brands fa-github fa-2x" style="color: #ff6630; text-decoration: none; margin-left: auto;" href="https://github.com/kartydhpr/duffel" target="_blank"></a>
+                  </div>
+                  <div class="card-content">
+                    <p>An Apple-platform app built with SwiftUI that compares driving and flying for a trip—drive time and fuel estimates, a rough flight picture, and a summary based on your priorities.</p>
+                  </div>
+                </div>
+                <img src=""/>
+                <div class="card-link-wrapper">
+                  <a href="2. programming-page/duffel.html" class="card-link">Marketing page</a>
+                </div>
+              </li>
               <li class="card">
                 <div>
                   <div class="hstack">
@@ -251,7 +296,7 @@
         </section>
         <section>
           <div class="container slide-in" style="padding: 0px 0px 50px;">
-            <h2 class="dark-mode-text" style="padding-bottom: 1rem;">Publications</h2>
+            <h2 class="dark-mode-text section-heading-with-icon" style="padding-bottom: 1rem;"><i class="fa-solid fa-book section-heading-icon" aria-hidden="true"></i><span>Publications</span></h2>
             <div class="pub1" style="padding: 1rem; border-radius: 1rem">
               <a href="https://ieeexplore.ieee.org/document/10392942" target="_blank" style="color: #ff6630;">
                 <div class="row">
@@ -583,7 +628,7 @@
           <div class = "row">
             <div class="col-md-3"></div>
             <div class="col-md-6">
-              <H1 class="header"  id="anchor">Get to know me a little better</H1>
+              <H1 class="header section-heading-with-icon"  id="anchor"><i class="fa-solid fa-user section-heading-icon" aria-hidden="true"></i><span>Get to know me a little better</span></H1>
               <lottie-player class = "aboutAnimation" src="https://lottie.host/3683ce0b-7020-485a-adbd-6de198a2c564/1xmDGqV2am.json"  background="transparent"  speed="1"  style="width: 100%; height: 20rem;"  loop  autoplay></lottie-player>
               <p class="dark-mode-text">I graduated from Purdue University with a BS in Computer & Information Science and a minor in Art & Design. With the <strong>logical mind</strong> of a Software Engineer and the <strong>creative vision</strong> of an Artist, I am always striving to bring great ideas into fruition. I'm looking for experiences that would allow me to hone and grow my existing engineering and design skills. </p>
               <p class="dark-mode-text" style="margin-top: 5%;">Born in India and raised in an American bubble in China, I have a <strong>distinctive cultural perspective</strong> that’s provided me with a unique world view. <strong>Fluent in 3 languages</strong>, I am able to effectively communicate in a range of cross-cultural team based and individual settings. Click the button below to view my resume!</p>
@@ -605,7 +650,7 @@
                 <div class = "row">
                   <div class="col-md-1"></div>
                   <div class="col-md-5">
-                    <H1 class="header" id="anchor">Art and Design</H1>
+                    <H1 class="header section-heading-with-icon" id="anchor"><i class="fa-solid fa-palette section-heading-icon" aria-hidden="true"></i><span>Art and Design</span></H1>
                     <lottie-player class = "artAnimation" src="https://assets4.lottiefiles.com/packages/lf20_iw0kfvau.json"  background="transparent"  speed="0.5"  style="width: 100%; height: 25rem;" loop autoplay></lottie-player>
                     <p class="dark-mode-text">I believe that good design connects people to the product, whether it be a video game, a mobile app, or a website — the design and aesthetics are what make the connection between the user and the product more meaningful and enjoyable.</p>
                     <p class="dark-mode-text" style="margin-top: 3%;">This is why I find it helpful to utilize my background in art and design to help visualize my ideas before getting them off the page into something more tangible — like this website. In my free time I like to illustrate anything from mundane household objects to space and interstellar phenomena.</p>
@@ -641,7 +686,7 @@
                     </div>
                   </div>
                   <div class="col-md-5">
-                    <H1 class="header" id="anchor">Music and Hobbies</H1>
+                    <H1 class="header section-heading-with-icon" id="anchor"><i class="fa-solid fa-headphones section-heading-icon" aria-hidden="true"></i><span>Music and Hobbies</span></H1>
                     <lottie-player class = "musicAnimation" src="https://assets10.lottiefiles.com/packages/lf20_j4xgoyi2.json"  background="transparent"  speed="1"  style="width: 100%; height: 27rem;" loop autoplay></lottie-player>
                     <p class="dark-mode-text">Music has always been a big part of my life and as with anything that brings me joy I like to learn as much about its inner workings as I possibly can. Which is why in my free time I like to compose and record new music using my electric guitar and GarageBand. Some of my favorite genres include alt-indie rock, folk, surf rock, and shoegaze. My other hobbies include gaming, photography, and cycling. </p>
                     <div class="bodyButton hover-btn">
