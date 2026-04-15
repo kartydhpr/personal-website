@@ -39,9 +39,8 @@ console.log("Today's date is: " + today);
 
 // code for dark mode
 
-var btn = document
-  .getElementById("darkModeBtn")
-  .addEventListener("click", toggleDarkMode);
+const darkModeBtn = document.getElementById("darkModeBtn");
+if (darkModeBtn) darkModeBtn.addEventListener("click", toggleDarkMode);
 var pressed = null; // variable tracks how many times the dark mode button was pressed
 console.log(pressed);
 
@@ -97,6 +96,7 @@ function toggleDarkMode() {
     }
     //Changing text to dark mode with white text
     for (let text of texts) { // for-loop iterates through texts array and changes each text element's style to white
+      if (text.closest && text.closest("#landingPage")) continue;
       text.style.color = colors.text;
     }
 
@@ -143,7 +143,7 @@ function toggleDarkMode() {
     const colors = COLOR_CONFIG.lightMode;
     
     try {
-      lp.classList.remove("bg-dark");
+      lp.classList.add("bg-dark");
     } catch {
       console.log("Website landing page not on this page.");
     } finally {
@@ -153,6 +153,7 @@ function toggleDarkMode() {
 
     //Changing text to light mode with black text
     for (let text of texts) {
+      if (text.closest && text.closest("#landingPage")) continue;
       text.style.color = colors.text;
     }
 
@@ -208,6 +209,157 @@ function scrollProgress() {
   scrollProgressBar.style.width = percentageScrolled + "%";
 }
 document.addEventListener("scroll", scrollProgress);
+
+(function initHeroMountainsBackground() {
+  const lp = document.getElementById("landingPage");
+  const layer = document.querySelector(".home-hero-mountains");
+  if (!lp || !layer) return;
+  const mountainToggleBtn = document.getElementById("mountainToggleBtn");
+  const mountainToggleText = document.getElementById("mountainToggleText");
+  const mountainToggleIcon = document.getElementById("mountainToggleIcon");
+
+  const rate = 0.58;
+  const maxPx = 280;
+  let ticking = false;
+
+  function mountainsOn() {
+    return lp.classList.contains("home-hero--mountains-on");
+  }
+
+  function applyParallax() {
+    ticking = false;
+    if (!mountainsOn() || prefersReducedMotion()) {
+      layer.style.removeProperty("--hero-parallax-y");
+      return;
+    }
+    const scrollY = window.scrollY || document.documentElement.scrollTop || 0;
+    const y = Math.min(maxPx, scrollY * rate);
+    layer.style.setProperty("--hero-parallax-y", `${y}px`);
+  }
+
+  function onScrollOrResize() {
+    if (!mountainsOn() || prefersReducedMotion()) return;
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(applyParallax);
+    }
+  }
+
+  function setMountainsOn(on) {
+    lp.classList.toggle("home-hero--mountains-on", Boolean(on));
+    syncMountainToggleButton();
+    applyParallax();
+  }
+
+  function syncMountainToggleButton() {
+    const on = mountainsOn();
+    if (mountainToggleText) {
+      mountainToggleText.textContent = on ? "Mountains On" : "Mountains Off";
+    }
+    if (mountainToggleBtn) {
+      mountainToggleBtn.setAttribute(
+        "aria-label",
+        on ? "Turn mountain background off" : "Turn mountain background on"
+      );
+    }
+    if (mountainToggleIcon) {
+      mountainToggleIcon.classList.toggle("fa-mountain", on);
+      mountainToggleIcon.classList.toggle("fa-image", !on);
+    }
+  }
+
+  window.addEventListener("load", function () {
+    syncMountainToggleButton();
+  });
+
+  window.addEventListener("scroll", onScrollOrResize, { passive: true });
+  window.addEventListener("resize", onScrollOrResize, { passive: true });
+
+  if (mountainToggleBtn) {
+    mountainToggleBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      setMountainsOn(!mountainsOn());
+    });
+  }
+
+  window.heroMountainsController = {
+    isOn: mountainsOn,
+    set: setMountainsOn,
+    toggle: function () {
+      setMountainsOn(!mountainsOn());
+    }
+  };
+
+  /* Mountains are on by default on first load. */
+  lp.classList.add("home-hero--mountains-on");
+  setMountainsOn(true);
+})();
+
+(function initNavThemeMountainButtonSwap() {
+  const hero = document.getElementById("landingPage");
+  const darkModeBtn = document.getElementById("darkModeBtn");
+  const mountainToggleBtn = document.getElementById("mountainToggleBtn");
+  if (!hero || !darkModeBtn || !mountainToggleBtn) return;
+  let swapScrollY = 0;
+
+  function recalcSwapThreshold() {
+    const heroTop = hero.offsetTop || 0;
+    /* Switch near the end of the first hero viewport, not only when full hero block ends. */
+    const viewportDriven = window.innerHeight * 0.9;
+    const heroDriven = hero.offsetHeight * 0.7;
+    swapScrollY = heroTop + Math.min(viewportDriven, heroDriven);
+  }
+
+  function shouldShowMountainToggle() {
+    return window.scrollY < swapScrollY;
+  }
+
+  function syncButtons() {
+    const showMountain = shouldShowMountainToggle();
+    mountainToggleBtn.classList.toggle("d-none", !showMountain);
+    darkModeBtn.classList.toggle("d-none", showMountain);
+    if (nav) nav.classList.toggle("hero-nav-active", showMountain);
+  }
+
+  recalcSwapThreshold();
+  syncButtons();
+  window.addEventListener("scroll", syncButtons, { passive: true });
+  window.addEventListener("resize", function () {
+    recalcSwapThreshold();
+    syncButtons();
+  }, { passive: true });
+  window.addEventListener("load", function () {
+    recalcSwapThreshold();
+    syncButtons();
+  }, { once: true });
+})();
+
+(function initHeroProfileHoverSwap() {
+  const heroProfileImg = document.querySelector("#landingPage .profile-picture");
+  if (!heroProfileImg) return;
+
+  const defaultSrc = heroProfileImg.getAttribute("src");
+  const hoverSrc = "public/images/KartyDhpr_Logo.png";
+  if (!defaultSrc) return;
+
+  const preloadedHover = new Image();
+  preloadedHover.src = hoverSrc;
+
+  function swapToLogo() {
+    heroProfileImg.classList.add("is-logo-hover");
+    heroProfileImg.setAttribute("src", hoverSrc);
+  }
+
+  function swapBackToProfile() {
+    heroProfileImg.classList.remove("is-logo-hover");
+    heroProfileImg.setAttribute("src", defaultSrc);
+  }
+
+  heroProfileImg.addEventListener("mouseenter", swapToLogo);
+  heroProfileImg.addEventListener("mouseleave", swapBackToProfile);
+  heroProfileImg.addEventListener("focus", swapToLogo);
+  heroProfileImg.addEventListener("blur", swapBackToProfile);
+})();
 
 function revealFadeAndSlideIn() {
   document.querySelectorAll(".fade-in, .slide-in, .slide-up").forEach((el) => {

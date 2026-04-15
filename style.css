@@ -451,6 +451,48 @@ body, #dark-mode-bg {
   z-index: 20;
 }
 
+/* Light scrim on the bar only (no ::after tail / drop-shadow under the nav) */
+#dark-mode-nav.navbar-dark {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.72) 0%,
+    rgba(0, 0, 0, 0.48) 26%,
+    rgba(0, 0, 0, 0.28) 48%,
+    rgba(0, 0, 0, 0.14) 68%,
+    rgba(0, 0, 0, 0.06) 82%,
+    rgba(0, 0, 0, 0) 100%
+  ) !important;
+}
+
+#dark-mode-nav.navbar-light.bg-light {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(255, 255, 255, 0.68) 30%,
+    rgba(255, 255, 255, 0.36) 58%,
+    rgba(255, 255, 255, 0.14) 78%,
+    rgba(255, 255, 255, 0.04) 90%,
+    rgba(255, 255, 255, 0) 100%
+  ) !important;
+}
+
+/* Keep hero experience dark while user is on hero */
+#dark-mode-nav.hero-nav-active.navbar-light.bg-light {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.72) 0%,
+    rgba(0, 0, 0, 0.48) 26%,
+    rgba(0, 0, 0, 0.28) 48%,
+    rgba(0, 0, 0, 0.14) 68%,
+    rgba(0, 0, 0, 0.06) 82%,
+    rgba(0, 0, 0, 0) 100%
+  ) !important;
+}
+
+#dark-mode-nav.hero-nav-active.navbar-light .navbar-brand {
+  color: #ffffff !important;
+}
+
 /* Navbar: avoid .centered on links (absolute positioning broke Bootstrap collapse on narrow screens) */
 #dark-mode-nav.navbar {
   row-gap: 0;
@@ -469,7 +511,8 @@ body, #dark-mode-bg {
     gap: 0;
   }
 
-  #dark-mode-nav .navbar-theme-btn #darkModeText {
+  #dark-mode-nav .navbar-theme-btn #darkModeText,
+  #dark-mode-nav .navbar-theme-btn #mountainToggleText {
     display: none;
   }
 
@@ -686,6 +729,78 @@ body, #dark-mode-bg {
   box-sizing: border-box;
 }
 
+/* Full-bleed mountain PNG: off by default; .home-hero--mountains-on enables it (orbit icons on the hero) */
+#landingPage.home-hero:not(.home-hero--mountains-on) .home-hero-mountains {
+  display: none;
+}
+
+/*
+ * Hero snow peaks: layer fills the whole hero so the PNG’s black sky continues
+ * the page background — a short bottom-only strip left a hard horizontal “cut”.
+ */
+.home-hero-mountains {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  box-shadow: inset 0 110px 100px -75px rgba(0, 0, 0, 0.45);
+}
+
+.home-hero-mountains::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  /* Longer fade at top: matches pure black first, then eases into peaks (avoids a “hard line”) */
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.88) 0%,
+    rgba(0, 0, 0, 0.8) 10%,
+    rgba(2, 2, 3, 0.72) 28%,
+    rgba(5, 6, 8, 0.68) 50%,
+    rgba(8, 9, 11, 0.72) 72%,
+    rgba(7, 8, 10, 0.78) 100%
+  );
+  transition: background 0.5s ease-in-out;
+}
+
+#dark-mode-bg[style*="white"] #landingPage:not(.home-hero--force-dark) .home-hero-mountains,
+#dark-mode-bg[style*="rgb(255, 255, 255)"] #landingPage:not(.home-hero--force-dark) .home-hero-mountains {
+  box-shadow: inset 0 110px 100px -75px rgba(255, 255, 255, 0.32);
+}
+
+#dark-mode-bg[style*="white"] #landingPage:not(.home-hero--force-dark) .home-hero-mountains::after,
+#dark-mode-bg[style*="rgb(255, 255, 255)"] #landingPage:not(.home-hero--force-dark) .home-hero-mountains::after {
+  background: linear-gradient(
+    to bottom,
+    #ffffff 0%,
+    rgba(255, 255, 255, 0.9) 9%,
+    rgba(252, 252, 254, 0.58) 36%,
+    rgba(248, 248, 252, 0.54) 100%
+  );
+}
+
+.home-hero-mountains img {
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 90%;
+  display: block;
+  user-select: none;
+  transform: translate3d(0, var(--hero-parallax-y, 0px), 0) scale(1.14);
+  transform-origin: center bottom;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-hero-mountains img {
+    transform: none;
+  }
+}
+
 /* Stack orbit, typewriter, and subtitle on one vertical axis (inline-block was sitting typewriter beside the portrait on wide screens). */
 #landingPage .hero.centered {
   display: flex;
@@ -699,6 +814,13 @@ body, #dark-mode-bg {
   margin-right: 0;
   transform: translateY(clamp(-1.35rem, -1.8vh, -0.4rem));
   margin-top: 0;
+  filter: drop-shadow(0 8px 32px rgba(0, 0, 0, 0.26))
+    drop-shadow(0 3px 10px rgba(0, 0, 0, 0.16));
+}
+
+#landingPage:not(.bg-dark) .hero.centered {
+  filter: drop-shadow(0 8px 26px rgba(0, 0, 0, 0.12))
+    drop-shadow(0 3px 8px rgba(0, 0, 0, 0.08));
 }
 
 /*
@@ -727,86 +849,84 @@ body, #dark-mode-bg {
   display: inline-block;
 }
 
-.home-orbit-ring {
-  --orbit-r: min(13.5rem, 34vmin);
-  --orbit-n: 11;
+/* Hero: icon stacks — bottom-left vs top-right (responsive gap + edge inset) */
+#landingPage .home-orbit-edge {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 150%;
-  aspect-ratio: 1;
-  transform: translate(-50%, -50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.72rem, 1.85vw + 0.45rem, 1.45rem);
+  width: auto;
+  height: auto;
+  padding: 0;
   pointer-events: none;
-  z-index: 1;
-  overflow: visible;
+  box-sizing: border-box;
 }
 
-/* Static arc of icons across the top of the portrait */
-.home-orbit-icon {
-  --orbit-n: 11;
-  --orbit-r: inherit;
-  --orbit-angle: calc(-70deg + var(--k) * 14deg);
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  font-size: clamp(0.88rem, 2.2vmin, 1.35rem);
-  opacity: 0.95;
-  color: rgba(255, 102, 48, 0.5);
-  /* Evenly spaced along a ~140deg arc centred above the avatar (from top-left to top-right: -70deg–+70deg). */
-  transform: translate(-50%, -50%)
-    rotate(var(--orbit-angle))
-    translateY(calc(-1 * var(--orbit-r)));
+#landingPage .home-orbit-edge--left {
+  left: 0;
+  bottom: max(
+    env(safe-area-inset-bottom, 0px),
+    clamp(1.5rem, 4.5vh + 0.5rem, 3.75rem)
+  );
+  top: auto;
+  align-items: flex-start;
+  padding-left: max(
+    env(safe-area-inset-left, 0px),
+    clamp(0.85rem, 3.2vw + 0.35rem, 1.85rem)
+  );
+  padding-right: clamp(0.2rem, 1vw, 0.45rem);
 }
 
-/* Only bounce when the hero image/orbit is hovered or focused. */
-.hero-avatar-orbit:hover .home-orbit-icon,
-.hero-avatar-orbit:focus-within .home-orbit-icon {
-  animation: home-orbit-bounce 2s ease-in-out infinite;
-  animation-delay: calc(var(--k) * 0.12s);
+#landingPage .home-orbit-edge--right {
+  right: 0;
+  top: max(
+    calc(env(safe-area-inset-top, 0px) + clamp(3.1rem, 7vw + 1.75rem, 4.6rem)),
+    clamp(3.25rem, 6vh + 2rem, 4.75rem)
+  );
+  bottom: auto;
+  align-items: flex-end;
+  padding-right: max(
+    env(safe-area-inset-right, 0px),
+    clamp(0.85rem, 3.2vw + 0.35rem, 1.85rem)
+  );
+  padding-left: clamp(0.2rem, 1vw, 0.45rem);
 }
 
-.home-orbit-icon:nth-child(even) {
-  color: rgba(28, 231, 131, 0.44);
+#landingPage .home-orbit-edge .home-orbit-icon {
+  position: relative;
+  left: auto;
+  top: auto;
+  flex-shrink: 0;
+  font-size: clamp(0.78rem, 1.75vmin, 1.02rem);
+  line-height: 1;
+  opacity: 0.92;
+  color: rgba(255, 102, 48, 0.55);
+  transform: none;
+  pointer-events: auto;
+  cursor: default;
 }
 
-#landingPage.home-hero:not(.bg-dark) .home-orbit-icon:nth-child(odd) {
+#landingPage .home-orbit-edge .home-orbit-icon:nth-child(even) {
+  color: rgba(255, 102, 48, 0.48);
+}
+
+#landingPage.home-hero:not(.bg-dark) .home-orbit-edge .home-orbit-icon {
   color: rgba(255, 102, 48, 0.55);
 }
 
-#landingPage.home-hero:not(.bg-dark) .home-orbit-icon:nth-child(even) {
-  color: rgba(28, 231, 131, 0.48);
+#landingPage.home-hero:not(.bg-dark) .home-orbit-edge .home-orbit-icon:nth-child(even) {
+  color: rgba(255, 102, 48, 0.5);
 }
 
-@keyframes home-orbit-spin {
-  from {
-    transform: translate(-50%, -50%) rotate(0deg);
-  }
-  to {
-    transform: translate(-50%, -50%) rotate(360deg);
-  }
+#landingPage .home-orbit-icon:focus {
+  outline: none;
 }
 
-/* Gentle radial “bounce” on the fixed arc; each icon is delayed by index so the motion travels as a wave. */
-@keyframes home-orbit-bounce {
-  0%,
-  60%,
-  100% {
-    transform: translate(-50%, -50%)
-      rotate(var(--orbit-angle))
-      translateY(calc(-1 * var(--orbit-r)));
-  }
-  30% {
-    transform: translate(-50%, -50%)
-      rotate(var(--orbit-angle))
-      translateY(calc(-1.05 * var(--orbit-r)));
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .home-orbit-ring,
-  .home-orbit-icon {
-    will-change: auto;
-  }
+#landingPage .home-orbit-icon:focus-visible {
+  outline: 2px solid rgba(255, 102, 48, 0.85);
+  outline-offset: 4px;
+  border-radius: 4px;
 }
 
 #landingPage .hero.centered > .sub-title {
@@ -814,6 +934,7 @@ body, #dark-mode-bg {
   z-index: 2;
   align-self: stretch;
   max-width: 100%;
+  margin-top: 0.3rem;
 }
 
 /* Simple wrap so the typewriter can sit under the avatar with no special background. */
@@ -864,7 +985,7 @@ body, #dark-mode-bg {
   width: 2px;
   height: 16px;
   border-radius: 999px;
-  background-color: rgba(28, 231, 131, 0.8);
+  background-color: rgba(255, 102, 48, 0.82);
 }
 
 /* Arrow head, touching the tail */
@@ -874,7 +995,7 @@ body, #dark-mode-bg {
   height: 0;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
-  border-top: 6px solid #1ce783;
+  border-top: 6px solid #ff6630;
 }
 
 .scroll-pill:hover,
@@ -1016,8 +1137,8 @@ body, #dark-mode-bg {
   border-radius: 50%;
   width: 25rem;
   height: auto;
-  border: 0.6rem solid #1ce783 /* #037231 03cc57  #00FF7F */;
-  box-shadow: 0px 0px 70px #1ce783;
+  border: 0.6rem solid #ff6630;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.38);
 }
 
 .navbar img:hover {
@@ -1031,7 +1152,7 @@ body, #dark-mode-bg {
   width: auto;
   display: inline-block;
   overflow: hidden; /* Ensures the content is not revealed until the animation */
-  color: #03e976;
+  color: #1ce783;
   font-size: 5rem; /* 100 */
   border-right: 0.1em solid #ff6630; /* The typwriter cursor */
   white-space: nowrap; /* Keeps the content on a single line */
@@ -1106,26 +1227,107 @@ h2 .section-heading-icon {
   transition: color 0.5s ease-in-out;
 }
 
-/* Landing hero — mid scale between full-size globals and the tighter pass */
-#landingPage .profile-picture {
+/* Landing hero — green ring only; no colored glow */
+#landingPage .hero-avatar-orbit-inner > a {
+  display: inline-block;
+  line-height: 0;
+  vertical-align: top;
   width: min(22.75rem, 87vw);
-  border-width: 0.55rem;
-  box-shadow: 0 0 64px #1ce783;
+  height: min(22.75rem, 87vw);
+  aspect-ratio: 1 / 1;
+  border: 0.55rem solid #1ce783;
+  border-radius: 50%;
+  overflow: hidden;
+  clip-path: circle(50% at 50% 50%);
+  box-shadow: none;
+  transition:
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.28s ease,
+    filter 0.28s ease;
+  will-change: transform, box-shadow;
+}
+
+#landingPage .profile-picture {
+  display: block;
+  width: calc(100% + 2px);
+  height: calc(100% + 2px);
+  margin: -1px;
+  object-fit: cover;
+  object-position: center;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), filter 0.28s ease;
+  will-change: transform;
+}
+
+#landingPage .hero-avatar-orbit:hover .hero-avatar-orbit-inner > a,
+#landingPage .hero-avatar-orbit:focus-within .hero-avatar-orbit-inner > a {
+  transform: translateY(-2px) scale(1.016);
+  box-shadow:
+    0 12px 24px rgba(0, 0, 0, 0.34),
+    0 0 0 2px rgba(255, 102, 48, 0.22);
+  filter: saturate(1.04);
+}
+
+#landingPage .profile-picture.is-logo-hover {
+  object-fit: cover;
+  object-position: 48% center;
+  background: #000;
+  padding: 0;
+}
+
+#landingPage .hero-avatar-orbit:hover .profile-picture.is-logo-hover,
+#landingPage .hero-avatar-orbit:focus-within .profile-picture.is-logo-hover {
+  transform: scale(1.1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #landingPage .hero-avatar-orbit-inner > a {
+    transition: box-shadow 0.25s ease, filter 0.25s ease;
+  }
+
+  #landingPage .hero-avatar-orbit:hover .hero-avatar-orbit-inner > a,
+  #landingPage .hero-avatar-orbit:focus-within .hero-avatar-orbit-inner > a {
+    transform: none;
+  }
 }
 
 #landingPage .typewriter {
   font-size: clamp(1.75rem, 4.05vw, 4.25rem);
   line-height: 1.32;
+  text-shadow: none;
+}
+
+#landingPage.bg-dark .typewriter {
+  text-shadow: none;
 }
 
 #landingPage .sub-title h3 {
   font-size: clamp(1.1rem, 2.5vw, 1.38rem);
-  line-height: 1.55;
+  line-height: 1.4;
+  color: #ffffff;
+  margin: 0;
+  text-shadow: none;
+}
+
+#landingPage .sub-title h3 + h3 {
+  margin-top: 0.08rem;
+}
+
+#landingPage.bg-dark .sub-title h3 {
+  text-shadow: none;
 }
 
 /* Landing hero scroll pill tweaks */
 #landingPage .scroll-pill {
   bottom: 20px;
+  filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.32))
+    drop-shadow(0 2px 6px rgba(0, 0, 0, 0.18));
+}
+
+#landingPage:not(.bg-dark) .scroll-pill {
+  filter: drop-shadow(0 5px 14px rgba(0, 0, 0, 0.16));
 }
 
 .details {

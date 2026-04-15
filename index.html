@@ -37,6 +37,14 @@
         <span id="darkModeText">Dark Mode</span>
       </button>
       <button
+        class="lightSwitchButton hover-btn navbar-theme-btn flex-shrink-0 d-none"
+        type="button"
+        id="mountainToggleBtn"
+        aria-label="Toggle mountain background"
+      >
+        <i class="fa-solid fa-mountain" id="mountainToggleIcon"></i>
+      </button>
+      <button
         class="navbar-toggler flex-shrink-0 d-lg-none"
         type="button"
         data-toggle="collapse"
@@ -61,23 +69,36 @@
     <main>
     <!--Website landing page-->
       <section>  
-          <div id="landingPage" class="home-hero">
+          <div id="landingPage" class="home-hero home-hero--force-dark">
+            <div class="home-hero-mountains" aria-hidden="true">
+              <img src="public/11147046.png" width="3328" height="2039" alt="" decoding="async">
+            </div>
+            <div
+              class="home-orbit-edge home-orbit-edge--left"
+              role="group"
+              aria-label="Interest icons along the left"
+            >
+              <i class="fa-solid fa-code home-orbit-icon" style="--k: 0"></i>
+              <i class="fa-solid fa-palette home-orbit-icon" style="--k: 1"></i>
+              <i class="fa-solid fa-laptop-code home-orbit-icon" style="--k: 2"></i>
+              <i class="fa-solid fa-headphones home-orbit-icon" style="--k: 3"></i>
+              <i class="fa-solid fa-gamepad home-orbit-icon" style="--k: 4"></i>
+            </div>
+            <div
+              class="home-orbit-edge home-orbit-edge--right"
+              role="group"
+              aria-label="Interest icons along the right"
+            >
+              <i class="fa-solid fa-bicycle home-orbit-icon" style="--k: 0"></i>
+              <i class="fa-solid fa-person-hiking home-orbit-icon" style="--k: 1"></i>
+              <i class="fa-solid fa-camera home-orbit-icon" style="--k: 2"></i>
+              <i class="fa-solid fa-mountain home-orbit-icon" style="--k: 3"></i>
+              <i class="fa-solid fa-plane home-orbit-icon" style="--k: 4"></i>
+              <i class="fa-solid fa-language home-orbit-icon" style="--k: 5"></i>
+            </div>
             <div class = "hero centered">
               <div class="hero-avatar-orbit">
                 <div class="hero-avatar-orbit-inner">
-                  <div class="home-orbit-ring" aria-hidden="true">
-                    <i class="fa-solid fa-code home-orbit-icon" style="--k: 0"></i>
-                    <i class="fa-solid fa-palette home-orbit-icon" style="--k: 1"></i>
-                    <i class="fa-solid fa-laptop-code home-orbit-icon" style="--k: 2"></i>
-                    <i class="fa-solid fa-headphones home-orbit-icon" style="--k: 3"></i>
-                    <i class="fa-solid fa-gamepad home-orbit-icon" style="--k: 4"></i>
-                    <i class="fa-solid fa-bicycle home-orbit-icon" style="--k: 5"></i>
-                    <i class="fa-solid fa-person-hiking home-orbit-icon" style="--k: 6"></i>
-                    <i class="fa-solid fa-camera home-orbit-icon" style="--k: 7"></i>
-                    <i class="fa-solid fa-mountain home-orbit-icon" style="--k: 8"></i>
-                    <i class="fa-solid fa-plane home-orbit-icon" style="--k: 9"></i>
-                    <i class="fa-solid fa-language home-orbit-icon" style="--k: 10"></i>
-                  </div>
                   <a href="#programming">
                     <img src="public/images/camprof.jpeg" class = "profile-picture fade-in">
                   </a>
