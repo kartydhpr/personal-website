@@ -295,6 +295,114 @@ document.addEventListener("scroll", scrollProgress);
   setMountainsOn(true);
 })();
 
+(function initHeroMouseParallax() {
+  const lp = document.getElementById("landingPage");
+  if (!lp || !lp.classList.contains("home-hero")) return;
+  if (!window.matchMedia("(pointer: fine)").matches) return;
+  if (prefersReducedMotion()) return;
+
+  const VAR_NAMES = [
+    "--hero-mouse-mx",
+    "--hero-mouse-my",
+    "--hero-mouse-content-x",
+    "--hero-mouse-content-y",
+    "--hero-mouse-orbit-lx",
+    "--hero-mouse-orbit-ly",
+    "--hero-mouse-orbit-rx",
+    "--hero-mouse-orbit-ry",
+  ];
+
+  /* Opposite cursor: all layers drift against pointer; background moves most, hero least. */
+  const BG_X = 8;
+  const BG_Y = 5;
+  const CX = 3;
+  const CY = 2;
+  const OLX = 5;
+  const OLY = 3;
+  const ORX = 5;
+  const ORY = 3;
+
+  let targetX = 0;
+  let targetY = 0;
+  let curX = 0;
+  let curY = 0;
+  let rafId = null;
+  let active = true;
+
+  function clearVars() {
+    VAR_NAMES.forEach((name) => lp.style.removeProperty(name));
+  }
+
+  function applyVars() {
+    lp.style.setProperty("--hero-mouse-mx", `${(curX * BG_X).toFixed(2)}px`);
+    lp.style.setProperty("--hero-mouse-my", `${(curY * BG_Y).toFixed(2)}px`);
+    lp.style.setProperty("--hero-mouse-content-x", `${(curX * CX).toFixed(2)}px`);
+    lp.style.setProperty("--hero-mouse-content-y", `${(curY * CY).toFixed(2)}px`);
+    lp.style.setProperty("--hero-mouse-orbit-lx", `${(curX * OLX).toFixed(2)}px`);
+    lp.style.setProperty("--hero-mouse-orbit-ly", `${(curY * OLY).toFixed(2)}px`);
+    lp.style.setProperty("--hero-mouse-orbit-rx", `${(curX * ORX).toFixed(2)}px`);
+    lp.style.setProperty("--hero-mouse-orbit-ry", `${(curY * ORY).toFixed(2)}px`);
+  }
+
+  function tick() {
+    rafId = null;
+    if (!active) return;
+    const k = 0.07;
+    curX += (targetX - curX) * k;
+    curY += (targetY - curY) * k;
+    applyVars();
+    if (
+      Math.abs(targetX - curX) > 0.002 ||
+      Math.abs(targetY - curY) > 0.002
+    ) {
+      rafId = requestAnimationFrame(tick);
+    }
+  }
+
+  function requestTick() {
+    if (!active) return;
+    if (!rafId) rafId = requestAnimationFrame(tick);
+  }
+
+  function onMove(e) {
+    const rect = lp.getBoundingClientRect();
+    if (rect.width < 8 || rect.height < 8) return;
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    const nx = (e.clientX - cx) / (rect.width / 2);
+    const ny = (e.clientY - cy) / (rect.height / 2);
+    /* Invert so layers drift opposite the cursor (classic parallax). */
+    targetX = Math.max(-1, Math.min(1, -nx));
+    targetY = Math.max(-1, Math.min(1, -ny));
+    requestTick();
+  }
+
+  function onLeave() {
+    targetX = 0;
+    targetY = 0;
+    requestTick();
+  }
+
+  lp.addEventListener("mousemove", onMove, { passive: true });
+  lp.addEventListener("mouseleave", onLeave);
+
+  const obs = new IntersectionObserver(
+    (entries) => {
+      const vis = entries.some((en) => en.isIntersecting);
+      active = vis;
+      if (!vis) {
+        targetX = 0;
+        targetY = 0;
+        curX = 0;
+        curY = 0;
+        clearVars();
+      }
+    },
+    { threshold: 0 }
+  );
+  obs.observe(lp);
+})();
+
 (function initNavThemeMountainButtonSwap() {
   const hero = document.getElementById("landingPage");
   const darkModeBtn = document.getElementById("darkModeBtn");
