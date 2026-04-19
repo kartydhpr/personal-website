@@ -163,8 +163,34 @@
           <div class="container slide-in" style="padding: 0px 0px 50px;">
               <h2 class="dark-mode-text section-heading-with-icon"><i class="fa-solid fa-laptop-code section-heading-icon" aria-hidden="true"></i><span>Project Library</span></h2>
               <p class="dark-mode-text">I'm an experienced back-end programmer in <strong>Java, Python, C#, and SQL</strong>. As well as a proven front-end developer using <strong>HTML5, CSS3, and Javascript</strong> - with exposure to the MERN and .NET stack. </p>
-            <ul class="cards dark-mode-text">
-              <li class="card">
+              <div class="project-library-controls dark-mode-text">
+                <div class="project-library-category-slider" role="toolbar" aria-label="Filter projects by category">
+                  <div class="project-library-category-track">
+                    <button type="button" class="project-library-filter-btn project-library-category-seg is-active" data-project-filter="all" aria-pressed="true">All projects</button>
+                    <button type="button" class="project-library-filter-btn project-library-category-seg" data-project-filter="featured" aria-pressed="false">Featured</button>
+                    <button type="button" class="project-library-filter-btn project-library-category-seg" data-project-filter="coursework" aria-pressed="false">Coursework</button>
+                    <button type="button" class="project-library-filter-btn project-library-category-seg" data-project-filter="apps" aria-pressed="false">Apps</button>
+                    <button type="button" class="project-library-filter-btn project-library-category-seg" data-project-filter="scripts" aria-pressed="false">Scripts</button>
+                    <button type="button" class="project-library-filter-btn project-library-category-seg" data-project-filter="games" aria-pressed="false">Games</button>
+                  </div>
+                </div>
+                <div class="project-library-lang-inline">
+                  <label class="project-library-lang-inline-label" for="project-library-lang-select">Language</label>
+                  <select id="project-library-lang-select" class="project-library-lang-select dark-mode-text" aria-controls="project-library-grid">
+                    <option value="all" selected>All languages</option>
+                    <option value="swift">Swift</option>
+                    <option value="java">Java</option>
+                    <option value="python">Python</option>
+                    <option value="javascript">JavaScript</option>
+                    <option value="html">HTML</option>
+                    <option value="css">CSS</option>
+                    <option value="csharp">C#</option>
+                    <option value="cpp">C++</option>
+                  </select>
+                </div>
+              </div>
+            <ul id="project-library-grid" class="cards dark-mode-text">
+              <li class="card project-library-item" data-project-tags="featured apps" data-project-languages="swift">
                 <div>
                   <div class="hstack">
                     <h3 class="card-title font-weight-bold">Duffel</h3>
@@ -187,32 +213,7 @@
                   <a href="2. programming-page/duffel.html" class="card-link">Marketing page</a>
                 </div>
               </li>
-              <li class="card">
-                <div>
-                  <div class="hstack">
-                    <h3 class="card-title font-weight-bold">LetsMeetApp</h3>
-                    <a class="fa-brands fa-github fa-2x" style="color: #ff6630; text-decoration: none; margin-left: auto;" href="https://github.com/kartydhpr/LetsMeetApp" target="_blank"></a>
-                  </div>
-                  <div class="card-content">
-                    <p>A full-stack meeting planner app built with Java that consolidates all the core functionality required when meeting with a team.</p>
-                  </div>
-                </div>
-                <div class="project-language-stack" aria-label="Languages used in LetsMeetApp">
-                  <h6 class="project-language-title">Languages</h6>
-                  <div class="project-language-bar">
-                    <span class="project-language-fill" style="width: 89.8%; background: #c49a27;"></span>
-                    <span class="project-language-fill" style="width: 10.2%; background: #d6492c;"></span>
-                  </div>
-                  <ul class="project-language-list">
-                    <li><span class="project-language-dot" style="background: #c49a27;"></span>Java 89.8%</li>
-                    <li><span class="project-language-dot" style="background: #d6492c;"></span>Python 10.2%</li>
-                  </ul>
-                </div>
-                <div class="card-link-wrapper">
-                  <a href="#" data-toggle="modal" data-target="#LetsMeetAppDemo" class="card-link">See it in action</a>
-                </div>
-              </li>
-              <li class="card">
+              <li class="card project-library-item" data-project-tags="featured scripts" data-project-languages="python">
                 <div>
                   <div class="hstack">
                     <h3 class="card-title font-weight-bold">FileSift</h3>
@@ -235,35 +236,7 @@
                   <a href="" data-toggle="modal" data-target="#FileSiftDemo" class="card-link">See it in action</a>
                 </div>
               </li>
-              <li class="card">
-                <div>
-                  <div class="hstack">
-                    <h3 class="card-title font-weight-bold">Sound Galaxy</h3>
-                    <a class="fa-brands fa-github fa-2x" style="color: #ff6630; text-decoration: none; margin-left: auto;" href="https://github.com/kartydhpr/personal-website/tree/main/2.%20programming-page/sound-galaxy-karty" target="_blank"></a>
-                  </div>                
-                  <div class="card-content">
-                    <p>An experimental project I made while tinkering with p5.js that uses your device's microphone to make stars dance in the night sky.</p>
-                  </div>
-                </div>
-                <div class="project-language-stack" aria-label="Languages used in Sound Galaxy">
-                  <h6 class="project-language-title">Languages</h6>
-                  <div class="project-language-bar">
-                    <span class="project-language-fill" style="width: 67%; background: #ff5e3a;"></span>
-                    <span class="project-language-fill" style="width: 22%; background: #5b4a91;"></span>
-                    <span class="project-language-fill" style="width: 11%; background: #e8d84c;"></span>
-                  </div>
-                  <ul class="project-language-list">
-                    <li><span class="project-language-dot" style="background: #ff5e3a;"></span>HTML 67.0%</li>
-                    <li><span class="project-language-dot" style="background: #5b4a91;"></span>CSS 22.0%</li>
-                    <li><span class="project-language-dot" style="background: #e8d84c;"></span>JavaScript 11.0%</li>
-                  </ul>
-                </div>
-                <div style="padding: 0.5rem;"></div>
-                <div class="card-link-wrapper">
-                  <a href="../2. programming-page/sound-galaxy-karty/index.html" class="card-link">Launch</a>
-                </div>
-              </li>
-              <li class="card">
+              <li class="card project-library-item" data-project-tags="featured coursework games" data-project-languages="csharp cpp shaderlab">
                 <div>
                   <div class="hstack">
                     <h3 class="card-title font-weight-bold">VR Solar System</h3>
@@ -296,7 +269,60 @@
                   <a href="" data-toggle="modal" data-target="#VRSolarSystemDemo" class="card-link">See it in action</a>
                 </div>
               </li>
-              <li class="this-site-card" style="background: transparent !important;">
+              <li class="card project-library-item" data-project-tags="featured coursework apps" data-project-languages="java python">
+                <div>
+                  <div class="hstack">
+                    <h3 class="card-title font-weight-bold">LetsMeetApp</h3>
+                    <a class="fa-brands fa-github fa-2x" style="color: #ff6630; text-decoration: none; margin-left: auto;" href="https://github.com/kartydhpr/LetsMeetApp" target="_blank"></a>
+                  </div>
+                  <div class="card-content">
+                    <p>A full-stack meeting planner app built with Java that consolidates all the core functionality required when meeting with a team.</p>
+                  </div>
+                </div>
+                <div class="project-language-stack" aria-label="Languages used in LetsMeetApp">
+                  <h6 class="project-language-title">Languages</h6>
+                  <div class="project-language-bar">
+                    <span class="project-language-fill" style="width: 89.8%; background: #c49a27;"></span>
+                    <span class="project-language-fill" style="width: 10.2%; background: #d6492c;"></span>
+                  </div>
+                  <ul class="project-language-list">
+                    <li><span class="project-language-dot" style="background: #c49a27;"></span>Java 89.8%</li>
+                    <li><span class="project-language-dot" style="background: #d6492c;"></span>Python 10.2%</li>
+                  </ul>
+                </div>
+                <div class="card-link-wrapper">
+                  <a href="#" data-toggle="modal" data-target="#LetsMeetAppDemo" class="card-link">See it in action</a>
+                </div>
+              </li>
+              <li class="card project-library-item" data-project-tags="games" data-project-languages="html css javascript">
+                <div>
+                  <div class="hstack">
+                    <h3 class="card-title font-weight-bold">Sound Galaxy</h3>
+                    <a class="fa-brands fa-github fa-2x" style="color: #ff6630; text-decoration: none; margin-left: auto;" href="https://github.com/kartydhpr/personal-website/tree/main/2.%20programming-page/sound-galaxy-karty" target="_blank"></a>
+                  </div>                
+                  <div class="card-content">
+                    <p>An experimental project I made while tinkering with p5.js that uses your device's microphone to make stars dance in the night sky.</p>
+                  </div>
+                </div>
+                <div class="project-language-stack" aria-label="Languages used in Sound Galaxy">
+                  <h6 class="project-language-title">Languages</h6>
+                  <div class="project-language-bar">
+                    <span class="project-language-fill" style="width: 67%; background: #ff5e3a;"></span>
+                    <span class="project-language-fill" style="width: 22%; background: #5b4a91;"></span>
+                    <span class="project-language-fill" style="width: 11%; background: #e8d84c;"></span>
+                  </div>
+                  <ul class="project-language-list">
+                    <li><span class="project-language-dot" style="background: #ff5e3a;"></span>HTML 67.0%</li>
+                    <li><span class="project-language-dot" style="background: #5b4a91;"></span>CSS 22.0%</li>
+                    <li><span class="project-language-dot" style="background: #e8d84c;"></span>JavaScript 11.0%</li>
+                  </ul>
+                </div>
+                <div style="padding: 0.5rem;"></div>
+                <div class="card-link-wrapper">
+                  <a href="../2. programming-page/sound-galaxy-karty/index.html" class="card-link">Launch</a>
+                </div>
+              </li>
+              <li class="this-site-card project-library-item" data-project-tags="games" data-project-languages="cpp" style="background: transparent !important;">
                 <div>
                   <div class="hstack">
                     <h3 class="card-title font-weight-bold">Epoch Noir Game</h3>
@@ -310,7 +336,7 @@
                   <a href="" data-toggle="modal" data-target="#EpochNoirDemo" class="card-link">Watch the Demo</a>
                 </div>
               </li>
-              <li class="card">
+              <li class="card project-library-item" data-project-tags="coursework apps" data-project-languages="swift">
                 <div>
                   <div class="hstack">
                     <h3 class="card-title font-weight-bold">Magic 8 Ball App</h3>
@@ -333,7 +359,7 @@
                   <a href="" data-toggle="modal" data-target="#Magic8BallDemo" class="card-link">See it in action</a>
                 </div>
               </li>
-              <li class="card">
+              <li class="card project-library-item" data-project-tags="coursework apps" data-project-languages="swift">
                 <div>
                   <div class="hstack">
                     <h3 class="card-title font-weight-bold">Canopy Recipe App</h3>
@@ -356,7 +382,7 @@
                   <a href="" data-toggle="modal" data-target="#CanopyDemo" class="card-link">See it in action</a>
                 </div>
               </li>
-              <li class="card">
+              <li class="card project-library-item" data-project-tags="games scripts" data-project-languages="python">
                 <div>
                   <div class="hstack">
                     <h3 class="card-title font-weight-bold">Wheel of Fortune</h3>
@@ -379,7 +405,7 @@
                   <a href="" data-toggle="modal" data-target="#SoloWofDemo" class="card-link">See it in action</a>
                 </div>
               </li>
-              <li class="this-site-card" style="background: transparent !important; border: solid #1ce783;">
+              <li class="this-site-card project-library-item" data-project-tags="apps" data-project-languages="html css javascript" style="background: transparent !important; border: solid #1ce783;">
                 <div>
                   <div class="hstack">
                     <h3 class="card-title font-weight-bold">This Website</h3>
@@ -407,6 +433,15 @@
                 </div>
               </li>
             </ul>
+            <div class="project-library-bottom dark-mode-text" aria-label="Browse project cards">
+              <button type="button" class="project-library-nav-btn" id="project-library-prev" aria-controls="project-library-grid" aria-label="Previous project">
+                <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+              </button>
+              <p class="project-library-counter" id="project-library-counter" aria-live="polite" aria-atomic="true">1 / 10</p>
+              <button type="button" class="project-library-nav-btn" id="project-library-next" aria-controls="project-library-grid" aria-label="Next project">
+                <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+              </button>
+            </div>
           </div>
         </section>
         <section>
@@ -747,8 +782,8 @@
               <lottie-player class = "aboutAnimation" src="https://lottie.host/3683ce0b-7020-485a-adbd-6de198a2c564/1xmDGqV2am.json"  background="transparent"  speed="1"  style="width: 100%; height: 20rem;"  loop  autoplay></lottie-player>
               <p class="dark-mode-text">I graduated from Purdue University with a BS in Computer & Information Science and a minor in Art & Design. With the <strong>logical mind</strong> of a Software Engineer and the <strong>creative vision</strong> of an Artist, I am always striving to bring great ideas into fruition. I'm looking for experiences that would allow me to hone and grow my existing engineering and design skills. </p>
               <p class="dark-mode-text" style="margin-top: 5%;">Born in India and raised in an American bubble in China, I have a <strong>distinctive cultural perspective</strong> that’s provided me with a unique world view. <strong>Fluent in 3 languages</strong>, I am able to effectively communicate in a range of cross-cultural team based and individual settings. Click the button below to view my resume!</p>
-              <div class="bodyButton hover-btn">
-                <a href="public/files/Karteikay_Dhuper_Resume copy.pdf" target="_blank" style="padding: 20px;">
+              <div class="bodyButton bodyButton--resume hover-btn">
+                <a href="public/files/Karteikay_Dhuper_Resume copy.pdf" target="_blank">
                   <i class="fa-solid fa-download"></i> Download my resume
                 </a>
               </div>
@@ -769,7 +804,7 @@
                     <lottie-player class = "artAnimation" src="https://assets4.lottiefiles.com/packages/lf20_iw0kfvau.json"  background="transparent"  speed="0.5"  style="width: 100%; height: 25rem;" loop autoplay></lottie-player>
                     <p class="dark-mode-text">I believe that good design connects people to the product, whether it be a video game, a mobile app, or a website — the design and aesthetics are what make the connection between the user and the product more meaningful and enjoyable.</p>
                     <p class="dark-mode-text" style="margin-top: 3%;">This is why I find it helpful to utilize my background in art and design to help visualize my ideas before getting them off the page into something more tangible — like this website. In my free time I like to illustrate anything from mundane household objects to space and interstellar phenomena.</p>
-                    <div class="bodyButton hover-btn">
+                    <div class="bodyButton bodyButton--art hover-btn">
                       <a href="3. art-page/art.html">
                         <i class="fa-solid fa-palette"></i> See my work
                       </a>
@@ -804,7 +839,7 @@
                     <H1 class="header section-heading-with-icon" id="anchor"><i class="fa-solid fa-headphones section-heading-icon" aria-hidden="true"></i><span>Music and Hobbies</span></H1>
                     <lottie-player class = "musicAnimation" src="https://assets10.lottiefiles.com/packages/lf20_j4xgoyi2.json"  background="transparent"  speed="1"  style="width: 100%; height: 27rem;" loop autoplay></lottie-player>
                     <p class="dark-mode-text">Music has always been a big part of my life and as with anything that brings me joy I like to learn as much about its inner workings as I possibly can. Which is why in my free time I like to compose and record new music using my electric guitar and GarageBand. Some of my favorite genres include alt-indie rock, folk, surf rock, and shoegaze. My other hobbies include gaming, photography, and cycling. </p>
-                    <div class="bodyButton hover-btn">
+                    <div class="bodyButton bodyButton--music hover-btn">
                       <a href="4. music-page/music.html">
                         <i class="fa-solid fa-guitar"></i> Hear my work
                       </a>

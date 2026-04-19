@@ -315,6 +315,31 @@ body, #dark-mode-bg {
   margin-top: 8px;
 }
 
+/* Transparent PNGs (e.g. site logo): square tile + dark plate (same idea as lightbox black under logo) */
+.gallery .image-container--logo-mat {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #030303;
+  border: 0.5rem solid rgba(90, 90, 90, 0.285);
+  border-radius: 10px;
+  padding: clamp(0.65rem, 3vw, 1.35rem);
+}
+
+.gallery .image-container--logo-mat img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  margin-top: 0;
+  border: none;
+  border-radius: 6px;
+  object-fit: contain;
+}
+
 .gallery .lazy-image-wrap--gallery {
   max-width: 100%;
   border-radius: 12px;
@@ -683,6 +708,7 @@ body, #dark-mode-bg {
   align-items: center;
   justify-content: center;
   font-size: 1.1rem;
+  transition: transform 0.38s cubic-bezier(0.34, 1.35, 0.64, 1);
 }
 
 .lightSwitchButton span {
@@ -1166,35 +1192,294 @@ body, #dark-mode-bg {
 }
 
 .bodyButton {
+  position: relative;
+  overflow: hidden;
   background: black;
   color: #fff;
-  font-size: 1.2rem;
+  font-size: 1.08rem;
+  line-height: 1.25;
   text-align: center;
   max-width: 20rem;
   height: auto;
   border: 3px solid #00ff7f;
   border-radius: 50px;
-  box-shadow: 0px 0px 35px #00ff7f;
+  box-shadow: none;
   margin-top: 3%;
   margin: auto;
+  cursor: pointer;
+  transition:
+    transform 0.32s cubic-bezier(0.34, 1.35, 0.64, 1),
+    border-color 0.28s ease,
+    box-shadow 0.28s ease;
 }
+
+/* Main CTA: diagonal shine sweep on hover / focus-within */
+.bodyButton::after {
+  content: "";
+  position: absolute;
+  top: -55%;
+  left: 0;
+  width: 68%;
+  height: 210%;
+  background: linear-gradient(
+    102deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0) 32%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0) 68%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: translate3d(-130%, 0, 0) skewX(-14deg);
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+}
+
+.bodyButton:hover::after,
+.bodyButton:focus-within::after {
+  animation: body-button-shine-sweep 1.08s cubic-bezier(0.42, 0.12, 0.24, 1) both;
+}
+
+@keyframes body-button-shine-sweep {
+  0% {
+    transform: translate3d(-130%, 0, 0) skewX(-14deg);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  88% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(305%, 0, 0) skewX(-14deg);
+    opacity: 0;
+  }
+}
+
   .bodyButton i{
-    padding: 10px;
+    padding: 4px 8px 4px 4px;
+    display: inline-block;
+    transition: transform 0.42s cubic-bezier(0.34, 1.35, 0.64, 1);
   }
   .bodyButton a{
+    position: relative;
+    z-index: 2;
     text-decoration: none;
     color: white;
-    padding: 20px 60px;
+    padding: 10px 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35em;
+    transition: color 0.28s ease, transform 0.12s ease;
   }
-  .bodyButton:hover a{
+  .bodyButton:hover a,
+  .bodyButton:focus-within a{
     color: #ff6630;
   }
+
+.bodyButton.hover-btn:hover,
+.bodyButton.hover-btn:focus-within {
+  transform: translateY(-4px);
+}
+
+.bodyButton a:active {
+  transform: scale(0.97);
+}
+
+/* Resume CTA: icon nudges up with the lifted button (avoids fighting translateY) */
+.bodyButton--resume.hover-btn:hover i,
+.bodyButton--resume.hover-btn:focus-within i {
+  transform: translateY(-3px) scale(1.06);
+}
+
+.bodyButton--resume.hover-btn:active i {
+  transform: translateY(1px) scale(0.96);
+  transition-duration: 0.1s;
+}
+
+/* Art CTA: palette tilt + pop */
+.bodyButton--art.hover-btn:hover i,
+.bodyButton--art.hover-btn:focus-within i {
+  transform: rotate(-14deg) scale(1.12);
+}
+
+.bodyButton--art.hover-btn:active i {
+  transform: rotate(4deg) scale(1.02);
+  transition-duration: 0.12s;
+}
+
+/* Music CTA: gentle “strum” sway */
+.bodyButton--music.hover-btn:hover i,
+.bodyButton--music.hover-btn:focus-within i {
+  transform: rotate(8deg) translateX(5px);
+}
+
+.bodyButton--music.hover-btn:active i {
+  transform: rotate(-6deg) translateX(-3px);
+  transition-duration: 0.12s;
+}
   
 .hover-btn:hover {
   border: 3px solid #ff6630;
   color: #ff6630;
   box-shadow: 0 20px 16px 0 rgba(0, 0, 0, 0.24);
   transition: 0.5s;
+}
+
+/* Theme controls: moon wobble vs mountain lift */
+#darkModeBtn #darkModeIcon {
+  transition-property: opacity, transform;
+  transition-duration: 0.52s, 0.52s;
+  transition-timing-function: cubic-bezier(0.42, 0, 0.58, 1), cubic-bezier(0.42, 0, 0.58, 1);
+}
+
+/* Snappier hover wobble when not mid theme swap */
+#darkModeBtn:not(.is-theme-toggle-swapping) #darkModeIcon {
+  transition-duration: 0.52s, 0.34s;
+  transition-timing-function: cubic-bezier(0.42, 0, 0.58, 1), cubic-bezier(0.34, 1.35, 0.64, 1);
+}
+
+#darkModeBtn.is-theme-toggle-swapping #darkModeIcon {
+  opacity: 0;
+  transform: scale(0.9) rotate(-8deg);
+}
+
+#darkModeBtn.lightSwitchButton:hover i,
+#darkModeBtn.lightSwitchButton:focus-visible i {
+  transform: rotate(-22deg) scale(1.12);
+}
+
+#darkModeBtn.lightSwitchButton:active i {
+  transform: rotate(-8deg) scale(0.95);
+  transition-duration: 0.1s;
+}
+
+#mountainToggleBtn.lightSwitchButton:hover i,
+#mountainToggleBtn.lightSwitchButton:focus-visible i {
+  transform: translateY(-3px) scale(1.1);
+}
+
+#mountainToggleBtn.lightSwitchButton:active i {
+  transform: translateY(1px) scale(0.94);
+  transition-duration: 0.1s;
+}
+
+.lightSwitchButton:hover,
+.lightSwitchButton:focus-visible {
+  transform: scale(1.03);
+}
+
+.lightSwitchButton:active {
+  transform: scale(0.97);
+}
+
+/* Hero scroll cue: tail + chevron nudge */
+.scroll-pill::before,
+.scroll-pill::after {
+  transition: transform 0.35s cubic-bezier(0.34, 1.35, 0.64, 1), opacity 0.25s ease;
+}
+
+.scroll-pill:hover::before,
+.scroll-pill:focus-visible::before {
+  transform: translateX(-50%) scaleY(1.08);
+}
+
+.scroll-pill:hover::after,
+.scroll-pill:focus-visible::after {
+  transform: translateX(-50%) translateY(5px);
+}
+
+.scroll-pill:active::after {
+  transform: translateX(-50%) translateY(7px);
+  transition-duration: 0.08s;
+}
+
+/* Project carousel: prev/next drift opposite ways */
+#project-library-prev:hover:not(:disabled),
+#project-library-prev:focus-visible:not(:disabled) {
+  transform: translateX(-3px);
+}
+
+#project-library-next:hover:not(:disabled),
+#project-library-next:focus-visible:not(:disabled) {
+  transform: translateX(3px);
+}
+
+#project-library-prev:active:not(:disabled),
+#project-library-next:active:not(:disabled) {
+  transform: scale(0.92);
+  transition-duration: 0.08s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bodyButton::after {
+    animation: none !important;
+    opacity: 0 !important;
+    transform: none !important;
+  }
+
+  .bodyButton,
+  .bodyButton i,
+  .bodyButton a,
+  .lightSwitchButton,
+  .lightSwitchButton i,
+  .scroll-pill::before,
+  .scroll-pill::after,
+  .project-library-nav-btn {
+    transition: none !important;
+  }
+
+  .bodyButton.hover-btn:hover,
+  .bodyButton.hover-btn:focus-within,
+  .bodyButton a:active,
+  .lightSwitchButton:hover,
+  .lightSwitchButton:focus-visible,
+  .lightSwitchButton:active,
+  #darkModeBtn.is-theme-toggle-swapping #darkModeIcon {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  #darkModeBtn.lightSwitchButton:hover i,
+  #darkModeBtn.lightSwitchButton:focus-visible i,
+  #darkModeBtn.lightSwitchButton:active i,
+  #mountainToggleBtn.lightSwitchButton:hover i,
+  #mountainToggleBtn.lightSwitchButton:focus-visible i,
+  #mountainToggleBtn.lightSwitchButton:active i,
+  .bodyButton--resume.hover-btn:hover i,
+  .bodyButton--resume.hover-btn:focus-within i,
+  .bodyButton--resume.hover-btn:active i,
+  .bodyButton--art.hover-btn:hover i,
+  .bodyButton--art.hover-btn:focus-within i,
+  .bodyButton--art.hover-btn:active i,
+  .bodyButton--music.hover-btn:hover i,
+  .bodyButton--music.hover-btn:focus-within i,
+  .bodyButton--music.hover-btn:active i,
+  .scroll-pill:hover::before,
+  .scroll-pill:focus-visible::before,
+  .scroll-pill:hover::after,
+  .scroll-pill:focus-visible::after,
+  .scroll-pill:active::after,
+  #project-library-prev:hover:not(:disabled),
+  #project-library-prev:focus-visible:not(:disabled),
+  #project-library-next:hover:not(:disabled),
+  #project-library-next:focus-visible:not(:disabled),
+  #project-library-prev:active:not(:disabled),
+  #project-library-next:active:not(:disabled) {
+    transform: none !important;
+  }
+
+  .art-lightbox-parallax {
+    transition: none !important;
+    transform: perspective(1100px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1) !important;
+  }
+
+  .art-lightbox-slide-wrap {
+    transition: none !important;
+    transform: translateX(0) !important;
+  }
 }
 
 .profile-picture {
@@ -1618,6 +1903,234 @@ hr{
 }
 
 /* Carousel View CSS */
+
+/* Project library filters: unified category track + language (index) */
+.project-library-controls {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 0.65rem 1rem;
+  margin: 0.35rem 0 0.2rem;
+  min-width: 0;
+}
+
+.project-library-category-slider {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.project-library-category-track {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  gap: 0.18rem;
+  padding: 0.3rem;
+  border: 2px solid rgba(255, 102, 48, 0.55);
+  border-radius: 9999px;
+  background: rgba(255, 102, 48, 0.05);
+  width: max-content;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x proximity;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 102, 48, 0.45) transparent;
+}
+
+.project-library-category-track::-webkit-scrollbar {
+  height: 5px;
+}
+
+.project-library-category-track::-webkit-scrollbar-thumb {
+  background: rgba(255, 102, 48, 0.45);
+  border-radius: 9999px;
+}
+
+.project-library-category-track .project-library-filter-btn {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  margin: 0;
+  border: none;
+  border-radius: 9999px;
+  box-shadow: none;
+  padding: 0.42rem 0.72rem;
+  background: transparent;
+  white-space: nowrap;
+}
+
+.project-library-category-track .project-library-filter-btn:hover,
+.project-library-category-track .project-library-filter-btn:focus-visible {
+  box-shadow: none;
+  background: rgba(255, 102, 48, 0.14);
+}
+
+.project-library-category-track .project-library-filter-btn.is-active {
+  background-color: #ff6630;
+  color: #fff;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.22);
+}
+
+.project-library-lang-inline {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.45rem;
+  min-width: 0;
+  margin-left: auto;
+}
+
+.project-library-lang-inline-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.88;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.project-library-lang-select {
+  display: block;
+  width: auto;
+  min-width: 9.25rem;
+  max-width: min(12.5rem, 36vw);
+  margin-top: 0;
+  box-sizing: border-box;
+  min-height: 2.45rem;
+  padding: 0.45rem 2.5rem 0.45rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: inherit;
+  line-height: 1.25;
+  border-radius: 9999px;
+  border: 2px solid rgba(255, 102, 48, 0.55);
+  background-color: transparent;
+  color: inherit;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='none' stroke='%23ff6630' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' d='M1.5 1.75L6 6.25l4.5-4.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.95rem center;
+  background-size: 0.7rem 0.45rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.project-library-lang-select:hover,
+.project-library-lang-select:focus-visible {
+  border-color: #ff6630;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255, 102, 48, 0.25);
+  background-color: rgba(255, 102, 48, 0.06);
+}
+
+@media (max-width: 480px) {
+  .project-library-lang-inline-label {
+    font-size: 0.65rem;
+  }
+
+  .project-library-category-track .project-library-filter-btn {
+    padding: 0.38rem 0.55rem;
+    font-size: 0.78rem;
+  }
+
+  .project-library-lang-select {
+    min-width: 7.5rem;
+    max-width: min(11rem, 34vw);
+    padding-left: 0.65rem;
+    padding-right: 2.1rem;
+  }
+}
+
+.project-library-filter-btn {
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1.2;
+  padding: 0.45rem 0.85rem;
+  border-radius: 9999px;
+  border: 2px solid rgba(255, 102, 48, 0.55);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.project-library-filter-btn:hover,
+.project-library-filter-btn:focus-visible {
+  border-color: #ff6630;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255, 102, 48, 0.25);
+}
+
+.project-library-filter-btn.is-active {
+  background-color: #ff6630;
+  border-color: #ff6630;
+  color: #fff;
+  box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.project-library-item.is-filtered-out {
+  display: none !important;
+}
+
+.project-library-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem 1.25rem;
+  margin-top: 0.25rem;
+  padding: 0.35rem 0 0.15rem;
+}
+
+.project-library-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 102, 48, 0.55);
+  background: transparent;
+  color: inherit;
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    opacity 0.2s ease,
+    transform 0.28s cubic-bezier(0.34, 1.35, 0.64, 1),
+    box-shadow 0.2s ease;
+}
+
+.project-library-nav-btn:hover:not(:disabled),
+.project-library-nav-btn:focus-visible:not(:disabled) {
+  border-color: #ff6630;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255, 102, 48, 0.25);
+}
+
+.project-library-nav-btn:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+}
+
+.project-library-counter {
+  margin: 0;
+  min-width: 5.5rem;
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  font-variant-numeric: tabular-nums;
+}
 
 .cards {
   display: grid;
@@ -2072,13 +2585,13 @@ hr{
     display: inline-block;
 }
 
-.image-container .tooltip {
-  background-color: rgba(2, 78, 56, 0.90);
-  border: 0.5rem solid #9a310bc9;
-  color: white;
+.gallery .image-container .tooltip {
+  background: rgba(22, 22, 26, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #f4f4f5;
   text-align: center;
-  border-radius: 4px;
-  padding: 5px 10px;
+  border-radius: 10px;
+  padding: 12px 14px;
   position: absolute;
   z-index: 1;
   top: 0;
@@ -2086,19 +2599,493 @@ hr{
   opacity: 0;
   width: 100%;
   height: 100%;
-  display: flex; /* Add display: flex */
-  flex-direction: column; /* Stack elements vertically */
-  align-items: center; /* Center horizontally */
-  justify-content: center; /* Center vertically */
-  transition: opacity 0.3s ease-in-out;
-}
-.tooltip H5{
-  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.22s ease;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
-.image-container:hover .tooltip {
-    opacity: 1;
-    transition: opacity 0.3s ease-in-out; /* Add ease-in-out transition */
+.gallery .tooltip H5,
+.gallery .tooltip h5 {
+  font-weight: 600;
+}
+
+.gallery .image-container:hover .tooltip {
+  opacity: 1;
+  transition: opacity 0.22s ease;
+}
+
+/* Art page — open gallery pieces in a lightbox modal */
+.gallery .image-container[role="button"] {
+  cursor: pointer;
+}
+
+.gallery .image-container[role="button"]:focus {
+  outline: none;
+}
+
+.gallery .image-container[role="button"]:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.45);
+  outline-offset: 3px;
+}
+
+.art-lightbox-modal .modal-backdrop.show {
+  opacity: 0.88;
+}
+
+.art-lightbox-modal__dialog {
+  max-width: min(96vw, 1100px);
+}
+
+.art-lightbox-modal__header {
+  padding: 0.9rem 1rem 1rem !important;
+  gap: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: #141518;
+}
+
+.art-lightbox-modal__title {
+  line-height: 1.35;
+  padding-right: 0.35rem;
+}
+
+.art-lightbox-zoom-tools {
+  gap: 0.25rem;
+}
+
+.art-lightbox-zoom-btn {
+  min-width: 2rem;
+  height: 2rem;
+  padding: 0 0.35rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.07);
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 1.05rem;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.art-lightbox-zoom-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.28);
+  color: #fff;
+}
+
+.art-lightbox-zoom-pct {
+  font-size: 0.72rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+  min-width: 2.85rem;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.65);
+  user-select: none;
+}
+
+.art-lightbox-modal__footer {
+  padding: 1rem 1.25rem 1.35rem !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: #141518;
+}
+
+.art-lightbox-modal__footer .art-lightbox-modal__subtitle {
+  padding-top: 0.2rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  max-width: 42rem;
+}
+
+.art-lightbox-modal__content {
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+}
+
+.art-lightbox-modal__body {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: min(52vh, 560px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 3.5rem !important;
+  padding-right: 3.5rem !important;
+  padding-top: 1.1rem !important;
+  padding-bottom: 1.15rem !important;
+  /* Dark room: warm key centered on the art (avoids top clip under overflow:hidden) */
+  background-color: #060708;
+  background-image:
+    radial-gradient(
+      ellipse 78% 62% at 50% 46%,
+      rgba(238, 226, 202, 0.36) 0%,
+      rgba(210, 195, 172, 0.13) 42%,
+      transparent 68%
+    ),
+    radial-gradient(
+      ellipse 72% 56% at 28% 48%,
+      rgba(222, 208, 186, 0.07) 0%,
+      transparent 52%
+    ),
+    radial-gradient(
+      ellipse 88% 44% at 50% 96%,
+      rgba(200, 182, 158, 0.055) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      circle at 50% 48%,
+      rgba(26, 28, 34, 0) 0%,
+      rgba(4, 4, 6, 0.97) 78%
+    );
+}
+
+/* Large-source diffusion (softer than the tight key; inset stays inside body so it is not sheared flat at the header) */
+.art-lightbox-modal__body::before {
+  content: "";
+  position: absolute;
+  inset: 0 -10% -18%;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(
+    ellipse 92% 80% at 50% 46%,
+    rgba(236, 228, 210, 0.16) 0%,
+    rgba(214, 200, 178, 0.05) 48%,
+    transparent 76%
+  );
+}
+
+/* Vignette + corner falloff (walls read darker than the lit piece) */
+.art-lightbox-modal__body::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(
+      circle at 50% 46%,
+      transparent 0%,
+      transparent 36%,
+      rgba(0, 0, 0, 0.52) 100%
+    ),
+    radial-gradient(circle at 0% 0%, rgba(0, 0, 0, 0.22) 0%, transparent 38%),
+    radial-gradient(circle at 100% 0%, rgba(0, 0, 0, 0.18) 0%, transparent 36%),
+    radial-gradient(circle at 0% 100%, rgba(0, 0, 0, 0.16) 0%, transparent 40%),
+    radial-gradient(circle at 100% 100%, rgba(0, 0, 0, 0.16) 0%, transparent 40%);
+}
+
+.art-lightbox-stage {
+  --art-slide-pad-block: clamp(2rem, 5.5vmin, 3.5rem);
+  --art-slide-pad-inline: clamp(0.75rem, 2.5vmin, 1.5rem);
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-height: min(72vh, 800px);
+  padding: 0.5rem 0;
+  perspective: 1100px;
+  perspective-origin: 50% 40%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Padding keeps mat + box-shadow inside the clip rect (overflow-x hidden is required for slides). */
+.art-lightbox-slide-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-block: var(--art-slide-pad-block);
+  padding-inline: var(--art-slide-pad-inline);
+  overflow-x: hidden;
+  overflow-y: hidden;
+  transform: translateX(0);
+  will-change: transform;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.art-lightbox-stage--slide-busy .art-lightbox-parallax {
+  pointer-events: none;
+  transition: transform 0.12s ease;
+}
+
+.art-lightbox-parallax {
+  display: inline-block;
+  transform-style: preserve-3d;
+  transform: perspective(1100px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1);
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.32, 1);
+  will-change: transform;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.art-lightbox-zoom-layer {
+  display: inline-block;
+  transform-origin: center center;
+  transition: transform 0.12s ease-out;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.art-lightbox--zoomed .art-lightbox-zoom-layer {
+  transition: none;
+}
+
+.art-lightbox-slide-wrap--can-pan {
+  cursor: grab;
+  touch-action: none;
+}
+
+.art-lightbox-slide-wrap--panning {
+  cursor: grabbing;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .art-lightbox-zoom-layer {
+    transition: none !important;
+  }
+}
+
+.art-lightbox-modal__body.art-lightbox--no-motion .art-lightbox-parallax {
+  transition: none !important;
+  transform: perspective(1100px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1) !important;
+}
+
+.art-lightbox-modal__body.art-lightbox--no-slide .art-lightbox-slide-wrap {
+  transition: none !important;
+}
+
+/* Neutral mat + charcoal moulding — works on light and dark subjects */
+.art-lightbox-img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  max-width: 100%;
+  /* Stay inside stage max-height after slide-wrap padding + stage padding (shadow paints in padding). */
+  max-height: min(
+    calc(72vh - 2 * var(--art-slide-pad-block, 2rem) - 1.25rem),
+    calc(800px - 2 * var(--art-slide-pad-block, 2rem) - 1.25rem)
+  );
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 1px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.22),
+    0 0 0 1px rgba(24, 24, 26, 0.94),
+    0 0 0 10px rgba(232, 232, 230, 0.96),
+    0 0 0 11px rgba(58, 58, 62, 0.92),
+    0 0 0 12px rgba(0, 0, 0, 0.38),
+    0 18px 46px rgba(0, 0, 0, 0.48),
+    0 0 72px rgba(255, 255, 255, 0.035);
+}
+
+/* Transparent site logo: solid plate behind PNG so modal spotlight does not show through */
+.art-lightbox-img.art-lightbox-img--logo-back {
+  background-color: #030303;
+}
+
+.art-lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  width: 2.85rem;
+  height: 2.85rem;
+  padding: 0;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 102, 48, 0.55);
+  background: rgba(0, 0, 0, 0.55);
+  color: #ff6630;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.75rem;
+  line-height: 1;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.art-lightbox-nav:hover:not(:disabled),
+.art-lightbox-nav:focus {
+  outline: none;
+  background: rgba(255, 102, 48, 0.24);
+  border-color: #ff6630;
+  color: #fff;
+}
+
+.art-lightbox-nav:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.art-lightbox-nav--prev {
+  left: 0.55rem;
+}
+
+.art-lightbox-nav--next {
+  right: 0.55rem;
+}
+
+.art-lightbox-nav__chevron {
+  display: block;
+  margin-top: -0.06em;
+}
+
+#dark-mode-bg[style*="background: black"] .art-lightbox-modal__content,
+#dark-mode-bg[style*="rgb(0, 0, 0)"] .art-lightbox-modal__content {
+  background: #1a1a1a;
+}
+
+#dark-mode-bg[style*="background: white"] .art-lightbox-modal__body,
+#dark-mode-bg[style*="rgb(255, 255, 255)"] .art-lightbox-modal__body {
+  background-color: #c9c7c4;
+  background-image:
+    radial-gradient(
+      ellipse 76% 58% at 50% 46%,
+      rgba(248, 238, 218, 0.55) 0%,
+      rgba(228, 212, 190, 0.22) 44%,
+      transparent 68%
+    ),
+    radial-gradient(
+      ellipse 70% 52% at 26% 48%,
+      rgba(232, 216, 194, 0.09) 0%,
+      transparent 52%
+    ),
+    radial-gradient(
+      ellipse 92% 42% at 50% 94%,
+      rgba(220, 202, 180, 0.08) 0%,
+      transparent 54%
+    ),
+    radial-gradient(
+      circle at 50% 44%,
+      rgba(210, 208, 206, 0) 0%,
+      rgba(130, 128, 132, 0.55) 78%
+    );
+}
+
+#dark-mode-bg[style*="background: white"] .art-lightbox-modal__body::before,
+#dark-mode-bg[style*="rgb(255, 255, 255)"] .art-lightbox-modal__body::before {
+  background: radial-gradient(
+    ellipse 92% 78% at 50% 46%,
+    rgba(244, 234, 214, 0.28) 0%,
+    rgba(224, 208, 186, 0.08) 50%,
+    transparent 78%
+  );
+}
+
+#dark-mode-bg[style*="background: white"] .art-lightbox-modal__body::after,
+#dark-mode-bg[style*="rgb(255, 255, 255)"] .art-lightbox-modal__body::after {
+  background:
+    radial-gradient(
+      circle at 50% 46%,
+      transparent 0%,
+      transparent 36%,
+      rgba(85, 82, 88, 0.22) 100%
+    ),
+    radial-gradient(circle at 0% 0%, rgba(70, 68, 74, 0.12) 0%, transparent 36%),
+    radial-gradient(circle at 100% 0%, rgba(70, 68, 74, 0.1) 0%, transparent 34%);
+}
+
+#dark-mode-bg[style*="background: white"] .art-lightbox-img,
+#dark-mode-bg[style*="rgb(255, 255, 255)"] .art-lightbox-img {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.65),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.2),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.12),
+    0 0 0 1px rgba(42, 42, 44, 0.88),
+    0 0 0 10px rgba(248, 248, 246, 0.98),
+    0 0 0 11px rgba(96, 96, 100, 0.88),
+    0 0 0 12px rgba(0, 0, 0, 0.12),
+    0 18px 42px rgba(0, 0, 0, 0.18),
+    0 0 64px rgba(255, 255, 255, 0.45);
+}
+
+#dark-mode-bg[style*="background: white"] .art-lightbox-img.art-lightbox-img--logo-back,
+#dark-mode-bg[style*="rgb(255, 255, 255)"] .art-lightbox-img.art-lightbox-img--logo-back {
+  background-color: #030303;
+  box-shadow:
+    inset 0 0 0 1px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(42, 42, 44, 0.88),
+    0 0 0 10px rgba(248, 248, 246, 0.98),
+    0 0 0 11px rgba(96, 96, 100, 0.88),
+    0 0 0 12px rgba(0, 0, 0, 0.12),
+    0 18px 42px rgba(0, 0, 0, 0.18),
+    0 0 64px rgba(255, 255, 255, 0.45);
+}
+
+#dark-mode-bg[style*="background: white"] .art-lightbox-modal__header,
+#dark-mode-bg[style*="rgb(255, 255, 255)"] .art-lightbox-modal__header {
+  background: #eceae7;
+  border-bottom-color: rgba(0, 0, 0, 0.1);
+}
+
+#dark-mode-bg[style*="background: white"] .art-lightbox-modal__footer,
+#dark-mode-bg[style*="rgb(255, 255, 255)"] .art-lightbox-modal__footer {
+  background: #eceae7;
+  border-top-color: rgba(0, 0, 0, 0.1);
+}
+
+#dark-mode-bg[style*="background: white"] .art-lightbox-zoom-btn,
+#dark-mode-bg[style*="rgb(255, 255, 255)"] .art-lightbox-zoom-btn {
+  border-color: rgba(0, 0, 0, 0.14);
+  background: rgba(255, 255, 255, 0.65);
+  color: #1c1c1f;
+}
+
+#dark-mode-bg[style*="background: white"] .art-lightbox-zoom-btn:hover,
+#dark-mode-bg[style*="rgb(255, 255, 255)"] .art-lightbox-zoom-btn:hover {
+  background: #fff;
+  border-color: rgba(0, 0, 0, 0.22);
+  color: #000;
+}
+
+#dark-mode-bg[style*="background: white"] .art-lightbox-zoom-pct,
+#dark-mode-bg[style*="rgb(255, 255, 255)"] .art-lightbox-zoom-pct {
+  color: rgba(0, 0, 0, 0.55);
+}
+
+.art-lightbox-modal__header .close {
+  opacity: 0.85;
+}
+
+.art-lightbox-modal__header .close:hover {
+  opacity: 1;
 }
 
   /* .hidden {

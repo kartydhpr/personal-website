@@ -44,6 +44,96 @@ if (darkModeBtn) darkModeBtn.addEventListener("click", toggleDarkMode);
 var pressed = null; // variable tracks how many times the dark mode button was pressed
 console.log(pressed);
 
+/** After first paint, theme icon swaps use a short fade instead of an instant glyph flip. */
+let themeToggleIconAnimationEnabled = false;
+
+/** Wait for fade-out to finish before swapping glyph + fading in (matches CSS ~0.5s + buffer). */
+const THEME_ICON_SWAP_MS = 540;
+
+/**
+ * Updates moon/sun icon (optional fade), label, and aria-label.
+ * When `animate` is true, only the icon fades; label and aria update immediately.
+ * @param {boolean} showMoon True when dark theme is active (moon icon).
+ * @param {{ animate?: boolean }} [options]
+ */
+function setDarkModeIconState(showMoon, options = {}) {
+  const { animate = true } = options;
+  const icon = document.getElementById("darkModeIcon");
+  const btn = document.getElementById("darkModeBtn");
+  const text = document.getElementById("darkModeText");
+
+  const applyTextAndAria = () => {
+    if (text) {
+      text.textContent = showMoon ? "Dark Mode" : "Light Mode";
+    }
+    if (btn) {
+      btn.setAttribute(
+        "aria-label",
+        showMoon ? "Switch to light mode" : "Switch to dark mode"
+      );
+    }
+  };
+
+  const applyIconClasses = () => {
+    if (!icon) return;
+    if (showMoon) {
+      icon.classList.remove("fa-sun");
+      icon.classList.add("fa-moon");
+    } else {
+      icon.classList.remove("fa-moon");
+      icon.classList.add("fa-sun");
+    }
+  };
+
+  const revealIcon = () => {
+    if (!btn) return;
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        btn.classList.remove("is-theme-toggle-swapping");
+      });
+    });
+  };
+
+  const applyAllImmediate = () => {
+    applyIconClasses();
+    applyTextAndAria();
+  };
+
+  if (!btn) {
+    return;
+  }
+
+  if (!icon) {
+    applyTextAndAria();
+    return;
+  }
+
+  const motionOk =
+    typeof window.matchMedia === "function" &&
+    !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const useMotion = Boolean(animate && motionOk);
+
+  if (!useMotion) {
+    btn.classList.remove("is-theme-toggle-swapping");
+    window.clearTimeout(btn._themeIconSwapTimer);
+    applyAllImmediate();
+    return;
+  }
+
+  btn.classList.remove("is-theme-toggle-swapping");
+  window.clearTimeout(btn._themeIconSwapTimer);
+
+  applyTextAndAria();
+
+  btn.classList.add("is-theme-toggle-swapping");
+
+  btn._themeIconSwapTimer = window.setTimeout(() => {
+    applyIconClasses();
+    revealIcon();
+  }, THEME_ICON_SWAP_MS);
+}
+
 // uncomment both lines when time based switching is inactive and you want dark mode as default
 pressed += 1; 
 toggleDarkMode();
@@ -76,6 +166,9 @@ function toggleDarkMode() {
   } else {
     pressed += 1;
   }
+
+  const shouldAnimateThemeIcon = themeToggleIconAnimationEnabled;
+  themeToggleIconAnimationEnabled = true;
 
   console.log(
     "Dark mode button pressed " +
@@ -115,18 +208,8 @@ function toggleDarkMode() {
 
     nav.style.backgroundColor = COLOR_CONFIG.navBackground;
 
-    // Update icon to moon (dark mode is active)
-    const darkModeIcon = document.getElementById("darkModeIcon");
-    const darkModeText = document.getElementById("darkModeText");
-    if (darkModeIcon) {
-      darkModeIcon.classList.remove("fa-sun");
-      darkModeIcon.classList.add("fa-moon");
-    }
-    if (darkModeText) {
-      darkModeText.textContent = "Dark Mode";
-    }
-    document.getElementById("darkModeBtn").setAttribute("aria-label", "Switch to light mode");
-    
+    setDarkModeIconState(true, { animate: shouldAnimateThemeIcon });
+
     // Changing background color of card elements
     for (let card of cardElements) {
       if (card.classList.contains("duffel-tile")) continue;
@@ -172,17 +255,8 @@ function toggleDarkMode() {
 
     nav.style.backgroundColor = COLOR_CONFIG.navBackground;
 
-    // Update icon to sun (light mode is active)
-    const darkModeIcon = document.getElementById("darkModeIcon");
-    const darkModeText = document.getElementById("darkModeText");
-    if (darkModeIcon) {
-      darkModeIcon.classList.remove("fa-moon");
-      darkModeIcon.classList.add("fa-sun");
-    }
-    if (darkModeText) {
-      darkModeText.textContent = "Light Mode";
-    }
-    document.getElementById("darkModeBtn").setAttribute("aria-label", "Switch to dark mode");
+    setDarkModeIconState(false, { animate: shouldAnimateThemeIcon });
+
     for (let card of cardElements) {
       if (card.classList.contains("duffel-tile")) continue;
       card.style.background = colors.cardBackground;
@@ -504,9 +578,12 @@ function wrapLazyMediaPlaceholders() {
     if (!img.hasAttribute("decoding")) img.setAttribute("decoding", "async");
   }
 
-  document
-    .querySelectorAll(".image-container > img")
-    .forEach((img) => wrapImg(img, "lazy-context-art"));
+  document.querySelectorAll(".image-container > img").forEach((img) => {
+    /* Large JPEG gallery: skip lazy wrapper + second pass below — avoids shimmer
+       reappearing and native lazy eviction that reads like “unload” while scrolling. */
+    if (img.closest("#art-photographs-gallery")) return;
+    wrapImg(img, "lazy-context-art");
+  });
   document
     .querySelectorAll(".polaroid-frame > img")
     .forEach((img) => wrapImg(img, "lazy-context-polaroid"));
@@ -520,6 +597,7 @@ function wrapLazyMediaPlaceholders() {
     if (img.closest(".lazy-image-wrap")) return;
     if (img.id === "albumCover") return;
     if (img.closest(".navbar")) return;
+    if (img.closest("#art-photographs-gallery")) return;
     wrapImg(img, "lazy-context-inline");
   });
 }
@@ -760,3 +838,236 @@ if (gallery) {
   scrollGalleryToStart();
   window.addEventListener("load", scrollGalleryToStart, { once: true });
 }
+
+(function initProjectLibrary() {
+  const grid = document.getElementById("project-library-grid");
+  if (!grid) return;
+
+  const items = grid.querySelectorAll(".project-library-item");
+  const filterButtons = document.querySelectorAll(
+    ".project-library-filter-btn[data-project-filter]"
+  );
+  const langSelect = document.getElementById("project-library-lang-select");
+  const categoryTrack = document.querySelector(".project-library-category-track");
+  var categoryFilter = "all";
+  var langFilter = "all";
+  const prevBtn = document.getElementById("project-library-prev");
+  const nextBtn = document.getElementById("project-library-next");
+  const counterEl = document.getElementById("project-library-counter");
+
+  function visibleItems() {
+    return Array.prototype.filter.call(items, function (li) {
+      return !li.classList.contains("is-filtered-out");
+    });
+  }
+
+  function activeCardIndex() {
+    var vis = visibleItems();
+    if (!vis.length) return 0;
+    var sl = grid.scrollLeft;
+    var sr = sl + grid.clientWidth;
+    var best = 0;
+    var maxVis = -1;
+    for (var i = 0; i < vis.length; i++) {
+      var el = vis[i];
+      var l = el.offsetLeft;
+      var r = l + el.offsetWidth;
+      var w = Math.max(0, Math.min(r, sr) - Math.max(l, sl));
+      if (w > maxVis) {
+        maxVis = w;
+        best = i;
+      }
+    }
+    if (maxVis <= 0) {
+      var mid = sl + grid.clientWidth * 0.5;
+      var bestD = Infinity;
+      for (var j = 0; j < vis.length; j++) {
+        var e = vis[j];
+        var c = e.offsetLeft + e.offsetWidth / 2;
+        var d = Math.abs(c - mid);
+        if (d < bestD) {
+          bestD = d;
+          best = j;
+        }
+      }
+    }
+    return best;
+  }
+
+  function scrollToVisibleIndex(index, behavior) {
+    var vis = visibleItems();
+    if (!vis.length) return;
+    var n = vis.length;
+    var i = Math.max(0, Math.min(index, n - 1));
+    vis[i].scrollIntoView({
+      inline: "start",
+      block: "nearest",
+      behavior: behavior || "smooth",
+    });
+  }
+
+  function syncNav() {
+    var vis = visibleItems();
+    var n = vis.length;
+    var idx = activeCardIndex();
+    if (counterEl) {
+      if (n === 0) {
+        counterEl.textContent = "0 / 0";
+      } else {
+        counterEl.textContent = idx + 1 + " / " + n;
+      }
+    }
+    if (prevBtn) {
+      prevBtn.disabled = n <= 1 || idx <= 0;
+    }
+    if (nextBtn) {
+      nextBtn.disabled = n <= 1 || idx >= n - 1;
+    }
+  }
+
+  var navRaf = null;
+  function scheduleSyncNav() {
+    if (navRaf !== null) return;
+    navRaf = window.requestAnimationFrame(function () {
+      navRaf = null;
+      syncNav();
+    });
+  }
+
+  var LANG_OPTIONS = [
+    { value: "swift", label: "Swift" },
+    { value: "java", label: "Java" },
+    { value: "python", label: "Python" },
+    { value: "javascript", label: "JavaScript" },
+    { value: "html", label: "HTML" },
+    { value: "css", label: "CSS" },
+    { value: "csharp", label: "C#" },
+    { value: "cpp", label: "C++" },
+  ];
+
+  function itemPassesCategoryOnly(li, cat) {
+    if (cat === "all") return true;
+    var raw = li.getAttribute("data-project-tags") || "";
+    var tags = raw.split(/\s+/).filter(Boolean);
+    return tags.indexOf(cat) !== -1;
+  }
+
+  function languageSlugsAvailableForCategory(cat) {
+    var allowed = {};
+    Array.prototype.forEach.call(items, function (li) {
+      if (!itemPassesCategoryOnly(li, cat)) return;
+      var langs = (li.getAttribute("data-project-languages") || "")
+        .split(/\s+/)
+        .filter(Boolean);
+      langs.forEach(function (slug) {
+        allowed[slug] = true;
+      });
+    });
+    return allowed;
+  }
+
+  function syncLanguageOptionsForCategory(cat) {
+    if (!langSelect) return;
+    var allowed = languageSlugsAvailableForCategory(cat);
+    var nextLang = langFilter;
+    if (nextLang !== "all" && !allowed[nextLang]) {
+      nextLang = "all";
+      langFilter = "all";
+    }
+    langSelect.innerHTML = "";
+    var optAll = document.createElement("option");
+    optAll.value = "all";
+    optAll.textContent = "All languages";
+    langSelect.appendChild(optAll);
+    LANG_OPTIONS.forEach(function (entry) {
+      if (!allowed[entry.value]) return;
+      var opt = document.createElement("option");
+      opt.value = entry.value;
+      opt.textContent = entry.label;
+      langSelect.appendChild(opt);
+    });
+    langSelect.value = nextLang;
+    langFilter = langSelect.value || "all";
+  }
+
+  function passesCategory(li) {
+    if (categoryFilter === "all") return true;
+    var raw = li.getAttribute("data-project-tags") || "";
+    var tags = raw.split(/\s+/).filter(Boolean);
+    return tags.indexOf(categoryFilter) !== -1;
+  }
+
+  function passesLanguage(li) {
+    if (langFilter === "all") return true;
+    var raw = li.getAttribute("data-project-languages") || "";
+    var langs = raw.split(/\s+/).filter(Boolean);
+    return langs.indexOf(langFilter) !== -1;
+  }
+
+  function applyFilters() {
+    syncLanguageOptionsForCategory(categoryFilter);
+
+    items.forEach(function (li) {
+      if (passesCategory(li) && passesLanguage(li)) {
+        li.classList.remove("is-filtered-out");
+      } else {
+        li.classList.add("is-filtered-out");
+      }
+    });
+
+    filterButtons.forEach(function (btn) {
+      var f = btn.getAttribute("data-project-filter") || "all";
+      var isActive = f === categoryFilter;
+      btn.classList.toggle("is-active", isActive);
+      btn.setAttribute("aria-pressed", isActive ? "true" : "false");
+    });
+
+    if (categoryTrack) {
+      var activeSeg = categoryTrack.querySelector(
+        ".project-library-filter-btn.is-active"
+      );
+      if (activeSeg) {
+        activeSeg.scrollIntoView({
+          inline: "nearest",
+          block: "nearest",
+          behavior: prefersReducedMotion() ? "auto" : "smooth",
+        });
+      }
+    }
+
+    grid.scrollLeft = 0;
+    scrollToVisibleIndex(0, "auto");
+    syncNav();
+  }
+
+  filterButtons.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      categoryFilter = btn.getAttribute("data-project-filter") || "all";
+      applyFilters();
+    });
+  });
+
+  if (langSelect) {
+    langSelect.addEventListener("change", function () {
+      langFilter = langSelect.value || "all";
+      applyFilters();
+    });
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener("click", function () {
+      scrollToVisibleIndex(activeCardIndex() - 1);
+    });
+  }
+  if (nextBtn) {
+    nextBtn.addEventListener("click", function () {
+      scrollToVisibleIndex(activeCardIndex() + 1);
+    });
+  }
+
+  grid.addEventListener("scroll", scheduleSyncNav, { passive: true });
+  grid.addEventListener("scrollend", syncNav);
+  window.addEventListener("resize", scheduleSyncNav);
+
+  applyFilters();
+})();
