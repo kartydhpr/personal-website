@@ -899,9 +899,10 @@ if (gallery) {
     if (!vis.length) return;
     var n = vis.length;
     var i = Math.max(0, Math.min(index, n - 1));
-    vis[i].scrollIntoView({
-      inline: "start",
-      block: "nearest",
+    var target = vis[i];
+    var nextLeft = Math.max(0, target.offsetLeft - grid.offsetLeft);
+    grid.scrollTo({
+      left: nextLeft,
       behavior: behavior || "smooth",
     });
   }
@@ -1027,9 +1028,9 @@ if (gallery) {
         ".project-library-filter-btn.is-active"
       );
       if (activeSeg) {
-        activeSeg.scrollIntoView({
-          inline: "nearest",
-          block: "nearest",
+        var segLeft = Math.max(0, activeSeg.offsetLeft - categoryTrack.offsetLeft);
+        categoryTrack.scrollTo({
+          left: segLeft,
           behavior: prefersReducedMotion() ? "auto" : "smooth",
         });
       }
