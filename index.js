@@ -32,7 +32,7 @@ var headers = document.getElementsByClassName("header");
 var greeting = document.getElementsByClassName("title");
 var nav = document.getElementById("dark-mode-nav");
 var lp = document.getElementById("landingPage");
-var cardElements = document.getElementsByClassName("card");
+var cardElements = document.querySelectorAll(".card, .this-site-card");
 
 console.log("How's it going hackers.");
 console.log("Today's date is: " + today);
@@ -1071,4 +1071,39 @@ if (gallery) {
   window.addEventListener("resize", scheduleSyncNav);
 
   applyFilters();
+})();
+
+(function initIndexPolaroidParallax() {
+  const polaroids = document.querySelectorAll(".polaroid-wrapper--scroll-parallax");
+  if (!polaroids.length) return;
+
+  let ticking = false;
+
+  function applyParallax() {
+    ticking = false;
+    if (prefersReducedMotion()) {
+      polaroids.forEach((el) => el.style.removeProperty("--polaroid-parallax-y"));
+      return;
+    }
+
+    const viewportHeight = window.innerHeight;
+    polaroids.forEach((el) => {
+      const rate = el.classList.contains("polaroid-wrapper--tilt-cw") ? 0.12 : 0.12;
+      const rect = el.getBoundingClientRect();
+      const centerOffset = rect.top + rect.height * 0.5 - viewportHeight * 0.5;
+      const y = centerOffset * rate;
+      el.style.setProperty("--polaroid-parallax-y", `${y.toFixed(2)}px`);
+    });
+  }
+
+  function scheduleParallax() {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(applyParallax);
+    }
+  }
+
+  window.addEventListener("scroll", scheduleParallax, { passive: true });
+  window.addEventListener("resize", scheduleParallax, { passive: true });
+  applyParallax();
 })();

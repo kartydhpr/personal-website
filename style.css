@@ -692,7 +692,7 @@ body, #dark-mode-bg {
   font-size: 1rem;
   border: 3px solid #00ff7f;
   border-radius: 25px;
-  box-shadow: 0px 0px 10px #00ff7f;
+  box-shadow: none;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1902,6 +1902,79 @@ hr{
   transition: background-color 0.5s ease-in-out;
 }
 
+/* Programming + Project Library band (dark mode only) */
+#dark-mode-bg[style*="background: black"] .programming-zone,
+#dark-mode-bg[style*="rgb(0, 0, 0)"] .programming-zone,
+nav.navbar-dark ~ main .programming-zone {
+  --programming-zone-bg: #06160e;
+  --programming-zone-card-bg: #142b22;
+  background-color: var(--programming-zone-bg);
+  background-image: linear-gradient(
+    to bottom,
+    #000000 0%,
+    #000000 22%,
+    #020a07 31%,
+    #04100a 41%,
+    var(--programming-zone-bg) 56%,
+    var(--programming-zone-bg) 100%
+  );
+  padding: 2.5rem 0 3rem;
+  transition: background 0.5s ease-in-out;
+}
+
+#dark-mode-bg[style*="background: black"] .programming-zone hr,
+#dark-mode-bg[style*="rgb(0, 0, 0)"] .programming-zone hr,
+nav.navbar-dark ~ main .programming-zone hr {
+  background-color: rgba(28, 231, 131, 0.22);
+}
+
+#dark-mode-bg[style*="background: black"] .programming-zone .dark-mode-text,
+#dark-mode-bg[style*="rgb(0, 0, 0)"] .programming-zone .dark-mode-text,
+nav.navbar-dark ~ main .programming-zone .dark-mode-text {
+  color: #f0f7f3 !important;
+}
+
+#dark-mode-bg[style*="background: black"] .programming-zone .header,
+#dark-mode-bg[style*="rgb(0, 0, 0)"] .programming-zone .header,
+nav.navbar-dark ~ main .programming-zone .header {
+  color: #1ce783 !important;
+}
+
+#dark-mode-bg[style*="background: black"] .programming-zone .card,
+#dark-mode-bg[style*="background: black"] .programming-zone .this-site-card,
+#dark-mode-bg[style*="rgb(0, 0, 0)"] .programming-zone .card,
+#dark-mode-bg[style*="rgb(0, 0, 0)"] .programming-zone .this-site-card,
+nav.navbar-dark ~ main .programming-zone .card,
+nav.navbar-dark ~ main .programming-zone .this-site-card {
+  background: var(--programming-zone-card-bg) !important;
+  transition: background-color 0.5s ease-in-out;
+}
+
+#dark-mode-bg[style*="background: black"] .programming-zone .cards::-webkit-scrollbar,
+#dark-mode-bg[style*="rgb(0, 0, 0)"] .programming-zone .cards::-webkit-scrollbar,
+nav.navbar-dark ~ main .programming-zone .cards::-webkit-scrollbar {
+  background: rgba(18, 40, 32, 0.55);
+}
+
+#dark-mode-bg[style*="background: black"] .programming-zone .pub1,
+#dark-mode-bg[style*="rgb(0, 0, 0)"] .programming-zone .pub1,
+nav.navbar-dark ~ main .programming-zone .pub1 {
+  background-color: var(--programming-zone-card-bg);
+  transition: background-color 0.2s ease;
+}
+
+#dark-mode-bg[style*="background: black"] .programming-zone .pub1:hover,
+#dark-mode-bg[style*="rgb(0, 0, 0)"] .programming-zone .pub1:hover,
+nav.navbar-dark ~ main .programming-zone .pub1:hover {
+  background-color: #ff67304f;
+}
+
+#dark-mode-bg[style*="background: black"] .programming-zone .pub1 h5,
+#dark-mode-bg[style*="rgb(0, 0, 0)"] .programming-zone .pub1 h5,
+nav.navbar-dark ~ main .programming-zone .pub1 h5 {
+  color: #f0f7f3;
+}
+
 /* Carousel View CSS */
 
 /* Project library filters: unified category track + language (index) */
@@ -2156,7 +2229,7 @@ hr{
 .this-site-card {
   display: flex;
   flex-direction: column;
-  background: #00FFFFFF;
+  background: #ffffff;
   padding: 20px;
   border-radius: 25px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 15%);
@@ -3097,6 +3170,28 @@ hr{
   width: 85%;
   margin: 0 auto;
   display: block;
+}
+
+.polaroid-wrapper--scroll-parallax {
+  padding-top: 4rem;
+  will-change: transform;
+  transform: translate3d(0, var(--polaroid-parallax-y, 0px), 0)
+    rotate(var(--polaroid-tilt, 0deg));
+}
+
+.polaroid-wrapper--tilt-cw {
+  --polaroid-tilt: 3deg;
+}
+
+.polaroid-wrapper--tilt-ccw {
+  --polaroid-tilt: -3deg;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .polaroid-wrapper--scroll-parallax {
+    will-change: auto;
+    transform: rotate(var(--polaroid-tilt, 0deg));
+  }
 }
 
 .polaroid-frame {
