@@ -2,32 +2,19 @@
 // Date: May 5th 2022 @ 4:16am
 // About: Javascript program that switches website to darkmode during nighttime amongst other things.
 
-// ============================================
-// COLOR CONFIGURATION - Easy to experiment with!
-// ============================================
+// Site theme colors (dark theme only — no toggle)
 const COLOR_CONFIG = {
-  // Dark Mode Colors
-  darkMode: {
-    background: "black",
-    text: "white",
-    header: "#1ce783",        // Bright green for headers
-    cardBackground: "#3C4042" // Dark gray for cards
-  },
-  // Light Mode Colors
-  lightMode: {
-    background: "white",
-    text: "black",
-    header: "#03e976",        // Green for headers
-    cardBackground: "#ffffff"   // White for cards
-  },
-  // Shared Colors
-  navBackground: "rgba(0, 255, 255, 0)", // Transparent cyan
-  scrollProgress: "#ff6630"                // Orange for scroll bar
+  background: "black",
+  text: "white",
+  header: "#1ce783",
+  cardBackground: "#3C4042",
+  navBackground: "rgba(0, 255, 255, 0)",
+  scrollProgress: "#ff6630",
 };
 
 var today = new Date();
 var bg = document.getElementById("dark-mode-bg");
-var texts = document.getElementsByClassName("dark-mode-text"); // stored as an array since multiple classes with words are stored
+var texts = document.getElementsByClassName("dark-mode-text");
 var headers = document.getElementsByClassName("header");
 var greeting = document.getElementsByClassName("title");
 var nav = document.getElementById("dark-mode-nav");
@@ -37,238 +24,52 @@ var cardElements = document.querySelectorAll(".card, .this-site-card");
 console.log("How's it going hackers.");
 console.log("Today's date is: " + today);
 
-// code for dark mode
+function applySiteTheme() {
+  if (!bg) return;
 
-const darkModeBtn = document.getElementById("darkModeBtn");
-if (darkModeBtn) darkModeBtn.addEventListener("click", toggleDarkMode);
-var pressed = null; // variable tracks how many times the dark mode button was pressed
-console.log(pressed);
-
-/** After first paint, theme icon swaps use a short fade instead of an instant glyph flip. */
-let themeToggleIconAnimationEnabled = false;
-
-/** Wait for fade-out to finish before swapping glyph + fading in (matches CSS ~0.5s + buffer). */
-const THEME_ICON_SWAP_MS = 540;
-
-/**
- * Updates moon/sun icon (optional fade), label, and aria-label.
- * When `animate` is true, only the icon fades; label and aria update immediately.
- * @param {boolean} showMoon True when dark theme is active (moon icon).
- * @param {{ animate?: boolean }} [options]
- */
-function setDarkModeIconState(showMoon, options = {}) {
-  const { animate = true } = options;
-  const icon = document.getElementById("darkModeIcon");
-  const btn = document.getElementById("darkModeBtn");
-  const text = document.getElementById("darkModeText");
-
-  const applyTextAndAria = () => {
-    if (text) {
-      text.textContent = showMoon ? "Dark Mode" : "Light Mode";
-    }
-    if (btn) {
-      btn.setAttribute(
-        "aria-label",
-        showMoon ? "Switch to light mode" : "Switch to dark mode"
-      );
-    }
-  };
-
-  const applyIconClasses = () => {
-    if (!icon) return;
-    if (showMoon) {
-      icon.classList.remove("fa-sun");
-      icon.classList.add("fa-moon");
-    } else {
-      icon.classList.remove("fa-moon");
-      icon.classList.add("fa-sun");
-    }
-  };
-
-  const revealIcon = () => {
-    if (!btn) return;
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        btn.classList.remove("is-theme-toggle-swapping");
-      });
-    });
-  };
-
-  const applyAllImmediate = () => {
-    applyIconClasses();
-    applyTextAndAria();
-  };
-
-  if (!btn) {
-    return;
+  try {
+    if (lp) lp.classList.add("bg-dark");
+  } catch {
+    console.log("Website landing page not on this page.");
   }
 
-  if (!icon) {
-    applyTextAndAria();
-    return;
+  bg.style.backgroundColor = COLOR_CONFIG.background;
+
+  for (let text of texts) {
+    if (text.closest && text.closest("#landingPage")) continue;
+    if (text.closest && text.closest(".programming-zone")) continue;
+    text.style.color = COLOR_CONFIG.text;
   }
 
-  const motionOk =
-    typeof window.matchMedia === "function" &&
-    !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  const useMotion = Boolean(animate && motionOk);
-
-  if (!useMotion) {
-    btn.classList.remove("is-theme-toggle-swapping");
-    window.clearTimeout(btn._themeIconSwapTimer);
-    applyAllImmediate();
-    return;
+  for (let header of headers) {
+    if (header.closest && header.closest(".programming-zone")) continue;
+    header.style.color = COLOR_CONFIG.header;
   }
 
-  btn.classList.remove("is-theme-toggle-swapping");
-  window.clearTimeout(btn._themeIconSwapTimer);
-
-  applyTextAndAria();
-
-  btn.classList.add("is-theme-toggle-swapping");
-
-  btn._themeIconSwapTimer = window.setTimeout(() => {
-    applyIconClasses();
-    revealIcon();
-  }, THEME_ICON_SWAP_MS);
-}
-
-// uncomment both lines when time based switching is inactive and you want dark mode as default
-pressed += 1; 
-toggleDarkMode();
-
-// // if-statement handles site-wide dark mode implementation only if its after 5:59pm or before 7 am
-// if (today.getHours() > 17 || today.getHours() < 7 )
-// {
-// 	 console.log("Shhh it's night time. Everyone is sleeping...")
-// 	 console.log("~ Switching to nightmode ~")
-
-// 	 try
-// 	 {
-// 		document.getElementById("toggle-notification").textContent = "It's night time, dark mode is active.";
-// 	 }
-// 	 catch(e)
-// 	 {
-// 		console.log("No headline on this page to update")
-// 	 }
-// 	 finally
-// 	 {
-// 		pressed += 1 // adds 1 to pressed counter so when toggleDarkMode() is executed variable is even.
-// 		toggleDarkMode();
-// 	 }
-// }
-
-function toggleDarkMode() {
-  if (pressed == null) {
-    // adds 2 to the pressed counter when its day-time and the button hasn't been pressed so that the first time the button is pressed the value is an even 2 and not null or 0
-    pressed += 2;
-  } else {
-    pressed += 1;
+  for (let i of greeting) {
+    i.style.color = COLOR_CONFIG.header;
   }
 
-  const shouldAnimateThemeIcon = themeToggleIconAnimationEnabled;
-  themeToggleIconAnimationEnabled = true;
-
-  console.log(
-    "Dark mode button pressed " +
-      pressed +
-      " times. (even = dark , odd = light)"
-  );
-
-  if (pressed % 2 == 0) {
-    //dark mode is only toggled on when the value of the "pressed" variable is even
-    const colors = COLOR_CONFIG.darkMode;
-    
-    try {
-      lp.classList.add("bg-dark");
-    } catch {
-      console.log("Website landing page not on this page");
-    } finally {
-      bg.style.backgroundColor = colors.background;
-    }
-    //Changing text to dark mode with white text
-    for (let text of texts) { // for-loop iterates through texts array and changes each text element's style to white
-      if (text.closest && text.closest("#landingPage")) continue;
-      text.style.color = colors.text;
-    }
-
-    for (let header of headers) {
-      header.style.color = colors.header;
-    }
-
-    for (let i of greeting) {
-      i.style.color = colors.header;
-    }
-
-    //Changing Nav Bar to Dark Mode
+  if (nav) {
     nav.classList.remove("navbar-light");
     nav.classList.remove("bg-light");
     nav.classList.add("navbar-dark");
-
     nav.style.backgroundColor = COLOR_CONFIG.navBackground;
+  }
 
-    setDarkModeIconState(true, { animate: shouldAnimateThemeIcon });
+  for (let card of cardElements) {
+    if (card.classList.contains("duffel-tile")) continue;
+    if (card.closest && card.closest(".programming-zone")) continue;
+    card.style.background = COLOR_CONFIG.cardBackground;
+  }
 
-    // Changing background color of card elements
-    for (let card of cardElements) {
-      if (card.classList.contains("duffel-tile")) continue;
-      card.style.background = colors.cardBackground;
-    }
-
-    // Changing music player container background in dark mode
-    const musicPlayerContainer = document.getElementById('musicPlayerContainer');
-    if (musicPlayerContainer) {
-      musicPlayerContainer.style.background = colors.cardBackground;
-    }
-  } // condiiton if "pressed" variable is odd and light mode is switched on.
-  else {
-    const colors = COLOR_CONFIG.lightMode;
-    
-    try {
-      lp.classList.add("bg-dark");
-    } catch {
-      console.log("Website landing page not on this page.");
-    } finally {
-      bg.style.backgroundColor = colors.background;
-    }
-    //bg.style.background = null
-
-    //Changing text to light mode with black text
-    for (let text of texts) {
-      if (text.closest && text.closest("#landingPage")) continue;
-      text.style.color = colors.text;
-    }
-
-    for (let header of headers) {
-      header.style.color = colors.header;
-    }
-
-    for (let i of greeting) {
-      i.style.color = colors.header;
-    }
-
-    //Changing Nav Bar to light mode
-    nav.classList.remove("navbar-dark");
-    nav.classList.add("navbar-light");
-    nav.classList.add("bg-light");
-
-    nav.style.backgroundColor = COLOR_CONFIG.navBackground;
-
-    setDarkModeIconState(false, { animate: shouldAnimateThemeIcon });
-
-    for (let card of cardElements) {
-      if (card.classList.contains("duffel-tile")) continue;
-      card.style.background = colors.cardBackground;
-    }
-
-    // Reset music player container background in light mode
-    const musicPlayerContainer = document.getElementById('musicPlayerContainer');
-    if (musicPlayerContainer) {
-      musicPlayerContainer.style.background = '';
-    }
+  const musicPlayerContainer = document.getElementById("musicPlayerContainer");
+  if (musicPlayerContainer) {
+    musicPlayerContainer.style.background = COLOR_CONFIG.cardBackground;
   }
 }
+
+applySiteTheme();
 
 // Code for scroll progress bar
 const scrollProgressBar = document.getElementById("scroll-progress");
@@ -479,14 +280,12 @@ document.addEventListener("scroll", scrollProgress);
 
 (function initNavThemeMountainButtonSwap() {
   const hero = document.getElementById("landingPage");
-  const darkModeBtn = document.getElementById("darkModeBtn");
   const mountainToggleBtn = document.getElementById("mountainToggleBtn");
-  if (!hero || !darkModeBtn || !mountainToggleBtn) return;
+  if (!hero || !mountainToggleBtn) return;
   let swapScrollY = 0;
 
   function recalcSwapThreshold() {
     const heroTop = hero.offsetTop || 0;
-    /* Switch near the end of the first hero viewport, not only when full hero block ends. */
     const viewportDriven = window.innerHeight * 0.9;
     const heroDriven = hero.offsetHeight * 0.7;
     swapScrollY = heroTop + Math.min(viewportDriven, heroDriven);
@@ -499,7 +298,6 @@ document.addEventListener("scroll", scrollProgress);
   function syncButtons() {
     const showMountain = shouldShowMountainToggle();
     mountainToggleBtn.classList.toggle("d-none", !showMountain);
-    darkModeBtn.classList.toggle("d-none", showMountain);
     if (nav) nav.classList.toggle("hero-nav-active", showMountain);
   }
 
@@ -1071,6 +869,49 @@ if (gallery) {
   window.addEventListener("resize", scheduleSyncNav);
 
   applyFilters();
+})();
+
+(function initProgrammingZoneSceneryParallax() {
+  const zone = document.querySelector(".programming-zone");
+  const scenery = zone?.querySelector(".programming-zone-scenery");
+  if (!zone || !scenery) return;
+
+  const layers = scenery.querySelectorAll("[data-parallax-rate]");
+  let ticking = false;
+
+  function applyParallax() {
+    ticking = false;
+    if (prefersReducedMotion()) {
+      zone.style.removeProperty("--programming-zone-parallax-y");
+      layers.forEach((layer) => layer.style.removeProperty("--programming-zone-parallax-y"));
+      return;
+    }
+
+    const rect = zone.getBoundingClientRect();
+    const viewportHeight = window.innerHeight;
+    const centerOffset = rect.top + rect.height * 0.5 - viewportHeight * 0.5;
+    const baseY = centerOffset * 0.06;
+    zone.style.setProperty("--programming-zone-parallax-y", `${baseY.toFixed(2)}px`);
+
+    layers.forEach((layer) => {
+      const rate = parseFloat(layer.getAttribute("data-parallax-rate") || "0.05");
+      layer.style.setProperty(
+        "--programming-zone-parallax-y",
+        `${(baseY * (rate / 0.06)).toFixed(2)}px`
+      );
+    });
+  }
+
+  function scheduleParallax() {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(applyParallax);
+    }
+  }
+
+  window.addEventListener("scroll", scheduleParallax, { passive: true });
+  window.addEventListener("resize", scheduleParallax, { passive: true });
+  applyParallax();
 })();
 
 (function initIndexPolaroidParallax() {

@@ -8,6 +8,7 @@
   if (!$modal.length) return;
 
   var $img = $("#artLightboxImage");
+  var $video = $("#artLightboxVideo");
   var $title = $("#artLightboxTitle");
   var $subtitle = $("#artLightboxSubtitle");
   var $prev = $(".art-lightbox-nav--prev");
@@ -18,6 +19,10 @@
   var $body = $(".art-lightbox-modal__body");
   var $zoomLayer = $(".art-lightbox-zoom-layer");
   var $zoomPct = $("#artLightboxZoomPct");
+  var $zoomTools = $(".art-lightbox-zoom-tools");
+  var $play = $("#artLightboxPlay");
+  var videoMode = false;
+  var loadedVideoSrc = "";
 
   $img.attr("draggable", "false").on("dragstart.artLb", function (e) {
     e.preventDefault();
@@ -75,7 +80,7 @@
 
   function applyParallaxTilt() {
     parallaxRaf = null;
-    if (!parallaxEnabled || !$parallax.length || slideBusy || isZoomed()) return;
+    if (!parallaxEnabled || !$parallax.length || slideBusy || isZoomed() || currentIsVideo()) return;
     var el = $parallax[0];
     var rect = el.getBoundingClientRect();
     if (rect.width < 2 || rect.height < 2) return;
@@ -199,7 +204,7 @@
   }
 
   var onWheelZoom = function (e) {
-    if (!$modal.hasClass("show") || slideBusy) return;
+    if (!$modal.hasClass("show") || slideBusy || currentIsVideo()) return;
     if (!$slideWrap.length || !$.contains($slideWrap[0], e.target)) return;
     e.preventDefault();
     var dy = e.deltaY;
@@ -274,26 +279,91 @@
     var h6 = tip ? tip.querySelector("h6") : null;
     var title = h5 ? h5.textContent.trim() : "";
     var subtitle = h6 ? h6.textContent.trim() : "";
+    var video = (container.getAttribute("data-video") || "").trim();
     return {
       src: img.getAttribute("src"),
+      video: video,
       alt: title || "Artwork",
       title: title,
       subtitle: subtitle,
     };
   }
 
-  var containers = [];
-  var items = [];
-  document.querySelectorAll(".gallery .image-container").forEach(function (container) {
-    var item = readItem(container);
-    if (item) {
-      containers.push(container);
-      items.push(item);
+  function currentIsVideo() {
+    return videoMode;
+  }
+
+  function currentHasVideo() {
+    var item = items[currentIndex];
+    return !!(item && item.video);
+  }
+
+  function updatePlayButton() {
+    if (!$play.length) return;
+    var show = currentHasVideo() && !videoMode;
+    $play.toggleClass("art-lightbox-media--hidden", !show);
+    if (show) {
+      var item = items[currentIndex];
+      $play.attr("aria-label", "Play " + (item.title || "animation"));
     }
-  });
+  }
 
-  if (!items.length) return;
+  function stopLightboxVideo() {
+    videoMode = false;
+    loadedVideoSrc = "";
+    if (!$video.length) return;
+    var el = $video[0];
+    el.pause();
+    try {
+      el.removeAttribute("src");
+      el.load();
+    } catch (err) {}
+    $video.addClass("art-lightbox-media--hidden");
+  }
 
+  function returnToStillFromVideo() {
+    videoMode = false;
+    if ($video.length) {
+      $video[0].pause();
+    }
+    $video.addClass("art-lightbox-media--hidden");
+    $img.removeClass("art-lightbox-media--hidden");
+    $body.removeClass("art-lightbox--video");
+    $zoomTools.removeClass("art-lightbox-zoom-tools--hidden");
+    updatePlayButton();
+  }
+
+  function playCurrentVideo() {
+    var item = items[currentIndex];
+    if (!item || !item.video || !$video.length || slideBusy) return;
+    videoMode = true;
+    resetZoom();
+    applyZoomTransform();
+    resetParallaxTilt();
+    $body.addClass("art-lightbox--video");
+    $zoomTools.addClass("art-lightbox-zoom-tools--hidden");
+    $img.addClass("art-lightbox-media--hidden");
+    $play.addClass("art-lightbox-media--hidden");
+    $video
+      .removeClass("art-lightbox-media--hidden")
+      .attr("poster", item.src)
+      .attr("aria-label", item.alt);
+    var el = $video[0];
+    if (loadedVideoSrc !== item.video) {
+      el.src = item.video;
+      loadedVideoSrc = item.video;
+    } else {
+      try {
+        el.currentTime = 0;
+      } catch (err) {}
+    }
+    var playAttempt = el.play();
+    if (playAttempt && typeof playAttempt.catch === "function") {
+      playAttempt.catch(function () {});
+    }
+  }
+
+  var items = [];
   var currentIndex = 0;
 
   function resetSlideWrap() {
@@ -321,14 +391,19 @@
 
   function syncImage() {
     var item = items[currentIndex];
-    $img.attr("src", item.src).attr("alt", item.alt);
+    stopLightboxVideo();
+    $body.removeClass("art-lightbox--video");
+    $zoomTools.removeClass("art-lightbox-zoom-tools--hidden");
+    resetZoom();
+
+    $img.removeClass("art-lightbox-media--hidden").attr("src", item.src).attr("alt", item.alt);
     var isLogoAsset = item.src.indexOf("logo.png") !== -1;
     $img.toggleClass("art-lightbox-img--logo-back", isLogoAsset);
-    resetZoom();
     $img.off("load.artLbZoom").one("load.artLbZoom", function () {
       clampPan();
       applyZoomTransform();
     });
+    updatePlayButton();
   }
 
   function render() {
@@ -354,6 +429,9 @@
     }
 
     slideBusy = true;
+    if ($video.length) {
+      $video[0].pause();
+    }
     resetZoom();
     applyZoomTransform();
     unbindParallax();
@@ -438,6 +516,11 @@
     } else if (e.key === "ArrowRight") {
       e.preventDefault();
       step(1);
+    } else if (currentIsVideo()) {
+      return;
+    } else if ((e.key === " " || e.key === "Enter") && currentHasVideo()) {
+      e.preventDefault();
+      playCurrentVideo();
     } else if (e.key === "+" || e.key === "=") {
       e.preventDefault();
       zoomStep(1);
@@ -451,22 +534,48 @@
     }
   }
 
-  containers.forEach(function (container, i) {
-    container.setAttribute("role", "button");
-    container.setAttribute("tabindex", "0");
-    var label = items[i].title || "Artwork";
-    container.setAttribute("aria-label", "Open larger view: " + label);
+  var hasAnyItems = false;
+  document.querySelectorAll(".gallery").forEach(function (gallery) {
+    var galleryItems = [];
+    gallery.querySelectorAll(".image-container").forEach(function (container) {
+      var item = readItem(container);
+      if (!item) return;
+      galleryItems.push(item);
+      var itemIndex = galleryItems.length - 1;
+      container.setAttribute("role", "button");
+      container.setAttribute("tabindex", "0");
+      container.setAttribute(
+        "aria-label",
+        "Open larger view: " + (item.title || "Artwork")
+      );
 
-    container.addEventListener("click", function (e) {
-      e.preventDefault();
-      openIndex(i);
-    });
-    container.addEventListener("keydown", function (e) {
-      if (e.key === "Enter" || e.key === " ") {
+      container.addEventListener("click", function (e) {
         e.preventDefault();
-        openIndex(i);
-      }
+        items = galleryItems;
+        openIndex(itemIndex);
+      });
+      container.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          items = galleryItems;
+          openIndex(itemIndex);
+        }
+      });
     });
+    if (galleryItems.length) hasAnyItems = true;
+  });
+
+  if (!hasAnyItems) return;
+
+  $play.on("click", function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    playCurrentVideo();
+  });
+
+  $video.on("ended.artLb", function () {
+    if (!videoMode) return;
+    returnToStillFromVideo();
   });
 
   $prev.on("click", function () {
@@ -517,5 +626,9 @@
     resetSlideWrap();
     resetParallaxTilt();
     resetZoom();
+    stopLightboxVideo();
+    $body.removeClass("art-lightbox--video");
+    $zoomTools.removeClass("art-lightbox-zoom-tools--hidden");
+    updatePlayButton();
   });
 })();

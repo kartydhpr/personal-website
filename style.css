@@ -93,8 +93,7 @@ body, #dark-mode-bg {
 }
 
 /*
- * Skeleton theme: defaults on :root; light mode when #dark-mode-bg uses white
- * (inline style from toggleDarkMode in index.js).
+ * Skeleton theme defaults for dark site.
  */
 :root {
   --sk-base: #131315;
@@ -104,17 +103,6 @@ body, #dark-mode-bg {
   --sk-shimmer-b: rgba(255, 255, 255, 0.028);
   --sk-shimmer-c: rgba(255, 255, 255, 0.052);
   --sk-shimmer-d: rgba(255, 255, 255, 0.088);
-}
-
-#dark-mode-bg[style*="white"],
-#dark-mode-bg[style*="rgb(255, 255, 255)"] {
-  --sk-base: #e4e4e8;
-  --sk-frame: #dcdce2;
-  --sk-border: rgba(15, 23, 42, 0.09);
-  --sk-shimmer-a: rgba(255, 255, 255, 0);
-  --sk-shimmer-b: rgba(255, 255, 255, 0.35);
-  --sk-shimmer-c: rgba(255, 255, 255, 0.72);
-  --sk-shimmer-d: rgba(255, 255, 255, 0.95);
 }
 
 /* Loading placeholders: themed base + angled shimmer band */
@@ -1902,10 +1890,10 @@ hr{
   transition: background-color 0.5s ease-in-out;
 }
 
-/* Programming + Project Library band (dark mode only) */
-#dark-mode-bg[style*="background: black"] .programming-zone,
-#dark-mode-bg[style*="rgb(0, 0, 0)"] .programming-zone,
-nav.navbar-dark ~ main .programming-zone {
+.programming-zone {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   --programming-zone-bg: #06160e;
   --programming-zone-card-bg: #142b22;
   background-color: var(--programming-zone-bg);
@@ -1918,61 +1906,174 @@ nav.navbar-dark ~ main .programming-zone {
     var(--programming-zone-bg) 56%,
     var(--programming-zone-bg) 100%
   );
-  padding: 2.5rem 0 3rem;
+  padding: 2.5rem 0 clamp(6rem, 11vw, 8.5rem);
   transition: background 0.5s ease-in-out;
 }
 
-#dark-mode-bg[style*="background: black"] .programming-zone hr,
-#dark-mode-bg[style*="rgb(0, 0, 0)"] .programming-zone hr,
-nav.navbar-dark ~ main .programming-zone hr {
+.programming-zone > section,
+.programming-zone > hr {
+  position: relative;
+  z-index: 1;
+}
+
+.programming-zone-scenery {
+  display: block;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Programming + Project Library band */
+.programming-zone hr {
   background-color: rgba(28, 231, 131, 0.22);
 }
 
-#dark-mode-bg[style*="background: black"] .programming-zone .dark-mode-text,
-#dark-mode-bg[style*="rgb(0, 0, 0)"] .programming-zone .dark-mode-text,
-nav.navbar-dark ~ main .programming-zone .dark-mode-text {
+.programming-zone .dark-mode-text {
   color: #f0f7f3 !important;
 }
 
-#dark-mode-bg[style*="background: black"] .programming-zone .header,
-#dark-mode-bg[style*="rgb(0, 0, 0)"] .programming-zone .header,
-nav.navbar-dark ~ main .programming-zone .header {
+.programming-zone .header {
   color: #1ce783 !important;
 }
 
-#dark-mode-bg[style*="background: black"] .programming-zone .card,
-#dark-mode-bg[style*="background: black"] .programming-zone .this-site-card,
-#dark-mode-bg[style*="rgb(0, 0, 0)"] .programming-zone .card,
-#dark-mode-bg[style*="rgb(0, 0, 0)"] .programming-zone .this-site-card,
-nav.navbar-dark ~ main .programming-zone .card,
-nav.navbar-dark ~ main .programming-zone .this-site-card {
+.programming-zone .card,
+.programming-zone .this-site-card {
   background: var(--programming-zone-card-bg) !important;
   transition: background-color 0.5s ease-in-out;
 }
 
-#dark-mode-bg[style*="background: black"] .programming-zone .cards::-webkit-scrollbar,
-#dark-mode-bg[style*="rgb(0, 0, 0)"] .programming-zone .cards::-webkit-scrollbar,
-nav.navbar-dark ~ main .programming-zone .cards::-webkit-scrollbar {
+.programming-zone .cards::-webkit-scrollbar {
   background: rgba(18, 40, 32, 0.55);
 }
 
-#dark-mode-bg[style*="background: black"] .programming-zone .pub1,
-#dark-mode-bg[style*="rgb(0, 0, 0)"] .programming-zone .pub1,
-nav.navbar-dark ~ main .programming-zone .pub1 {
+.programming-zone .pub1 {
   background-color: var(--programming-zone-card-bg);
   transition: background-color 0.2s ease;
 }
 
-#dark-mode-bg[style*="background: black"] .programming-zone .pub1:hover,
-#dark-mode-bg[style*="rgb(0, 0, 0)"] .programming-zone .pub1:hover,
-nav.navbar-dark ~ main .programming-zone .pub1:hover {
+.programming-zone .pub1:hover {
   background-color: #ff67304f;
 }
 
-#dark-mode-bg[style*="background: black"] .programming-zone .pub1 h5,
-#dark-mode-bg[style*="rgb(0, 0, 0)"] .programming-zone .pub1 h5,
-nav.navbar-dark ~ main .programming-zone .pub1 h5 {
+.programming-zone .pub1 h5 {
   color: #f0f7f3;
+}
+
+.programming-zone-scenery__sky {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 55% 35% at 82% 14%, rgba(28, 231, 131, 0.07) 0%, transparent 62%),
+    radial-gradient(ellipse 40% 28% at 12% 20%, rgba(255, 102, 48, 0.04) 0%, transparent 58%);
+}
+
+.programming-zone-publications .container {
+  padding: 0 0 clamp(3.5rem, 6vw, 5rem);
+}
+
+.programming-zone-scenery__moon {
+  position: absolute;
+  top: 8%;
+  right: 11%;
+  width: clamp(2rem, 3.2vw, 2.75rem);
+  height: clamp(2rem, 3.2vw, 2.75rem);
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='18%25' y1='12%25' x2='88%25' y2='88%25'%3E%3Cstop offset='0%25' stop-color='%23e2ece7' stop-opacity='0.82'/%3E%3Cstop offset='100%25' stop-color='%23a8bdb2' stop-opacity='0.48'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath fill='url(%23g)' d='M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+.programming-zone-scenery__stars {
+  position: absolute;
+  inset: 0;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.35) 38%, transparent 62%);
+}
+
+.programming-zone-scenery__stars span {
+  position: absolute;
+  left: var(--star-x, 50%);
+  top: var(--star-y, 50%);
+  width: var(--star-s, 1px);
+  height: var(--star-s, 1px);
+  border-radius: 50%;
+  background: rgba(240, 247, 243, 0.95);
+  opacity: var(--star-o, 0.6);
+  box-shadow: 0 0 calc(var(--star-s, 1px) * 1.5) rgba(240, 247, 243, 0.35);
+}
+
+.programming-zone-scenery__ridge {
+  position: absolute;
+  left: -5%;
+  right: -5%;
+  bottom: 0;
+  height: min(42%, 22rem);
+  transform: translate3d(0, var(--programming-zone-parallax-y, 0px), 0);
+  background:
+    radial-gradient(ellipse 55% 100% at 18% 100%, rgba(8, 32, 22, 0.92) 0%, transparent 68%),
+    radial-gradient(ellipse 48% 95% at 52% 100%, rgba(6, 28, 18, 0.88) 0%, transparent 64%),
+    radial-gradient(ellipse 42% 90% at 84% 100%, rgba(10, 36, 24, 0.85) 0%, transparent 62%),
+    linear-gradient(to top, rgba(4, 16, 10, 0.75) 0%, transparent 100%);
+}
+
+.programming-zone-scenery__grass {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: clamp(3rem, 8vw, 5rem);
+  transform: translate3d(0, var(--programming-zone-parallax-y, 0px), 0);
+  background:
+    linear-gradient(to top, rgba(6, 22, 14, 0.95) 0%, rgba(10, 34, 22, 0.72) 55%, transparent 100%),
+    repeating-linear-gradient(
+      105deg,
+      transparent 0,
+      transparent 7px,
+      rgba(28, 231, 131, 0.035) 7px,
+      rgba(28, 231, 131, 0.035) 8px
+    );
+}
+
+.programming-zone-scenery__grass::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -0.35rem;
+  height: 1.2rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 24' preserveAspectRatio='none'%3E%3Cpath fill='%230a2016' d='M0 24V14 Q30 6 60 14 T120 12 T180 15 T240 11 T300 14 T360 10 T420 13 T480 11 T540 14 T600 9 T660 13 T720 11 T780 14 T840 10 T900 13 T960 11 T1020 14 T1080 10 T1140 13 T1200 12V24Z'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-size: 1200px 100%;
+  opacity: 0.9;
+}
+
+.programming-zone-scenery__treeline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: clamp(5.5rem, 14vw, 9rem);
+  transform: translate3d(0, var(--programming-zone-parallax-y, 0px), 0);
+  opacity: 0.88;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath fill='%2308120c' d='M0 120V95 L18 95 L28 55 L38 95 L52 95 L62 38 L72 95 L88 95 L98 48 L108 95 L120 95 L130 62 L140 95 L156 95 L168 42 L180 95 L196 95 L206 58 L216 95 L232 95 L244 35 L256 95 L272 95 L282 52 L292 95 L308 95 L318 44 L328 95 L344 95 L356 60 L366 95 L382 95 L394 40 L406 95 L422 95 L432 54 L442 95 L458 95 L470 38 L482 95 L498 95 L508 50 L518 95 L534 95 L546 36 L558 95 L574 95 L584 58 L594 95 L610 95 L622 42 L634 95 L650 95 L660 48 L670 95 L686 95 L698 34 L710 95 L726 95 L736 56 L746 95 L762 95 L774 44 L786 95 L802 95 L812 52 L822 95 L838 95 L850 38 L862 95 L878 95 L888 60 L898 95 L914 95 L926 40 L938 95 L954 95 L964 54 L974 95 L990 95 L1002 36 L1014 95 L1030 95 L1040 58 L1050 95 L1066 95 L1078 42 L1090 95 L1106 95 L1116 48 L1126 95 L1142 95 L1154 34 L1166 95 L1182 95 L1192 56 L1200 95V120Z'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-size: 1200px 100%;
+  background-position: center bottom;
+  mask-image: linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.85) 55%, transparent 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .programming-zone-scenery__ridge,
+  .programming-zone-scenery__grass,
+  .programming-zone-scenery__treeline {
+    transform: none;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .programming-zone-scenery__moon {
+    top: 5%;
+    right: 7%;
+  }
 }
 
 /* Carousel View CSS */
@@ -2704,6 +2805,112 @@ nav.navbar-dark ~ main .programming-zone .pub1 h5 {
 .gallery .image-container[role="button"]:focus-visible {
   outline: 2px solid rgba(255, 255, 255, 0.45);
   outline-offset: 3px;
+}
+
+.gallery .image-container--video {
+  position: relative;
+}
+
+.gallery .art-video-badge {
+  position: absolute;
+  left: 0.85rem;
+  bottom: 0.85rem;
+  z-index: 2;
+  padding: 0.28rem 0.55rem 0.28rem 0.42rem;
+  border-radius: 999px;
+  background: rgba(12, 12, 14, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #f4f4f5;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  pointer-events: none;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.gallery .art-video-badge::before {
+  content: "";
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-right: 0.32rem;
+  border-style: solid;
+  border-width: 0.28rem 0 0.28rem 0.42rem;
+  border-color: transparent transparent transparent #fff;
+  transform: translateY(-0.04em);
+}
+
+.gallery .image-container--video:hover .art-video-badge {
+  opacity: 0;
+}
+
+.art-lightbox-media--hidden {
+  display: none !important;
+}
+
+.art-lightbox-zoom-tools--hidden {
+  display: none !important;
+}
+
+.art-lightbox-video {
+  background-color: #030303;
+}
+
+.art-lightbox-play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 4;
+  width: 4.35rem;
+  height: 4.35rem;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 50%;
+  background: rgba(12, 12, 14, 0.72);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.38);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  cursor: pointer;
+  transition:
+    background-color 0.16s ease,
+    border-color 0.16s ease,
+    transform 0.16s ease;
+}
+
+.art-lightbox-play:hover,
+.art-lightbox-play:focus {
+  outline: none;
+  background: rgba(12, 12, 14, 0.88);
+  border-color: rgba(255, 255, 255, 0.45);
+  transform: translate(-50%, -50%) scale(1.06);
+}
+
+.art-lightbox-play:focus-visible {
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.38),
+    0 0 0 3px rgba(255, 255, 255, 0.35);
+}
+
+.art-lightbox-play__icon {
+  display: block;
+  width: 0;
+  height: 0;
+  margin-left: 0.18rem;
+  border-style: solid;
+  border-width: 0.7rem 0 0.7rem 1.15rem;
+  border-color: transparent transparent transparent #fff;
+}
+
+.art-lightbox-stage--slide-busy .art-lightbox-play {
+  pointer-events: none;
+  opacity: 0;
 }
 
 .art-lightbox-modal .modal-backdrop.show {

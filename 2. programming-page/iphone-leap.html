@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark light">
+    <meta name="theme-color" content="#000000">
+    <title>Leap (unofficial) · iPhone comparison</title>
+    <meta name="description" content="Unofficial iPhone upgrade comparison. Not affiliated with Apple Inc. Pick the phone you have and the one you are considering to see what new hardware unlocks, including iOS features the older chip cannot run.">
+    <meta name="author" content="kartydhpr">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" href="../favicon.ico" sizes="any">
+    <link rel="stylesheet" href="iphone-leap/style.css?v=34">
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Leap",
+        "alternateName": "Leap unofficial iPhone comparison",
+        "description": "Unofficial iPhone upgrade comparison. Not affiliated with, endorsed by, or sponsored by Apple Inc.",
+        "url": "https://www.kartydhpr.com/2.%20programming-page/iphone-leap.html",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Any",
+        "isAccessibleForFree": true,
+        "author": { "@type": "Person", "name": "kartydhpr", "url": "https://www.kartydhpr.com" },
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "disambiguatingDescription": "An independent personal project. Not an Apple website, store, or product."
+      }
+    </script>
+    <script async src="../analytics.js"></script>
+  </head>
+  <body>
+    <a class="leap-skip" href="#compare">Skip to comparison</a>
+
+    <header class="leap-nav">
+      <div class="leap-nav-inner">
+        <a class="leap-wordmark" href="#top">Leap</a>
+        <nav aria-label="Page">
+          <a href="#compare">Compare</a>
+          <a href="#method">How</a>
+          <a href="#legal">Legal</a>
+          <a href="../index.html">kartydhpr</a>
+        </nav>
+      </div>
+    </header>
+
+    <p class="leap-disclaimer" role="note">
+      Unofficial personal project. Leap is not affiliated with, endorsed by, or sponsored by Apple Inc.
+      <a href="#legal">Notices</a>
+    </p>
+
+    <main id="top">
+      <div class="leap-announce">
+        <section class="leap-hero">
+          <p class="leap-eyebrow">Unofficial comparison</p>
+          <h1>Leap.</h1>
+          <p class="leap-hero-tag">What new hardware unlocks.</p>
+          <p class="leap-subhead">Skipped a few iPhone generations? See the features new hardware actually unlocks, not just updated numbers on a spec sheet.</p>
+          <a class="leap-hero-cta" href="#compare">Compare yours</a>
+        </section>
+
+        <section class="leap-compare" id="compare" aria-label="Choose two iPhones">
+          <p class="leap-eyebrow">Compare</p>
+          <h2>Your iPhone.<br>Next iPhone.</h2>
+          <div class="leap-stage">
+            <div class="leap-col">
+              <div class="leap-device" id="leap-from-device"></div>
+              <div class="leap-field">
+                <label for="leap-from">I have</label>
+                <select id="leap-from" name="from"></select>
+              </div>
+            </div>
+            <button type="button" class="leap-swap" id="leap-swap" aria-label="Swap iPhones">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path d="M4 7h12M13 4l3 3-3 3M16 13H4M7 10l-3 3 3 3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="leap-col">
+              <div class="leap-device leap-device--to" id="leap-to-device"></div>
+              <div class="leap-field">
+                <label for="leap-to">I’m considering</label>
+                <select id="leap-to" name="to"></select>
+              </div>
+            </div>
+          </div>
+          <p class="leap-credit">Product photographs © Apple Inc. Displayed to identify the two phones in the comparison.</p>
+        </section>
+      </div>
+
+      <div class="leap-results">
+        <div id="leap-results"></div>
+
+        <details class="leap-method" id="method">
+          <summary class="leap-method-toggle">
+            <div>
+              <p class="leap-kicker">How it works</p>
+              <h2 id="leap-method-heading">How Leap works.</h2>
+              <p class="leap-method-hint">What gets compared, and how the lists are built.</p>
+            </div>
+            <span class="leap-method-chevron" aria-hidden="true"></span>
+          </summary>
+
+          <p class="leap-method-lead">Leap runs in your browser. It looks up two iPhones in a local dataset, then lists hardware the newer one has that yours does not, and anything you would lose by switching.</p>
+
+          <ol class="leap-method-grid">
+            <li>
+              <h3>Each model is a record.</h3>
+              <p>The dataset covers iPhone 8 through iPhone 18 Pro, 18 Pro Max, and iPhone Duo. A phone is stored as chip generation, last supported iOS, cameras, radios, Face ID or Touch ID, whether it folds, and other hardware flags.</p>
+            </li>
+            <li>
+              <h3>A feature is a yes-or-no check.</h3>
+              <p>Camera Control, Memory Integrity Enforcement, Smart Take, and the rest each have a requirement. Leap shows a feature when the phone you are considering meets it and the phone you have does not.</p>
+            </li>
+            <li>
+              <h3>Software and hardware stay separate.</h3>
+              <p>If your iPhone stopped getting iOS updates, Leap also lists system features that need a later version, such as Liquid Glass, RCS, and StandBy. If you already run the latest iOS, those stay off the list, because a software update can add them.</p>
+            </li>
+            <li>
+              <h3>The highlight row is a short subset.</h3>
+              <p>“What you’d actually notice” is up to six of the highest-weight unlocks, with at most two from the same category, and nothing below a usefulness floor. The full list underneath is every unlock, grouped by camera, display, intelligence, and the rest.</p>
+            </li>
+            <li>
+              <h3>Losses use the same checks in reverse.</h3>
+              <p>Moving to iPhone Duo can mean giving up Face ID, a telephoto, or LiDAR. Leap runs the feature list the other way and shows what your current phone has that the target does not.</p>
+            </li>
+            <li>
+              <h3>The pair is stored in the URL.</h3>
+              <p>Choosing two phones writes <code>#from=iphone-13&amp;to=iphone-18-pro</code> without reloading. Open that link to see the same comparison. In-page links scroll in place so they do not reset the pair.</p>
+            </li>
+          </ol>
+          <p class="leap-method-note">No account and no server. The dataset and compare logic ship as two scripts on this page. Specs and gates were compiled from public reporting as of September 2026. Unofficial, and not affiliated with Apple.</p>
+        </details>
+      </div>
+    </main>
+
+    <footer class="leap-footer">
+      <section class="leap-legal" id="legal" aria-labelledby="leap-legal-heading">
+        <p class="leap-kicker">Notices</p>
+        <h2 id="leap-legal-heading">Legal.</h2>
+        <p>Leap is an unofficial comparison on a personal website. It is not an Apple website, store, advertisement, event, or product. Apple Inc. has not reviewed, approved, licensed, endorsed, or sponsored Leap.</p>
+        <p>Apple, the Apple logo, iPhone, iOS, iPad, Face ID, Touch ID, Dynamic Island, MagSafe, Apple Intelligence, Siri, Apple Pencil, Ceramic Shield, Lightning, App Store, iCloud, and other product and service names are trademarks of Apple Inc., registered in the U.S. and other countries. Leap uses those names only to refer to Apple’s products.</p>
+        <p>Photographs and marketing stills on this page are copyright Apple Inc. Leap does not own them, did not create them, and does not have a license or permission from Apple to display them. They are shown only to help identify the devices being compared. Apple may request their removal at any time.</p>
+        <p>The dataset is compiled from publicly available information as of September 2026. It may be incomplete, outdated, or wrong. Feature availability varies by country, language, carrier, and software version. Leap is not a substitute for Apple’s specifications and is not advice to buy or sell anything.</p>
+        <p>Leap is provided as-is, without warranties of any kind. To request removal of an image or other Apple material, contact the site owner through <a href="../index.html">kartydhpr</a> or <a href="https://www.linkedin.com/in/kartydhuper/" rel="noopener noreferrer">LinkedIn</a>.</p>
+      </section>
+      <p>© 2026 kartydhpr. Leap is an independent project.</p>
+      <p>Apple and iPhone are trademarks of Apple Inc. Product images © Apple Inc. No affiliation or endorsement.</p>
+      <p><a href="../index.html#programming">Back to kartydhpr</a></p>
+    </footer>
+
+    <script src="iphone-leap/data.js?v=17"></script>
+    <script src="iphone-leap/app.js?v=15"></script>
+  </body>
+</html>

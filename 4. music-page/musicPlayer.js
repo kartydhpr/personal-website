@@ -115,21 +115,10 @@ class MusicPlayer {
   }
 
   checkDarkMode() {
-    const bgElement = document.getElementById('dark-mode-bg');
-    return bgElement && bgElement.style.backgroundColor === 'black';
+    return true;
   }
 
-  observeDarkModeChanges() {
-    const darkModeBtn = document.getElementById('darkModeBtn');
-    if (darkModeBtn) {
-      darkModeBtn.addEventListener('click', () => {
-        setTimeout(() => {
-          this.isDarkMode = this.checkDarkMode();
-          this.applyTheme();
-        }, 100);
-      });
-    }
-  }
+  observeDarkModeChanges() {}
 
   renderSongLibrary() {
     const library = document.getElementById('songsLibrary');

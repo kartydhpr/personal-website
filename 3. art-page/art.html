@@ -29,7 +29,7 @@
   <body id="dark-mode-bg">
 
     <!-- Navigation Bar Code-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light " id="dark-mode-nav"> 
+    <nav class="navbar navbar-expand-lg navbar-dark " id="dark-mode-nav"> 
       <a class="navbar-brand" href="../index.html">
         <div class="logo-image">
           <img src="../public/images/logo.png" class="img-fluid">
@@ -47,8 +47,6 @@
           <a class="nav-item nav-link" href="https://www.kartydhpr.com/index.html#music">Music</a>
         </div>
       </div>
-      <button class="lightSwitchButton hover-btn" type="button" id="darkModeBtn"><i class="fa-solid fa-moon" id="darkModeIcon"></i><span id="darkModeText">Dark Mode</span></button>
-      <!-- <button id="darkModeBtn">Dark Mode: On/Off </button> -->
     	<div class="scroll-progress" id="scroll-progress"></div>
     </nav>
     <main>
@@ -60,7 +58,7 @@
             <div class="col-md-6">
               <H1 class="header" id="anchor" style="margin-top: 20px;">Art and Design</H1>
               <lottie-player class="artAnimation" src="https://assets4.lottiefiles.com/packages/lf20_iw0kfvau.json" background="transparent" speed="1" style="width: 20rem ; height: 20rem;" loop autoplay></lottie-player>
-              <p class="dark-mode-text">This page contains some of the original art and design projects I've worked on across a variety of mediums. This page is best viewed in dark mode :)</p>
+              <p class="dark-mode-text">This page contains some of the original art and design projects I've worked on across a variety of mediums.</p>
             </div>
             <div class="col-md-3"></div>
           </div>
@@ -68,17 +66,98 @@
       </section>
       <hr>
 
-      <!-- <div class="hstack justify-content-center">
-        <button class="filter-button" data-style="all">All</button>
-        <button class="filter-button" data-style="physical">Physical</button>
-        <button class="filter-button" data-style="digital">Digital</button>
-        <button><a href="../3. art-page/designs/AD 105 Digital Portfolio.pdf" target="_blank">Designs</a></button>
-      </div> -->
+      <section class="slide-up">
+        <h2 class="text-center">
+          <i class="fa-solid fa-pen-nib art-section-icon"></i>
+        </h2>
+        <h1 class="dark-mode-text text-center" style="padding: 0rem 0rem 1rem 0rem;">Digital Art</h1>
+        <div class="gallery">
+          <div class="column">
+            <div
+              class="image-container image-container--video"
+              data-video="../3. art-page/drawings/Cardinal.mp4"
+            >
+              <img src="../3. art-page/drawings/Cardinal.jpg" alt="Northern Cardinal" data-style="all">
+              <span class="art-video-badge" aria-hidden="true">Play</span>
+              <div class="tooltip">
+                <H5>Northern Cardinal</H5>
+                <H6>Drawn on Procreate</H6>
+              </div>
+            </div>
+            <div
+              class="image-container image-container--video"
+              data-video="../3. art-page/drawings/Ghost_House.mp4"
+            >
+              <img src="../3. art-page/drawings/Ghost_House.jpg" alt="Ghost House" data-style="all">
+              <span class="art-video-badge" aria-hidden="true">Play</span>
+              <div class="tooltip">
+                <H5>Ghost House</H5>
+                <H6>Drawn on Procreate</H6>
+              </div>
+            </div>
+          </div>
+          <div class="column">
+            <div
+              class="image-container image-container--video"
+              data-video="../3. art-page/drawings/Cascadia_Poster.mp4"
+            >
+              <img src="../3. art-page/drawings/Cascadia_Poster.jpg" alt="Cascadia Poster" data-style="all">
+              <span class="art-video-badge" aria-hidden="true">Play</span>
+              <div class="tooltip">
+                <H5>Cascadia Poster</H5>
+                <H6>Drawn on Procreate</H6>
+              </div>
+            </div>
+            <div
+              class="image-container image-container--video"
+              data-video="../3. art-page/drawings/Brain_Freeze.mp4"
+            >
+              <img src="../3. art-page/drawings/Brain_Freeze.jpg" alt="Brain Freeze" data-style="all">
+              <span class="art-video-badge" aria-hidden="true">Play</span>
+              <div class="tooltip">
+                <H5>Brain Freeze</H5>
+                <H6>Drawn on Procreate</H6>
+              </div>
+            </div>
+          </div>
+          <div class="column">
+            <div
+              class="image-container image-container--video"
+              data-video="../3. art-page/drawings/Alpine_Pond.mp4"
+            >
+              <img src="../3. art-page/drawings/Alpine_Pond.jpg" alt="Alpine Pond" data-style="all">
+              <span class="art-video-badge" aria-hidden="true">Play</span>
+              <div class="tooltip">
+                <H5>Alpine Pond</H5>
+                <H6>Drawn on Procreate</H6>
+              </div>
+            </div>
+            <div class="image-container">
+              <img src="../3. art-page/drawings/Aurora-Night.png" data-style="all">
+              <div class="tooltip">
+                <H5>"Borealis Over Observatory"</H5>
+                <h6>Drawn on Procreate</h6>
+              </div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="image-container">
+              <img src="../3. art-page/drawings/Insomniac-Spiderman.jpg" data-style="all">
+              <div class="tooltip">
+                <h5>"Overcoming the Symbiote"</h5>
+                <H6>Doodled on Notability</H6>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <hr>
+
       <section class="slide-up">
         <h2 class="text-center">
           <i class="fa-solid fa-pencil art-section-icon"></i>
         </h2>
-        <h1 class="dark-mode-text text-center" style="padding: 0rem 0rem 1rem 0rem;">Drawings</h1>
+        <h1 class="dark-mode-text text-center" style="padding: 0rem 0rem 1rem 0rem;">Studio Drawings</h1>
         <div class="gallery">
           <div class="column">
             <div class="image-container">
@@ -100,13 +179,6 @@
               <div class="tooltip">
                 <H5>1-Point Perspective</H5>
                 <H6>Graphite on Drawing Paper</H6>
-              </div>
-            </div>
-            <div class="image-container">
-              <img src="../3. art-page/drawings/15.png" data-style="all">
-              <div class="tooltip">
-                <H5>Mass Gesture</H5>
-                <H6>Charcoal on Newsprint</H6>
               </div>
             </div>
             <!-- <div class="image-container">
@@ -146,7 +218,7 @@
                 <h6>Charcoal on Newsprint</h6>
               </div>
             </div>
-          </div> 
+          </div>
           <div class="column">
             <div class="image-container">
               <img src="../3. art-page/drawings/3.png" data-style="all">
@@ -176,34 +248,27 @@
                 <H6>India Ink on Newsprint</H6>
               </div>
             </div>
-            <div class="image-container">
-              <img src="../3. art-page/drawings/17.png" data-style="all">
-              <div class="tooltip">
-                <H5>Line Gesture</H5>
-                <H6>Charcoal on Newsprint</H6>
-              </div>
-            </div>
           </div>
           <div class="column">
-            <div class="image-container">
-              <img src="../3. art-page/drawings/Aurora-Night.png" data-style="all">
-              <div class="tooltip">
-                <H5>"Borealis Over Observatory"</H5>
-                <h6>Drawn on Procreate</h6>
-              </div>
-            </div>
-            <div class="image-container">
-              <img src="../3. art-page/drawings/Insomniac-Spiderman.jpg" data-style="all">
-              <div class="tooltip">
-                <h5>"Overcoming the Symbiote"</h5>
-                <H6>Doodled on Notability</H6>
-              </div>
-            </div>
             <div class="image-container">
               <img src="../3. art-page/drawings/6.png" data-style="all">
               <div class="tooltip">
                 <H5>Animal Line Drawing</H5>
                 <h6>Ball-Point Pen on Drawing Paper</h6>
+              </div>
+            </div>
+            <div class="image-container">
+              <img src="../3. art-page/drawings/15.png" data-style="all">
+              <div class="tooltip">
+                <H5>Mass Gesture</H5>
+                <H6>Charcoal on Newsprint</H6>
+              </div>
+            </div>
+            <div class="image-container">
+              <img src="../3. art-page/drawings/17.png" data-style="all">
+              <div class="tooltip">
+                <H5>Line Gesture</H5>
+                <H6>Charcoal on Newsprint</H6>
               </div>
             </div>
             <!-- <div class="image-container">
@@ -540,9 +605,24 @@
                       decoding="async"
                       draggable="false"
                     />
+                    <video
+                      id="artLightboxVideo"
+                      class="art-lightbox-img art-lightbox-video art-lightbox-media--hidden"
+                      playsinline
+                      controls
+                      preload="metadata"
+                    ></video>
                   </div>
                 </div>
               </div>
+              <button
+                type="button"
+                class="art-lightbox-play art-lightbox-media--hidden"
+                id="artLightboxPlay"
+                aria-label="Play animation"
+              >
+                <span class="art-lightbox-play__icon" aria-hidden="true"></span>
+              </button>
             </div>
             <button type="button" class="art-lightbox-nav art-lightbox-nav--next" aria-label="Next artwork">
               <span class="art-lightbox-nav__chevron" aria-hidden="true">&#8250;</span>

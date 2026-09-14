@@ -20,7 +20,7 @@
   </head>
   <body id="dark-mode-bg">
     <!-- Navigation Bar Code-->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light align-items-center flex-wrap" id="dark-mode-nav">
+    <nav class="navbar navbar-expand-lg navbar-dark align-items-center flex-wrap" id="dark-mode-nav">
       <div class="navbar-brand-cluster d-flex align-items-center mr-auto min-w-0">
         <a class="navbar-brand mb-0 py-0" href="#">
           <div class="logo-image">
@@ -29,15 +29,6 @@
         </a>
         <a class="navbar-brand mb-0 py-0 text-truncate" href="#">Karteikay Dhuper</a>
       </div>
-      <button
-        class="lightSwitchButton hover-btn navbar-theme-btn flex-shrink-0"
-        type="button"
-        id="darkModeBtn"
-        aria-label="Switch light or dark mode"
-      >
-        <i class="fa-solid fa-moon" id="darkModeIcon"></i>
-        <span id="darkModeText">Dark Mode</span>
-      </button>
       <button
         class="lightSwitchButton hover-btn navbar-theme-btn flex-shrink-0 d-none"
         type="button"
@@ -145,6 +136,43 @@
       </section> -->
       <section class="quarantine">
         <div class="programming-zone">
+        <div class="programming-zone-scenery" aria-hidden="true">
+          <div class="programming-zone-scenery__sky">
+            <span class="programming-zone-scenery__moon"></span>
+            <div class="programming-zone-scenery__stars">
+              <span style="--star-x: 8%; --star-y: 7%; --star-s: 2px; --star-o: 0.95;"></span>
+              <span style="--star-x: 14%; --star-y: 19%; --star-s: 1px; --star-o: 0.55;"></span>
+              <span style="--star-x: 22%; --star-y: 11%; --star-s: 1.5px; --star-o: 0.8;"></span>
+              <span style="--star-x: 31%; --star-y: 6%; --star-s: 1px; --star-o: 0.45;"></span>
+              <span style="--star-x: 39%; --star-y: 16%; --star-s: 2px; --star-o: 0.7;"></span>
+              <span style="--star-x: 47%; --star-y: 9%; --star-s: 1px; --star-o: 0.6;"></span>
+              <span style="--star-x: 54%; --star-y: 22%; --star-s: 1.5px; --star-o: 0.5;"></span>
+              <span style="--star-x: 61%; --star-y: 13%; --star-s: 1px; --star-o: 0.85;"></span>
+              <span style="--star-x: 68%; --star-y: 5%; --star-s: 2px; --star-o: 0.65;"></span>
+              <span style="--star-x: 76%; --star-y: 18%; --star-s: 1px; --star-o: 0.4;"></span>
+              <span style="--star-x: 5%; --star-y: 28%; --star-s: 1px; --star-o: 0.5;"></span>
+              <span style="--star-x: 18%; --star-y: 32%; --star-s: 1.5px; --star-o: 0.75;"></span>
+              <span style="--star-x: 27%; --star-y: 24%; --star-s: 1px; --star-o: 0.35;"></span>
+              <span style="--star-x: 36%; --star-y: 31%; --star-s: 2px; --star-o: 0.6;"></span>
+              <span style="--star-x: 44%; --star-y: 27%; --star-s: 1px; --star-o: 0.9;"></span>
+              <span style="--star-x: 52%; --star-y: 34%; --star-s: 1px; --star-o: 0.45;"></span>
+              <span style="--star-x: 58%; --star-y: 29%; --star-s: 1.5px; --star-o: 0.7;"></span>
+              <span style="--star-x: 71%; --star-y: 26%; --star-s: 1px; --star-o: 0.55;"></span>
+              <span style="--star-x: 83%; --star-y: 31%; --star-s: 2px; --star-o: 0.8;"></span>
+              <span style="--star-x: 91%; --star-y: 14%; --star-s: 1px; --star-o: 0.5;"></span>
+              <span style="--star-x: 11%; --star-y: 41%; --star-s: 1px; --star-o: 0.4;"></span>
+              <span style="--star-x: 24%; --star-y: 38%; --star-s: 1.5px; --star-o: 0.65;"></span>
+              <span style="--star-x: 33%; --star-y: 44%; --star-s: 1px; --star-o: 0.75;"></span>
+              <span style="--star-x: 49%; --star-y: 41%; --star-s: 1px; --star-o: 0.35;"></span>
+              <span style="--star-x: 63%; --star-y: 37%; --star-s: 2px; --star-o: 0.55;"></span>
+              <span style="--star-x: 79%; --star-y: 42%; --star-s: 1px; --star-o: 0.85;"></span>
+              <span style="--star-x: 88%; --star-y: 36%; --star-s: 1.5px; --star-o: 0.45;"></span>
+            </div>
+          </div>
+          <div class="programming-zone-scenery__ridge" data-parallax-rate="0.04"></div>
+          <div class="programming-zone-scenery__grass" data-parallax-rate="0.06"></div>
+          <div class="programming-zone-scenery__treeline" data-parallax-rate="0.07"></div>
+        </div>
         <!--Programming Section-->
         <section>
           <div class = "container-fluid details" style="padding-bottom: 0%;" id= "programming">
@@ -191,6 +219,33 @@
                 </div>
               </div>
             <ul id="project-library-grid" class="cards dark-mode-text">
+              <li class="card project-library-item" data-project-tags="featured apps" data-project-languages="html css javascript">
+                <div>
+                  <div class="hstack">
+                    <h3 class="card-title font-weight-bold">Leap</h3>
+                    <a class="fa-brands fa-github fa-2x" style="color: #ff6630; text-decoration: none; margin-left: auto;" href="https://github.com/kartydhpr/personal-website" target="_blank" rel="noopener noreferrer"></a>
+                  </div>
+                  <div class="card-content">
+                    <p>An unofficial iPhone comparison for people who skip years. Pick the phone you have and the one you’re eyeing. See the features new hardware unlocks, not just the spec sheet. I built this page as practice following Apple’s Human Interface Guidelines. Not affiliated with Apple.</p>
+                  </div>
+                </div>
+                <div class="project-language-stack" aria-label="Languages used in Leap">
+                  <h6 class="project-language-title">Languages</h6>
+                  <div class="project-language-bar">
+                    <span class="project-language-fill" style="width: 38%; background: #e8d84c;"></span>
+                    <span class="project-language-fill" style="width: 34%; background: #5b4a91;"></span>
+                    <span class="project-language-fill" style="width: 28%; background: #ff5e3a;"></span>
+                  </div>
+                  <ul class="project-language-list">
+                    <li><span class="project-language-dot" style="background: #e8d84c;"></span>JavaScript 38.0%</li>
+                    <li><span class="project-language-dot" style="background: #5b4a91;"></span>CSS 34.0%</li>
+                    <li><span class="project-language-dot" style="background: #ff5e3a;"></span>HTML 28.0%</li>
+                  </ul>
+                </div>
+                <div class="card-link-wrapper">
+                  <a href="2. programming-page/iphone-leap.html" class="card-link">Launch</a>
+                </div>
+              </li>
               <li class="card project-library-item" data-project-tags="featured apps" data-project-languages="swift">
                 <div>
                   <div class="hstack">
@@ -438,15 +493,15 @@
               <button type="button" class="project-library-nav-btn" id="project-library-prev" aria-controls="project-library-grid" aria-label="Previous project">
                 <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
               </button>
-              <p class="project-library-counter" id="project-library-counter" aria-live="polite" aria-atomic="true">1 / 10</p>
+              <p class="project-library-counter" id="project-library-counter" aria-live="polite" aria-atomic="true">1 / 11</p>
               <button type="button" class="project-library-nav-btn" id="project-library-next" aria-controls="project-library-grid" aria-label="Next project">
                 <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
               </button>
             </div>
           </div>
         </section>
-        <section>
-          <div class="container slide-in" style="padding: 0px 0px 50px;">
+        <section class="programming-zone-publications">
+          <div class="container slide-in">
             <h2 class="dark-mode-text section-heading-with-icon" style="padding-bottom: 1rem;"><i class="fa-solid fa-book section-heading-icon" aria-hidden="true"></i><span>Publications</span></h2>
             <div class="pub1" style="padding: 1rem; border-radius: 1rem">
               <a href="https://ieeexplore.ieee.org/document/10392942" target="_blank" style="color: #ff6630;">
