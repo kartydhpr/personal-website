@@ -9,6 +9,7 @@
 
   var $img = $("#artLightboxImage");
   var $video = $("#artLightboxVideo");
+  var $videoFrame = $("#artLightboxVideoFrame");
   var $title = $("#artLightboxTitle");
   var $subtitle = $("#artLightboxSubtitle");
   var $prev = $(".art-lightbox-nav--prev");
@@ -22,7 +23,6 @@
   var $zoomTools = $(".art-lightbox-zoom-tools");
   var $play = $("#artLightboxPlay");
   var videoMode = false;
-  var loadedVideoSrc = "";
 
   $img.attr("draggable", "false").on("dragstart.artLb", function (e) {
     e.preventDefault();
@@ -293,9 +293,21 @@
     return videoMode;
   }
 
+  function youtubeEmbedUrl(raw) {
+    var match = String(raw || "").match(
+      /(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([A-Za-z0-9_-]{6,})/
+    );
+    if (!match) return "";
+    return (
+      "https://www.youtube.com/embed/" +
+      match[1] +
+      "?autoplay=1&rel=0&modestbranding=1"
+    );
+  }
+
   function currentHasVideo() {
     var item = items[currentIndex];
-    return !!(item && item.video);
+    return !!(item && youtubeEmbedUrl(item.video));
   }
 
   function updatePlayButton() {
@@ -310,23 +322,14 @@
 
   function stopLightboxVideo() {
     videoMode = false;
-    loadedVideoSrc = "";
-    if (!$video.length) return;
-    var el = $video[0];
-    el.pause();
-    try {
-      el.removeAttribute("src");
-      el.load();
-    } catch (err) {}
+    if ($videoFrame.length) {
+      $videoFrame.attr("src", "");
+    }
     $video.addClass("art-lightbox-media--hidden");
   }
 
   function returnToStillFromVideo() {
-    videoMode = false;
-    if ($video.length) {
-      $video[0].pause();
-    }
-    $video.addClass("art-lightbox-media--hidden");
+    stopLightboxVideo();
     $img.removeClass("art-lightbox-media--hidden");
     $body.removeClass("art-lightbox--video");
     $zoomTools.removeClass("art-lightbox-zoom-tools--hidden");
@@ -335,7 +338,8 @@
 
   function playCurrentVideo() {
     var item = items[currentIndex];
-    if (!item || !item.video || !$video.length || slideBusy) return;
+    var embed = item ? youtubeEmbedUrl(item.video) : "";
+    if (!embed || !$video.length || !$videoFrame.length || slideBusy) return;
     videoMode = true;
     resetZoom();
     applyZoomTransform();
@@ -344,23 +348,11 @@
     $zoomTools.addClass("art-lightbox-zoom-tools--hidden");
     $img.addClass("art-lightbox-media--hidden");
     $play.addClass("art-lightbox-media--hidden");
-    $video
-      .removeClass("art-lightbox-media--hidden")
-      .attr("poster", item.src)
-      .attr("aria-label", item.alt);
-    var el = $video[0];
-    if (loadedVideoSrc !== item.video) {
-      el.src = item.video;
-      loadedVideoSrc = item.video;
-    } else {
-      try {
-        el.currentTime = 0;
-      } catch (err) {}
-    }
-    var playAttempt = el.play();
-    if (playAttempt && typeof playAttempt.catch === "function") {
-      playAttempt.catch(function () {});
-    }
+    $video.removeClass("art-lightbox-media--hidden");
+    $videoFrame.attr({
+      src: embed,
+      title: (item.alt || "Artwork") + " on YouTube",
+    });
   }
 
   var items = [];
@@ -429,8 +421,8 @@
     }
 
     slideBusy = true;
-    if ($video.length) {
-      $video[0].pause();
+    if (videoMode) {
+      returnToStillFromVideo();
     }
     resetZoom();
     applyZoomTransform();
@@ -571,11 +563,6 @@
     e.preventDefault();
     e.stopPropagation();
     playCurrentVideo();
-  });
-
-  $video.on("ended.artLb", function () {
-    if (!videoMode) return;
-    returnToStillFromVideo();
   });
 
   $prev.on("click", function () {

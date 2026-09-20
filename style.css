@@ -52,6 +52,10 @@ body, #dark-mode-bg {
     padding-left: 23px;
     padding-right: 23px;
   }
+  .quarantine .programming-zone {
+    margin-left: -23px;
+    margin-right: -23px;
+  }
 }
 
 .pub1 {
@@ -301,6 +305,27 @@ body, #dark-mode-bg {
   width: 100%;
   max-width: 100%;
   margin-top: 8px;
+  border-radius: 12px;
+  transform:
+    perspective(1100px)
+    translateY(var(--art-piece-parallax-y, 0px))
+    rotateX(var(--art-piece-rx, 0deg));
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.1),
+    0 8px 18px rgba(0, 0, 0, 0.28),
+    0 28px 54px rgba(0, 0, 0, 0.42);
+}
+
+.gallery .column {
+  transform: translate3d(0, var(--art-col-parallax-y, 0px), 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery .column,
+  .gallery .image-container {
+    transform: none;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.32);
+  }
 }
 
 /* Transparent PNGs (e.g. site logo): square tile + dark plate (same idea as lightbox black under logo) */
@@ -311,8 +336,8 @@ body, #dark-mode-bg {
   width: 100%;
   box-sizing: border-box;
   background-color: #030303;
-  border: 0.5rem solid rgba(90, 90, 90, 0.285);
-  border-radius: 10px;
+  border: none;
+  border-radius: 12px;
   padding: clamp(0.65rem, 3vw, 1.35rem);
 }
 
@@ -2691,7 +2716,7 @@ hr{
   .gallery {
     display: flex;
     flex-wrap: wrap;
-    padding: 0 10px 100px;
+    padding: 24px 10px 120px;
   }
 
   .slide-up {
@@ -2731,7 +2756,7 @@ hr{
     border-radius: 10px;
   }
 
-  /* Lazy-loaded gallery: avoid double frame (wrapper + legacy .column img border) */
+  .gallery .column img,
   .gallery .column .lazy-image-wrap img {
     margin-top: 0;
     border: none;
@@ -2786,6 +2811,13 @@ hr{
 .gallery .tooltip H5,
 .gallery .tooltip h5 {
   font-weight: 600;
+}
+
+.gallery .image-container:hover {
+  box-shadow:
+    0 2px 0 rgba(255, 255, 255, 0.12),
+    0 16px 32px rgba(0, 0, 0, 0.34),
+    0 40px 72px rgba(0, 0, 0, 0.5);
 }
 
 .gallery .image-container:hover .tooltip {
@@ -2855,62 +2887,53 @@ hr{
 }
 
 .art-lightbox-video {
+  --art-video-max-h: min(
+    calc(72vh - 2 * var(--art-slide-pad-block, 2rem) - 1.25rem),
+    calc(800px - 2 * var(--art-slide-pad-block, 2rem) - 1.25rem)
+  );
+  position: relative;
+  width: min(calc(var(--art-video-max-h) * 16 / 9), calc(96vw - 8rem), 52rem);
+  aspect-ratio: 16 / 9;
+  max-height: var(--art-video-max-h);
+  overflow: hidden;
   background-color: #030303;
+  border-radius: 8px;
+}
+
+.art-lightbox-video iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
 
 .art-lightbox-play {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  z-index: 4;
-  width: 4.35rem;
-  height: 4.35rem;
-  padding: 0;
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  border-radius: 50%;
-  background: rgba(12, 12, 14, 0.72);
-  color: #fff;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transform: translate(-50%, -50%);
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.38);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  cursor: pointer;
-  transition:
-    background-color 0.16s ease,
-    border-color 0.16s ease,
-    transform 0.16s ease;
-}
-
-.art-lightbox-play:hover,
-.art-lightbox-play:focus {
-  outline: none;
-  background: rgba(12, 12, 14, 0.88);
-  border-color: rgba(255, 255, 255, 0.45);
-  transform: translate(-50%, -50%) scale(1.06);
-}
-
-.art-lightbox-play:focus-visible {
-  box-shadow:
-    0 10px 28px rgba(0, 0, 0, 0.38),
-    0 0 0 3px rgba(255, 255, 255, 0.35);
+  gap: 0.35rem;
+  min-width: auto;
+  height: 2.15rem;
+  margin-top: calc(2rem - var(--art-slide-pad-block, 2rem));
+  margin-bottom: 0.15rem;
+  padding: 0 0.9rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 4;
+  flex-shrink: 0;
 }
 
 .art-lightbox-play__icon {
   display: block;
   width: 0;
   height: 0;
-  margin-left: 0.18rem;
   border-style: solid;
-  border-width: 0.7rem 0 0.7rem 1.15rem;
-  border-color: transparent transparent transparent #fff;
-}
-
-.art-lightbox-stage--slide-busy .art-lightbox-play {
-  pointer-events: none;
-  opacity: 0;
+  border-width: 0.28rem 0 0.28rem 0.42rem;
+  border-color: transparent transparent transparent currentColor;
 }
 
 .art-lightbox-modal .modal-backdrop.show {
@@ -3070,6 +3093,7 @@ hr{
   z-index: 1;
   flex: 1;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   max-height: min(72vh, 800px);
@@ -3085,6 +3109,7 @@ hr{
   width: 100%;
   max-width: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   padding-block: var(--art-slide-pad-block);

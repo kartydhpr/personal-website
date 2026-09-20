@@ -75,7 +75,7 @@
           <div class="column">
             <div
               class="image-container image-container--video"
-              data-video="../3. art-page/drawings/Cardinal.mp4"
+              data-video="https://youtu.be/A4Zqp_NEO08"
             >
               <img src="../3. art-page/drawings/Cardinal.jpg" alt="Northern Cardinal" data-style="all">
               <span class="art-video-badge" aria-hidden="true">Play</span>
@@ -86,7 +86,7 @@
             </div>
             <div
               class="image-container image-container--video"
-              data-video="../3. art-page/drawings/Ghost_House.mp4"
+              data-video="https://youtu.be/UMnz_8RiC78"
             >
               <img src="../3. art-page/drawings/Ghost_House.jpg" alt="Ghost House" data-style="all">
               <span class="art-video-badge" aria-hidden="true">Play</span>
@@ -99,7 +99,7 @@
           <div class="column">
             <div
               class="image-container image-container--video"
-              data-video="../3. art-page/drawings/Cascadia_Poster.mp4"
+              data-video="https://youtu.be/JBE3bDCeQeQ"
             >
               <img src="../3. art-page/drawings/Cascadia_Poster.jpg" alt="Cascadia Poster" data-style="all">
               <span class="art-video-badge" aria-hidden="true">Play</span>
@@ -110,7 +110,7 @@
             </div>
             <div
               class="image-container image-container--video"
-              data-video="../3. art-page/drawings/Brain_Freeze.mp4"
+              data-video="https://youtu.be/vNi0pZmTC5I"
             >
               <img src="../3. art-page/drawings/Brain_Freeze.jpg" alt="Brain Freeze" data-style="all">
               <span class="art-video-badge" aria-hidden="true">Play</span>
@@ -123,7 +123,7 @@
           <div class="column">
             <div
               class="image-container image-container--video"
-              data-video="../3. art-page/drawings/Alpine_Pond.mp4"
+              data-video="https://youtu.be/lqgbTDmTa-A"
             >
               <img src="../3. art-page/drawings/Alpine_Pond.jpg" alt="Alpine Pond" data-style="all">
               <span class="art-video-badge" aria-hidden="true">Play</span>
@@ -605,23 +605,29 @@
                       decoding="async"
                       draggable="false"
                     />
-                    <video
+                    <div
                       id="artLightboxVideo"
-                      class="art-lightbox-img art-lightbox-video art-lightbox-media--hidden"
-                      playsinline
-                      controls
-                      preload="metadata"
-                    ></video>
+                      class="art-lightbox-video art-lightbox-media--hidden"
+                    >
+                      <iframe
+                        id="artLightboxVideoFrame"
+                        title="Artwork on YouTube"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen
+                        referrerpolicy="strict-origin-when-cross-origin"
+                      ></iframe>
+                    </div>
                   </div>
                 </div>
               </div>
               <button
                 type="button"
-                class="art-lightbox-play art-lightbox-media--hidden"
+                class="art-lightbox-zoom-btn art-lightbox-play art-lightbox-media--hidden"
                 id="artLightboxPlay"
                 aria-label="Play animation"
               >
                 <span class="art-lightbox-play__icon" aria-hidden="true"></span>
+                Play
               </button>
             </div>
             <button type="button" class="art-lightbox-nav art-lightbox-nav--next" aria-label="Next artwork">
@@ -661,6 +667,6 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="art-lightbox.js"></script>
+    <script src="art-lightbox.js?v=5"></script>
   </body>
 </html>

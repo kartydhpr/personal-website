@@ -948,3 +948,75 @@ if (gallery) {
   window.addEventListener("resize", scheduleParallax, { passive: true });
   applyParallax();
 })();
+
+(function initArtGalleryParallax() {
+  const galleries = document.querySelectorAll(".gallery");
+  if (!galleries.length) return;
+
+  const COLUMN_RATES = [0.1, 0.04, 0.13, 0.07];
+  const columns = document.querySelectorAll(".gallery .column");
+  const pieces = document.querySelectorAll(".gallery .image-container");
+  let ticking = false;
+
+  function clearTransforms() {
+    columns.forEach((el) => {
+      el.style.removeProperty("--art-col-parallax-y");
+    });
+    pieces.forEach((el) => {
+      el.style.removeProperty("--art-piece-parallax-y");
+      el.style.removeProperty("--art-piece-rx");
+    });
+  }
+
+  function applyParallax() {
+    ticking = false;
+    if (
+      prefersReducedMotion() ||
+      document.querySelector(".art-lightbox-modal.show")
+    ) {
+      clearTransforms();
+      return;
+    }
+
+    const viewportHeight = window.innerHeight;
+    columns.forEach((col) => {
+      const gallery = col.parentElement;
+      if (!gallery) return;
+      const siblings = gallery.children;
+      const index = Array.prototype.indexOf.call(siblings, col);
+      const rate = COLUMN_RATES[index % COLUMN_RATES.length];
+      const galleryTop = gallery.getBoundingClientRect().top;
+      const centerOffset =
+        galleryTop + col.offsetTop + col.offsetHeight * 0.5 - viewportHeight * 0.5;
+      col.style.setProperty("--art-col-parallax-y", `${(centerOffset * rate).toFixed(2)}px`);
+    });
+
+    pieces.forEach((el) => {
+      const parent = el.parentElement;
+      if (!parent) return;
+      const parentRect = parent.getBoundingClientRect();
+      const top = parentRect.top + el.offsetTop;
+      const height = el.offsetHeight;
+      if (top + height < -160 || top > viewportHeight + 160) return;
+      const centerY = top + height * 0.5;
+      const ny = (centerY - viewportHeight * 0.5) / (viewportHeight * 0.5);
+      const clampedNy = Math.max(-1.2, Math.min(1.2, ny));
+      const rx = -clampedNy * 3.2;
+      el.style.setProperty("--art-piece-parallax-y", `${(clampedNy * 16).toFixed(2)}px`);
+      el.style.setProperty("--art-piece-rx", `${rx.toFixed(2)}deg`);
+    });
+  }
+
+  function scheduleParallax() {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(applyParallax);
+    }
+  }
+
+  window.addEventListener("scroll", scheduleParallax, { passive: true });
+  window.addEventListener("resize", scheduleParallax, { passive: true });
+  document.addEventListener("shown.bs.modal", scheduleParallax);
+  document.addEventListener("hidden.bs.modal", scheduleParallax);
+  applyParallax();
+})();
