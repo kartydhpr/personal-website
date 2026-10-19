@@ -890,7 +890,7 @@ if (gallery) {
     const rect = zone.getBoundingClientRect();
     const viewportHeight = window.innerHeight;
     const centerOffset = rect.top + rect.height * 0.5 - viewportHeight * 0.5;
-    const baseY = centerOffset * 0.06;
+    const baseY = Math.max(-48, Math.min(48, centerOffset * 0.06));
     zone.style.setProperty("--programming-zone-parallax-y", `${baseY.toFixed(2)}px`);
 
     layers.forEach((layer) => {
@@ -928,11 +928,17 @@ if (gallery) {
     }
 
     const viewportHeight = window.innerHeight;
+    const maxShift = 64;
     polaroids.forEach((el) => {
-      const rate = el.classList.contains("polaroid-wrapper--tilt-cw") ? 0.12 : 0.12;
+      const rate = 0.12;
       const rect = el.getBoundingClientRect();
+      const inRange = rect.bottom > -viewportHeight && rect.top < viewportHeight * 2;
+      if (!inRange) {
+        el.style.setProperty("--polaroid-parallax-y", "0px");
+        return;
+      }
       const centerOffset = rect.top + rect.height * 0.5 - viewportHeight * 0.5;
-      const y = centerOffset * rate;
+      const y = Math.max(-maxShift, Math.min(maxShift, centerOffset * rate));
       el.style.setProperty("--polaroid-parallax-y", `${y.toFixed(2)}px`);
     });
   }

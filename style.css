@@ -56,6 +56,40 @@ body, #dark-mode-bg {
     margin-left: -23px;
     margin-right: -23px;
   }
+  .quarantine .programming-zone > section {
+    padding-left: 23px;
+    padding-right: 23px;
+  }
+  .quarantine .programming-zone .container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .quarantine .programming-zone .project-library-controls {
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: 0.7rem;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  .quarantine .programming-zone .project-library-category-slider {
+    flex: 1 1 100%;
+    width: 100%;
+    max-width: 100%;
+  }
+  .quarantine .programming-zone .project-library-category-track {
+    width: 100%;
+    max-width: 100%;
+  }
+  .quarantine .programming-zone .project-library-lang-inline {
+    flex: 1 1 100%;
+    width: 100%;
+    margin-left: 0;
+  }
+  .quarantine .programming-zone .project-library-lang-select {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
 }
 
 .pub1 {
@@ -1715,7 +1749,19 @@ h2 .section-heading-icon {
   transform: translateY(0);
 }
 
+/* Keep polaroid parallax from extending the document below the footer. */
+.details:has(.polaroid-wrapper--scroll-parallax) {
+  overflow-x: clip;
+  overflow-y: clip;
+}
+
 /* Footer */
+
+footer {
+  position: relative;
+  z-index: 2;
+  background-color: #ff6630;
+}
 
 .footer {
   text-align: center;
