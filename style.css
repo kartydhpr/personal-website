@@ -2954,6 +2954,27 @@ hr{
   border: 0;
 }
 
+.art-lightbox-video--file {
+  width: auto;
+  max-width: min(calc(96vw - 8rem), 40rem);
+  aspect-ratio: auto;
+  height: auto;
+  max-height: none;
+  overflow: visible;
+  background-color: transparent;
+}
+
+.art-lightbox-video--file video {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: min(calc(96vw - 8rem), 40rem);
+  max-height: var(--art-video-max-h);
+  border: 0;
+  border-radius: 8px;
+  background-color: #030303;
+}
+
 .art-lightbox-play {
   display: inline-flex;
   align-items: center;

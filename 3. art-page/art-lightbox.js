@@ -10,6 +10,7 @@
   var $img = $("#artLightboxImage");
   var $video = $("#artLightboxVideo");
   var $videoFrame = $("#artLightboxVideoFrame");
+  var $videoFile = $("#artLightboxVideoFile");
   var $title = $("#artLightboxTitle");
   var $subtitle = $("#artLightboxSubtitle");
   var $prev = $(".art-lightbox-nav--prev");
@@ -305,9 +306,14 @@
     );
   }
 
+  function isLocalVideo(raw) {
+    return /\.(mp4|webm|mov)(\?.*)?$/i.test(String(raw || "").trim());
+  }
+
   function currentHasVideo() {
     var item = items[currentIndex];
-    return !!(item && youtubeEmbedUrl(item.video));
+    if (!item || !item.video) return false;
+    return !!(youtubeEmbedUrl(item.video) || isLocalVideo(item.video));
   }
 
   function updatePlayButton() {
@@ -325,7 +331,13 @@
     if ($videoFrame.length) {
       $videoFrame.attr("src", "");
     }
-    $video.addClass("art-lightbox-media--hidden");
+    if ($videoFile.length) {
+      var fileEl = $videoFile[0];
+      fileEl.pause();
+      $videoFile.addClass("art-lightbox-media--hidden").removeAttr("src");
+      fileEl.load();
+    }
+    $video.addClass("art-lightbox-media--hidden").removeClass("art-lightbox-video--file");
   }
 
   function returnToStillFromVideo() {
@@ -338,8 +350,12 @@
 
   function playCurrentVideo() {
     var item = items[currentIndex];
-    var embed = item ? youtubeEmbedUrl(item.video) : "";
-    if (!embed || !$video.length || !$videoFrame.length || slideBusy) return;
+    if (!item || !$video.length || slideBusy) return;
+    var embed = youtubeEmbedUrl(item.video);
+    var local = isLocalVideo(item.video);
+    if (embed && !$videoFrame.length) return;
+    if (local && !$videoFile.length) return;
+    if (!embed && !local) return;
     videoMode = true;
     resetZoom();
     applyZoomTransform();
@@ -349,10 +365,28 @@
     $img.addClass("art-lightbox-media--hidden");
     $play.addClass("art-lightbox-media--hidden");
     $video.removeClass("art-lightbox-media--hidden");
-    $videoFrame.attr({
-      src: embed,
-      title: (item.alt || "Artwork") + " on YouTube",
+    if (embed) {
+      $video.removeClass("art-lightbox-video--file");
+      $videoFile.addClass("art-lightbox-media--hidden");
+      $videoFrame.removeClass("art-lightbox-media--hidden").attr({
+        src: embed,
+        title: (item.alt || "Artwork") + " on YouTube",
+      });
+      return;
+    }
+    if ($videoFrame.length) {
+      $videoFrame.addClass("art-lightbox-media--hidden").attr("src", "");
+    }
+    $video.addClass("art-lightbox-video--file");
+    $videoFile.removeClass("art-lightbox-media--hidden").attr({
+      src: item.video,
+      title: item.alt || "Artwork",
     });
+    var fileEl = $videoFile[0];
+    var playPromise = fileEl.play();
+    if (playPromise && typeof playPromise.catch === "function") {
+      playPromise.catch(function () {});
+    }
   }
 
   var items = [];
